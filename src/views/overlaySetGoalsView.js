@@ -10,6 +10,7 @@ class OverlaySetGoalsView extends View {
   _allSlides;
   _currentSlide;
   _data;
+  _curAccGoalLength;
 
   addHandlerClickX(handler) {
     this._parentElement.addEventListener("click", function (e) {
@@ -84,7 +85,7 @@ class OverlaySetGoalsView extends View {
           const titleInput = s.querySelector(".input--goal_title")?.value;
           const dateInput = s.querySelector(".input--goal_date")?.value;
 
-          if (!titleInput && !dateInput) return "";
+          if (!titleInput && !dateInput) return;
 
           return {
             title: titleInput,
@@ -93,7 +94,7 @@ class OverlaySetGoalsView extends View {
             toDoList: [],
           };
         })
-        .filter((info) => info && (info.date !== "" || info.title !== ""));
+        .filter((info) => info && (info.date || info.title));
 
       if (goalsInfo.length === 0) return;
 
@@ -102,11 +103,13 @@ class OverlaySetGoalsView extends View {
   }
 
   _generateMarkup() {
+    console.log(this._data);
+    this._curAccGoalLength = this._data.goals?.length;
     return `
       <form class="overlay_in--set_goal">
        <button class="btn--x set_goal--btn_x">&times;</button>
        <h1>${
-         this._data.goals.length !== 10
+         this._curAccGoalLength !== 10
            ? "Let's set your goals!"
            : "You have maximum number of goals!"
        }</h1>
@@ -129,20 +132,20 @@ class OverlaySetGoalsView extends View {
           <h2>Goal No.${i + 1}</h2>
           <div class="goal_title">
             <p>${
-              this._data.goals.length > i ? "The" : "Set the"
+              this._curAccGoalLength > i ? "The" : "Set the"
             } name of your goal No.${i + 1}!</p>
             ${
-              this._data.goals.length > i
+              this._curAccGoalLength > i
                 ? `<p class="set_goal_title">${this._data.goals[i].title}</p>`
                 : '<input class="input--goal_title" type="text" placeholder="Goal title"></input>'
             }
           </div>
           <div class="goal_date">
            <p>${
-             this._data.goals.length > i ? "The" : "Set the"
+             this._curAccGoalLength > i ? "The" : "Set the"
            } date of your goal No.${i + 1}!</p>
            ${
-             this._data.goals.length > i
+             this._curAccGoalLength > i
                ? `<p class="set_goal_date">${this._data.goals[i].date}</p>`
                : `<input class="input--goal_date datepicker${i}" type="text" placeholder="Click here to select date"></input>`
            }
@@ -194,58 +197,6 @@ class OverlaySetGoalsView extends View {
     this._setDatePicker();
     this._activeDot();
   }
-
-  // updateTagLines(data) {
-  //   this._data = newData;
-  //   const newMarkup = this._generateMarkupUpdate();
-
-  //   const newDOM = document.createRange().createContextualFragment(newMarkup);
-
-  //   const newElements = Array.from(newDOM.querySelectorAll("*"));
-  //   const curElements = Array.from(this._parentElement.querySelectorAll("*"));
-
-  //   newElements.forEach((newEle, i) => {
-  //     const curEle = curElements[i];
-
-  //     if (!newEle.isEqualNode(curEle) && newEle.tagName !== curEle.tagName) {
-  //       let element = document.createElement(`${newEle.tagName}`);
-
-  //       element.textContent = newEle.textContent;
-  //       element.className = newEle.className;
-
-  //       curEle.parentNode.replaceChild(element, curEle);
-  //     }
-  //   });
-  // }
-
-  // update(newData) {
-  //   this._data = newData;
-  //   const newMarkup = this._generateMarkupUpdate();
-
-  //   const newDOM = document.createRange().createContextualFragment(newMarkup);
-
-  //   const newElements = Array.from(newDOM.querySelectorAll("*"));
-  //   const curElements = Array.from(this._parentElement.querySelectorAll("*"));
-
-  //   newElements.forEach((newEle, i) => {
-  //     const curEle = curElements[i];
-
-  //     //Updates changed text (When 1. newEle is different from the curEle && 2. newEle's firstChile is text node && 3. the text node content is not empty)
-  //     if (
-  //       !newEle.isEqualNode(curEle) &&
-  //       newEle.firstChild?.nodevalue &&
-  //       newEle.firstChild?.nodevalue?.trim() !== ""
-  //     )
-  //       curEle.textContent = newEle.textContent;
-
-  //     //Updates changed tag lines
-  //     if (!newEle.isEqualNode(curEle) && newEle.tagName !== curEle.tagName) {
-  //       const element = document.createElement(`${newEle.tagName}`);
-
-  //       element.textContent = newEle.textContent;
-  //     }
-  //   });
-  // }
 }
 
 export default new OverlaySetGoalsView();

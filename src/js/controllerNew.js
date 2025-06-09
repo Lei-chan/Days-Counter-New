@@ -7,6 +7,7 @@ import loginBottomHalfView from "../views/loginBottomHalfView";
 import loginWholeView from "../views/loginWholeView";
 import mainWholeView from "../views/mainWholeView";
 import mainTopSectionView from "../views/mainTopSectionView";
+import mainDaysCounterView from "../views/mainDaysCounterView";
 import overlaySetGoalsView from "../views/overlaySetGoalsView";
 import overlayCreateRoomsView from "../views/overlayCreateRoomsView";
 import * as model from "./model";
@@ -29,6 +30,7 @@ const controlLogin = function (inputUsername, inputPassword) {
 
   loginWholeView.close();
   mainTopSectionView.renderToParentEle(model.state.currentAccount);
+  mainDaysCounterView.renderToParentEle(model.state.currentAccount);
   mainWholeView.open();
 };
 
@@ -62,6 +64,7 @@ const controlSeatGoalsSubmit = function (goalsInfo) {
   model.saveGoalsInfo(goalsInfo);
   console.log(model.state);
   overlaySetGoalsView.init(model.state.currentAccount);
+  mainDaysCounterView.renderToParentEle(model.state.currentAccount);
 };
 
 const init = function () {

@@ -9,8 +9,9 @@ export const state = {
       password: "abc123!@#",
       email: "",
       goals: [
-        // { title: "ahaha", date: "", comments: [], doToList: [] }
+        { title: "ahaha", date: "07/04/2025", comments: [], doToList: [] },
       ],
+      remainingDays: [25],
       rooms: [
         // { id: "", goals: [] }
       ],
@@ -37,6 +38,7 @@ export const saveUsernamePassword = function (username, password) {
     password,
     email: "",
     goals: [{ title: "", date: "", doToList: [], comments: [] }],
+    remainingDays: [],
     rooms: [{ id: "", goals: [{ date: "", doToList: [], comments: [] }] }],
   };
   state.accounts.push(account);
@@ -44,10 +46,22 @@ export const saveUsernamePassword = function (username, password) {
 };
 
 export const saveGoalsInfo = function (goalsInfo) {
+  //Adding the new goals info to the goals array
   state.currentAccount.goals.push(...goalsInfo);
+
+  //Adding remaining days for each goal to the remaingDays array
+  state.currentAccount.remainingDays.push(...calcRemainingDays(goalsInfo));
+
   console.log(state.currentAccount, state.accounts);
 };
 
-export const howManyGoals = function () {
-  return state.currentAccount.goals.length;
+const calcRemainingDays = function (goalsInfo) {
+  //Create a new array of remaining days for each goal
+  const remainingDays = goalsInfo.map((goal) =>
+    goal.date !== ""
+      ? Math.ceil((new Date(goal.date) - new Date()) / (1000 * 60 * 60 * 24))
+      : undefined
+  );
+
+  return remainingDays;
 };

@@ -2,6 +2,7 @@ import View from "./View";
 
 class MainTopSectionView extends View {
   _parentElement = document.querySelector(".top_section");
+  _data; //currentAccount
 
   addHandlerClickGoals(handler) {
     this._parentElement.addEventListener("click", function (e) {
