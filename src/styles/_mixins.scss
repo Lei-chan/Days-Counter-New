@@ -1,7 +1,6 @@
 @mixin img-btn-style($color: $primary-font-color-white) {
   background: transparent;
-  background-position-x: center;
-  background-position-y: center;
+  background-size: contain;
   border: none;
   color: $color;
   font-family: $primary-font-family;
@@ -18,8 +17,7 @@
 }
 
 @mixin img-background-style {
-  background-position-x: center;
-  background-position-y: center;
+  background-size: contain;
 }
 
 @mixin message-style($bg-color: #fa7304, $color: $primary-font-color-white) {

@@ -11,7 +11,10 @@ export const state = {
       goals: [
         { title: "ahaha", date: "07/04/2025", comments: [], doToList: [] },
       ],
-      remainingDays: [25],
+      remainingDaysPrev: [25],
+      remainingDaysNow: [],
+      howManyTimesClick: [],
+      loggedInDates: [],
       rooms: [
         // { id: "", goals: [] }
       ],
@@ -27,7 +30,19 @@ export const findAccount = function (username, password) {
 
   if (!account) return;
 
+  //Set the logged in account as the current account
   state.currentAccount = account;
+
+  //Save the logged in date
+  saveLoggedInDate();
+
+  //Save the new remaining days
+  state.currentAccount.remainingDaysNow.push(
+    ...calcRemainingDays(state.currentAccount.goals)
+  );
+  saveHowManyTimesClick();
+  console.log(state.currentAccount);
+
   return account;
 };
 
@@ -38,19 +53,38 @@ export const saveUsernamePassword = function (username, password) {
     password,
     email: "",
     goals: [{ title: "", date: "", doToList: [], comments: [] }],
-    remainingDays: [],
+    remainingDaysPrev: [],
+    remainingDaysNow: [],
+    howManyTimesClick: [],
+    loggedInDates: [],
     rooms: [{ id: "", goals: [{ date: "", doToList: [], comments: [] }] }],
   };
+
+  //Save the new account
   state.accounts.push(account);
+
+  //Set the account as the current account
   state.currentAccount = account;
+
+  //Save the logged in date
+  saveLoggedInDate();
+  console.log(state.currentAccount);
+};
+
+const saveLoggedInDate = function () {
+  state.currentAccount.loggedInDates.push(
+    new Intl.DateTimeFormat("en-US").format(new Date())
+  );
 };
 
 export const saveGoalsInfo = function (goalsInfo) {
-  //Adding the new goals info to the goals array
+  //Saving the new goals info to the goals array
   state.currentAccount.goals.push(...goalsInfo);
 
-  //Adding remaining days for each goal to the remaingDays array
-  state.currentAccount.remainingDays.push(...calcRemainingDays(goalsInfo));
+  //Saving remaining days for each new goal
+  state.currentAccount.remainingDaysPrev.push(...calcRemainingDays(goalsInfo));
+  state.currentAccount.remainingDaysNow.push(...calcRemainingDays(goalsInfo));
+  saveHowManyTimesClick();
 
   console.log(state.currentAccount, state.accounts);
 };
@@ -64,4 +98,19 @@ const calcRemainingDays = function (goalsInfo) {
   );
 
   return remainingDays;
+};
+
+const saveHowManyTimesClick = function () {
+  const remainingDaysPrev = state.currentAccount.remainingDaysPrev;
+  const remainingDaysNow = state.currentAccount.remainingDaysNow;
+
+  const howManyTimesClickNew = remainingDaysPrev.map((daysPrev, i) => {
+    const daysNow = remainingDaysNow[i];
+    //1) User can not click for the goal
+    if (daysPrev === daysNow) return 0;
+    //2) User can click for the goal
+    return daysPrev - daysNow;
+  });
+
+  state.currentAccount.howManyTimesClick = howManyTimesClickNew;
 };

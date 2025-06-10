@@ -22,6 +22,14 @@ class OverlaySetGoalsView extends View {
     });
   }
 
+  addHandlerClickOutside(handler) {
+    this._parentElement.addEventListener("click", function (e) {
+      if (e.target.className !== "overlay") return;
+
+      handler();
+    });
+  }
+
   addEventClickRight() {
     this._parentElement.addEventListener("click", (e) => {
       const btn = e.target.closest(".btn--right");
@@ -103,7 +111,6 @@ class OverlaySetGoalsView extends View {
   }
 
   _generateMarkup() {
-    console.log(this._data);
     this._curAccGoalLength = this._data.goals?.length;
     return `
       <form class="overlay_in--set_goal">

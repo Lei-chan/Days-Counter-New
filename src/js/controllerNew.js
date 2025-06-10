@@ -56,7 +56,7 @@ const controlCreateRooms = function () {
   overlayCreateRoomsView.renderToParentEle();
 };
 
-const controlClickX = function () {
+const controlCloseSetGoals = function () {
   overlaySetGoalsView.close();
 };
 
@@ -74,7 +74,8 @@ const init = function () {
   loginBottomHalfView.addHandlerSubmit(controlCreateAcc);
   mainTopSectionView.addHandlerClickGoals(controlSetGoals);
   mainTopSectionView.addHandlerClickRooms(controlCreateRooms);
-  overlaySetGoalsView.addHandlerClickX(controlClickX);
+  overlaySetGoalsView.addHandlerClickX(controlCloseSetGoals);
+  overlaySetGoalsView.addHandlerClickOutside(controlCloseSetGoals);
   overlaySetGoalsView.addEventClickRight();
   overlaySetGoalsView.addEventClickLeft();
   overlaySetGoalsView.addEventArrowKey();

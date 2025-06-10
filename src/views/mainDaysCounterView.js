@@ -17,31 +17,32 @@ class MainDaysCounterView extends View {
     if (this._curAccGoalLength)
       return this._data.goals
         .map((goal, i) => {
-          const remainingDays = this._data.remainingDays[i];
-          `
+          const remainingDaysPrev = this._data.remainingDaysPrev[i];
+
+          return `
         <div class="card" data-card="${i}">
           <div class="fukidashi_container">
-            <section class="details--fukidashi">
+            <section class="detains details--fukidashi">
             <span>${
-              remainingDays
-                ? `${remainingDays} days are ${(remainingDays * 24).toFixed(
-                    1
-                  )} hours`
+              remainingDaysPrev
+                ? `${remainingDaysPrev} days are ${(
+                    remainingDaysPrev * 24
+                  ).toFixed(1)} hours`
                 : ""
             }</span>
             <span>${
-              remainingDays
-                ? `${remainingDays} days are ${(
-                    remainingDays *
+              remainingDaysPrev
+                ? `${remainingDaysPrev} days are ${(
+                    remainingDaysPrev *
                     24 *
                     60
                   ).toFixed(1)} minutes`
                 : "You haven't set the date yet!"
             }</span>
             <span>${
-              remainingDays
-                ? `${remainingDays} days are ${(
-                    remainingDays *
+              remainingDaysPrev
+                ? `${remainingDaysPrev} days are ${(
+                    remainingDaysPrev *
                     24 *
                     60 *
                     60
@@ -56,35 +57,36 @@ class MainDaysCounterView extends View {
                 : "You haven't set the title yet!"
             }</h2>
             <div class="bottom_content">
-            <div class="remaining_days">${remainingDays}</div>
+            <div class="remaining_days">${
+              remainingDaysPrev ? remainingDaysPrev : "  "
+            }</div>
             <p>days</p>
-            <div class="details">
+            <div class="details details--card">
                 <span>${
-                  remainingDays
-                    ? `${remainingDays} days are ${(remainingDays / 7).toFixed(
-                        1
-                      )} weeks`
+                  remainingDaysPrev
+                    ? `${remainingDaysPrev} days are ${(
+                        remainingDaysPrev / 7
+                      ).toFixed(1)} weeks`
                     : ""
                 }</span>
                 <span>${
-                  remainingDays
-                    ? `${remainingDays} days are ${(
-                        remainingDays /
+                  remainingDaysPrev
+                    ? `${remainingDaysPrev} days are ${(
+                        remainingDaysPrev /
                         (365 / 12)
                       ).toFixed(1)} months`
                     : "You haven't set the date yet!"
                 }</span>
                 <spam>${
-                  remainingDays
-                    ? `${remainingDays} days are ${(
-                        remainingDays / 365
+                  remainingDaysPrev
+                    ? `${remainingDaysPrev} days are ${(
+                        remainingDaysPrev / 365
                       ).toFixed(1)} years`
                     : ""
                 }</spam>
             </div>
           </div>
        </div>
-       <button class="btn--count">Click here!</button>
        `;
         })
         .join("");
