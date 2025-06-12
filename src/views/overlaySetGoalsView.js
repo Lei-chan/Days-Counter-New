@@ -12,6 +12,33 @@ class OverlaySetGoalsView extends View {
   _data;
   _curAccGoalLength;
 
+  addHandlerSubmit(handler) {
+    this._parentElement.addEventListener("click", (e) => {
+      const btn = e.target.closest(".slider--btn_next");
+      if (!btn) return;
+
+      const goalsInfo = Array.from(this._allSlides)
+        .map((s) => {
+          const titleInput = s.querySelector(".input--goal_title")?.value;
+          const dateInput = s.querySelector(".input--goal_date")?.value;
+
+          if (!titleInput && !dateInput) return;
+
+          return {
+            title: titleInput,
+            date: dateInput,
+            comments: [],
+            toDoList: [],
+          };
+        })
+        .filter((info) => info && (info.date || info.title));
+
+      if (goalsInfo.length === 0) return;
+
+      handler(goalsInfo);
+    });
+  }
+
   addHandlerClickX(handler) {
     this._parentElement.addEventListener("click", function (e) {
       e.preventDefault();
@@ -81,33 +108,6 @@ class OverlaySetGoalsView extends View {
 
     this._goToSlide(this._currentSlide);
     this._activeDot();
-  }
-
-  addHandlerSubmit(handler) {
-    this._parentElement.addEventListener("click", (e) => {
-      const btn = e.target.closest(".slider--btn_next");
-      if (!btn) return;
-
-      const goalsInfo = Array.from(this._allSlides)
-        .map((s) => {
-          const titleInput = s.querySelector(".input--goal_title")?.value;
-          const dateInput = s.querySelector(".input--goal_date")?.value;
-
-          if (!titleInput && !dateInput) return;
-
-          return {
-            title: titleInput,
-            date: dateInput,
-            comments: [],
-            toDoList: [],
-          };
-        })
-        .filter((info) => info && (info.date || info.title));
-
-      if (goalsInfo.length === 0) return;
-
-      handler(goalsInfo);
-    });
   }
 
   _generateMarkup() {

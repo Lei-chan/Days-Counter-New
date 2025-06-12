@@ -1,25 +1,24 @@
 import View from "./View";
 
-class MainDaysCounterView extends View {
+class MainDaysCounterContainerView extends View {
   _parentElement = document.querySelector(".days_counter--container");
   _data; //currentAccount
   _curAccGoalLength;
-  _errorMessage =
-    "You can not click the button anymore! Wait for another day ;)";
 
   _generateMarkup() {
-    this._curAccGoalLength = this._data.goals?.length;
+    this._curAccGoalLength = this._data.goals.length;
+    console.log(this._curAccGoalLength);
 
     if (!this._curAccGoalLength)
       return `
          <p class="start_explanation">Let's first start by setting your goals!</p>`;
 
-    if (this._curAccGoalLength)
-      return this._data.goals
-        .map((goal, i) => {
-          const remainingDaysPrev = this._data.remainingDaysPrev[i];
+    if (this._curAccGoalLength) this._setDaysCounterStyle();
+    return this._data.goals
+      .map((goal, i) => {
+        const remainingDaysPrev = this._data.remainingDaysPrev[i];
 
-          return `
+        return `
         <div class="card" data-card="${i}">
           <div class="fukidashi_container">
             <section class="detains details--fukidashi">
@@ -37,7 +36,7 @@ class MainDaysCounterView extends View {
                     24 *
                     60
                   ).toFixed(1)} minutes`
-                : "You haven't set the date yet!"
+                : "You haven't set the date <br> yet!"
             }</span>
             <span>${
               remainingDaysPrev
@@ -75,7 +74,7 @@ class MainDaysCounterView extends View {
                         remainingDaysPrev /
                         (365 / 12)
                       ).toFixed(1)} months`
-                    : "You haven't set the date yet!"
+                    : "You haven't set the date <br> yet!"
                 }</span>
                 <spam>${
                   remainingDaysPrev
@@ -88,9 +87,14 @@ class MainDaysCounterView extends View {
           </div>
        </div>
        `;
-        })
-        .join("");
+      })
+      .join("");
+  }
+
+  _setDaysCounterStyle() {
+    this._parentElement.style.display = "grid";
+    this._parentElement.style.gridTemplateColumns = "repeat(2, 1fr)";
   }
 }
 
-export default new MainDaysCounterView();
+export default new MainDaysCounterContainerView();

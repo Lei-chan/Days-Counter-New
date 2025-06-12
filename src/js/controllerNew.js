@@ -7,10 +7,11 @@ import loginBottomHalfView from "../views/loginBottomHalfView";
 import loginWholeView from "../views/loginWholeView";
 import mainWholeView from "../views/mainWholeView";
 import mainTopSectionView from "../views/mainTopSectionView";
-import mainDaysCounterView from "../views/mainDaysCounterView";
+import MainDaysCounterContainerView from "../views/mainDaysCounterContainerView";
 import overlaySetGoalsView from "../views/overlaySetGoalsView";
 import overlayCreateRoomsView from "../views/overlayCreateRoomsView";
 import * as model from "./model";
+import mainDaysCounterContainerView from "../views/mainDaysCounterContainerView";
 
 if (model.hot) {
   model.hot.accept();
@@ -30,7 +31,8 @@ const controlLogin = function (inputUsername, inputPassword) {
 
   loginWholeView.close();
   mainTopSectionView.renderToParentEle(model.state.currentAccount);
-  mainDaysCounterView.renderToParentEle(model.state.currentAccount);
+  MainDaysCounterContainerView.renderToParentEle(model.state.currentAccount);
+  mainWholeView.renderInit(model.state.currentAccount);
   mainWholeView.open();
 };
 
@@ -41,9 +43,19 @@ const controlScroll = function () {
 
 const controlCreateAcc = function (username, password) {
   model.saveUsernamePassword(username, password);
-  loginWholeView.close();
   mainTopSectionView.renderToParentEle(model.state.currentAccount);
+  mainDaysCounterContainerView.renderToParentEle(model.state.currentAccount);
+  mainWholeView.renderInit(model.state.currentAccount);
+  loginWholeView.close();
   mainWholeView.open();
+};
+
+const controlDaysCounter = function () {
+  model.updateRemainingDaysPrev();
+  model.saveHowManyTimesClick();
+  console.log(model.state.currentAccount);
+  mainTopSectionView.renderToParentEle(model.state.currentAccount);
+  MainDaysCounterContainerView.renderToParentEle(model.state.currentAccount);
 };
 
 const controlSetGoals = function () {
@@ -62,9 +74,9 @@ const controlCloseSetGoals = function () {
 
 const controlSeatGoalsSubmit = function (goalsInfo) {
   model.saveGoalsInfo(goalsInfo);
-  console.log(model.state);
   overlaySetGoalsView.init(model.state.currentAccount);
-  mainDaysCounterView.renderToParentEle(model.state.currentAccount);
+  MainDaysCounterContainerView.renderToParentEle(model.state.currentAccount);
+  mainWholeView.renderInit(model.state.currentAccount);
 };
 
 const init = function () {
@@ -74,6 +86,7 @@ const init = function () {
   loginBottomHalfView.addHandlerSubmit(controlCreateAcc);
   mainTopSectionView.addHandlerClickGoals(controlSetGoals);
   mainTopSectionView.addHandlerClickRooms(controlCreateRooms);
+  mainWholeView.addHandlerClick(controlDaysCounter);
   overlaySetGoalsView.addHandlerClickX(controlCloseSetGoals);
   overlaySetGoalsView.addHandlerClickOutside(controlCloseSetGoals);
   overlaySetGoalsView.addEventClickRight();

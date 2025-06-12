@@ -9,6 +9,10 @@ export default class View {
     element.classList.add("hidden");
   }
 
+  // setData(data) {
+  //   this._data = data;
+  // }
+
   _clearInputField(field) {
     field.value = "";
   }
@@ -24,9 +28,15 @@ export default class View {
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
-  renderInit() {
+  renderInit(data) {
+    if (data) this._data = data;
     const markup = this._generateMarkup();
     this._clearHTML(this._renderInitContainer);
     this._renderInitContainer.insertAdjacentHTML("afterbegin", markup);
+  }
+
+  renderError(message = this._errorMessage) {
+    this._messageContainer.innerHTML = message;
+    this.open(this._messageContainer);
   }
 }

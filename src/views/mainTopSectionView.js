@@ -23,8 +23,7 @@ class MainTopSectionView extends View {
   }
 
   _generateMarkup() {
-    const howManyTimesClickMax = Math.max(this._data.howManyTimesClick);
-    console.log(howManyTimesClickMax);
+    const howManyTimesClickMax = Math.max(...this._data.howManyTimesClick);
 
     return `
       <p class="welcome">Welcome<br>${this._data.username}</p>

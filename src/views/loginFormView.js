@@ -22,11 +22,6 @@ class LoginFormView extends View {
       handler(inputUsername, inputPassword);
     });
   }
-
-  renderError(errorMessage = this._errorMessage) {
-    this._messageContainer.innerHTML = errorMessage;
-    this.open(this._messageContainer);
-  }
 }
 
 export default new LoginFormView();
