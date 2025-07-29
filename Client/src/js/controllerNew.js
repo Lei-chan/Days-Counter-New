@@ -61,9 +61,9 @@ const controlLogin = async function (username, password) {
     loginWholeView.close();
 
     pageMainInit("goals");
-    overlayMessageSpinnerView.close();
 
     mainWholeView.open();
+    overlayMessageSpinnerView.close();
 
     helpers._setTimeoutLogout();
   } catch (err) {
@@ -127,13 +127,14 @@ const controlCreateAcc = async function (username, password, email) {
     mainWholeView.init(curUser);
     loginWholeView.close();
 
+    mainWholeView.open();
+
     await overlayMessageSpinnerView._asyncInit(
       "message",
       "message",
       overlayMessageSpinnerView._messageCreateAcc
     );
 
-    mainWholeView.open();
     helpers._setTimeoutLogout();
   } catch (err) {
     overlayMessageSpinnerView.close();
@@ -174,15 +175,16 @@ const controlLogout = async function () {
 
     setCurUserToNull();
 
+    settingsView.close();
+    overlayView.close();
+    mainWholeView.close();
+
     await overlayMessageSpinnerView._asyncInit(
       "message",
       "message",
       overlayMessageSpinnerView._messageLogout
     );
 
-    settingsView.close();
-    overlayView.close();
-    mainWholeView.close();
     loginWholeView.open();
   } catch (err) {
     console.error(err);
@@ -222,15 +224,14 @@ const controlEditGoalRoom = async function (
     curUser = UserManageApi._curUser;
 
     pageMainInit(type);
-    // overlayMessageSpinnerView.close();
+
+    overlaySliderView.init(curUser);
 
     await overlayMessageSpinnerView._asyncInit(
       "message",
       "message",
       `${type.at(0).toUpperCase() + type.slice(1, 4)} updated successfully!`
     );
-
-    overlaySliderView.init(curUser);
   } catch (err) {
     helpers._resetSetTimeoutLogout();
     console.error(err);
@@ -264,15 +265,15 @@ const controlDeleteGoalRoom = async function (
 
     curUser = UserManageApi._curUser;
 
+    if (daysCounterOrSlide === "daysCounter") pageMainInit(type);
+
+    if (daysCounterOrSlide === "slide") overlaySliderView.init(curUser);
+
     await overlayMessageSpinnerView._asyncInit(
       "message",
       "message",
       `${type.at(0).toUpperCase() + type.slice(1, 4)} deleted successfully!`
     );
-
-    if (daysCounterOrSlide === "daysCounter") return pageMainInit(type);
-
-    overlaySliderView.init(curUser);
   } catch (err) {
     helpers._resetSetTimeoutLogout();
 
@@ -444,6 +445,8 @@ const controlGoalsRoomsSubmit = async function (
     overlaySliderView.type = type;
     if (roomType) overlaySliderView.roomType = roomType;
 
+    overlaySliderView.init(curUser);
+
     await overlayMessageSpinnerView._asyncInit(
       "message",
       "message",
@@ -451,8 +454,6 @@ const controlGoalsRoomsSubmit = async function (
         goalsOrRoomsInfo.length >= 2 ? type.slice(1) : type.slice(1, 4)
       } created successfully!`
     );
-
-    overlaySliderView.init(curUser);
   } catch (err) {
     helpers._resetSetTimeoutLogout();
 
@@ -551,7 +552,6 @@ const controlUpdateUsernameEmail = async function (
       "message",
       settingsView._message
     );
-    // overlayMessageSpinnerView.open();
 
     if (section !== "username") return;
 

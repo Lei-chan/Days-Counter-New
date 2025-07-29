@@ -149,7 +149,7 @@ class ContentedidableView {
   }
 
   _generateCheckbox(texts, container, checkedOrNotArr) {
-    // if (!texts) return;
+    if (!texts) return;
 
     //separate texts into each line
     const textsArr = texts.split("\n");
@@ -243,7 +243,6 @@ class ContentedidableView {
   }
 
   _renderComments(texts, container) {
-    // //I will remove it later
     if (!texts) return;
 
     container.innerHTML = texts;
