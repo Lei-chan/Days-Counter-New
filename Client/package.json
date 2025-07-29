@@ -19,9 +19,11 @@
   "homepage": "https://github.com/Lei-chan/Days-Counter-New#readme",
   "dependencies": {
     "air-datepicker": "^3.6.0",
-    "core-js": "^3.42.0"
+    "core-js": "^3.42.0",
+    "nanoid": "^5.1.5"
   },
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.15.2",
     "parcel": "^2.15.2",
     "sass": "^1.89.1"
   }
