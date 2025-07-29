@@ -7,8 +7,6 @@ import {
   PASSWORD_MIN_DIGIT,
   PASSWORD_MIN_SPECIAL_CHARACTER,
 } from "../config.js";
-///////Validate password a user sets//////
-import { PasswordValidatorManager } from "@password-validator/core";
 
 class LoginBottomHalfView extends View {
   _parentElement = document.querySelector(".bottom_half");
