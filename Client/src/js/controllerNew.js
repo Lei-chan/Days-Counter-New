@@ -21,75 +21,11 @@ import overlayView from "./views/overlayView.js";
 import overlayMessageSpinnerView from "./views/overlayMessageSpinnerView.js";
 import idRoomsSliderView from "./views/idRoomsSliderView.js";
 
-// if (model.hot) {
-//   model.hot.accept();
-// }
 let curUser;
 
 export const setCurUserToNull = function () {
   curUser = null;
 };
-// curUser = UserManageApi._curUser;
-
-// curUser = {
-//   _id: "hkshdjs63s8****u23h3j",
-//   username: "leichan",
-//   email: "",
-//   goals: [
-//     {
-//       title: "Too long title here! How to handle it",
-//       date: "07/05/2025",
-//       comments: [],
-//       doToList: [],
-//     },
-//     { title: "ahaha", date: "07/10/2025", comments: [], doToList: [] },
-//   ],
-//   remainingDaysPrev: [12876, 30],
-//   remainingDaysNow: [23, 20],
-//   howManyTimesClick: [],
-//   remainingDaysNowRooms: [],
-//   remainingDaysPrevRooms: [],
-//   howManyTimesClickRooms: [],
-//   rooms: [
-//     {
-//       roomId: "hkshdjs63s8****u23h3j",
-//       title: "tanabata",
-//       date: "07/07/2025",
-//       comments: [],
-//       doToList: [],
-//       usernames: ["leichan", "hhhh", "fofofofof", "heheheheheh", "nununununun"],
-//     },
-//   ],
-// };
-
-// mainTopSectionView.type =
-//   mainDaysCounterContainerView.type =
-//   mainWholeView.type =
-//     "goals";
-// loginWholeView.close();
-// mainTopSectionView.renderPartialToParentEle("beforeend", curUser);
-// mainDaysCounterContainerView.renderToParentEle(curUser);
-// mainWholeView.init(curUser);
-// mainWholeView.open();
-
-// overlayMessageSpinnerView._asyncInit(
-//   "message",
-//   "message",
-//   overlayMessageSpinnerView._messageSessionTimeout
-// );
-
-// overlaySliderView.type = "goals";
-
-// overlaySliderView.init(curUser);
-// overlaySliderView.open();
-// overlayCreateRoomsView.renderToParentEle();
-// overlayCreateRoomsView.open();
-
-// (async function () {
-//   loginWholeView.close();
-//   await overlayMessageSpinnerView._asyncInit("spinner");
-//   overlayMessageSpinnerView.open();
-// })();
 
 const pageMainInit = function (type) {
   mainTopSectionView.type =

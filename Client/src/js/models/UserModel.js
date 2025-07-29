@@ -82,16 +82,17 @@ class UserManageApi {
       const newRemainingDaysNow = this._calcRemainingDays("goals");
       const newRemainingDaysNowRooms = this._calcRemainingDays("rooms");
 
-      const roomIds =
-        this._curUser.rooms.length &&
-        this._curUser.rooms.map((room) => room.roomId);
+      let updatedRooms;
+      if (this._curUser.rooms.length) {
+        const roomIds = this._curUser.rooms.map((room) => room.roomId);
 
-      const updatedRooms = roomIds && (await this._getRooms(roomIds));
+        updatedRooms = await this._getRooms(roomIds);
+      }
 
       await this.updateUser({
         remainingDaysNow: newRemainingDaysNow,
         remainingDaysNowRooms: newRemainingDaysNowRooms,
-        rooms: updatedRooms,
+        rooms: updatedRooms || [],
       });
 
       const newHowManyTimesClick = this._calcHowManyTimesClick("goals");

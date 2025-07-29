@@ -28,12 +28,12 @@ body {
 }
 
 .attribution_line {
+  position: absolute;
   color: #0359b6;
   font-size: 1.05vw;
 }
 
 .attribution_line--login {
-  position: absolute;
   top: 2%;
   right: 0.4%;
 }
@@ -41,6 +41,7 @@ body {
 .attribution_line--main,
 .attribution_line--settings {
   padding-bottom: 0.7%;
+  bottom: 0vh;
 }
 
 .btn--app_explanation {
