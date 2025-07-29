@@ -83,6 +83,7 @@ class UserManageApi {
       const newRemainingDaysNowRooms = this._calcRemainingDays("rooms");
 
       let updatedRooms;
+
       if (this._curUser.rooms.length) {
         const roomIds = this._curUser.rooms.map((room) => room.roomId);
 
