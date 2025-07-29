@@ -1,4 +1,5 @@
-export const BASE_URL = "https://days-counter-api-production.up.railway.app";
+export const BASE_URL =
+  "https://days-counter-api-production.up.railway.app/api";
 export const USERNAME_MAX_LENGTH = 12;
 export const PASSWORD_MIN_LENGTH = 8;
 export const PASSWORD_MIN_UPPERCASE = 1;
