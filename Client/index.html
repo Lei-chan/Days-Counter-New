@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./src/styles/main.scss" />
+    <title>Days Counter</title>
+    <script type="module" defer src="./src/js/controllerNew.js"></script>
+  </head>
+
+  <body>
+   <!--login-->
+    <div class="page--login">
+      <div class="login">
+        <p class="version_line">Ver. 1.0.0</p>
+        <p class="attribution_line attribution_line--login">Designed by Freepik and pixabay</p>
+        <button class="btn--app_explanation btn_app_explanation--about_this_web">About this website</button>
+        <h3>Let's make your days more exciting!</h3>
+        <h1>Days Counter</h1>
+        <form class="login--form">
+          <h2>Login</h2>
+          <span class="login--error hidden">
+           Wrong username or password was entered!<br> Try again!
+          </span>
+          <input id="login--input_username" type="text" placeholder="username"></input>
+          <input class="input--password" id="login--input_password" type="password" placeholder="password"><button class="btn--password_visibility btn_password_visibility--login_form" type="button"></button></input>
+          <button class="login--btn" type="submit"> </button>
+        </form>
+        <a class="link--forgot_password">Forgot your password?</a>
+        <p class="scroll--explanation">Click to create your account</p>
+        <button class="btn_scroll" href="#bottom_half">&larr;</button>
+      </div>
+
+      <!--create a new account-->
+      <div class="bottom_half hidden" id="bottom_half">
+        <form class="bottom_half--form">
+          <h1>Let's create your account</h1>
+          <span class="bottom_half--warning hidden">????</span>
+          <div class="bottom_half--inputs">
+          <h2 class="bottom_half--username_explanation">username (required)</h2>
+          <div class="username_explanation--tiny">
+          Use 12 letters at maximum</div>
+          <input id="bottom_half--input_username" type="text" placeholder="username"></input>
+          <h2 class="bottom_half--password_explanation">password (required)</h2>
+          <div class="password_explanation--tiny">
+          Use ? letters at minimam including <br>more than ? digit and ? special character!</div>
+          <input id="bottom_half--input_password" type="password" placeholder="password"></input>
+          <h2 class="bottom_half--email_explanation">email address (optional)</h2>
+          <div class="email_explanation--tiny">
+          You can set email address in case <br>you forget the password</div>
+          <input id="bottom_half--input_email" type="email" placeholder="email"></input>
+        </div>
+          <button class="btn--next bottom_half--btn_next" type="submit">&larr;</button>
+        </form>
+      </div>
+    </div>
+
+    <form class="forgot_password--form">
+      <button class="forgot_password--btn_x" type="button">&times;</button>
+      <h2>~ Reset your password ~</h2>
+      <span class="forgot_password--warning hidden">Email address is required</span>
+      <p class="forgot_password--explanation">Please enter your email address</p>
+      <input id="forgot_password--input_email" 
+      type="email" placeholder="email address">
+      <button class="btn--send" type="submit">send</button>
+      <p class="forgot_password--disclaimer">※If you didn't set your email address,<br>please create your account again!</p>
+    </form>
+  
+    <div class="overlay--app_explanation overlay_app_explanation--about_this_web hidden">
+      <div class="overlay_in--app_explanation overlay_in_app_explanation--about_this_web">
+        <button class="btn--x btn_x--app_explanation" type="button">&times;</button>
+        <div class="overlay_in_app_explanation--inside">
+          <h1>Welcome to Days Counter 😊</h1>
+          <p>This website is quite simple...<br>you can set goals and count down to them!</p>
+          <p>This website could be for something you are looking forward to, you are working on, or for managing work plans, etc...<br>There are a various ways of using it depending on your needs!</p>
+          <img class="image_about_this_web--goals" src="./src/imgs/appExplanationImgs/appExplanationGoals.jpg">
+          <img class="image_about_this_web--contenteditable" src="./src/imgs/appExplanationImgs/appExplanationContenteditable.jpg">
+          <p>You can also set goals with friends and share them ✨ 
+          </p>
+          <img class="image_about_this_web--rooms" src="./src/imgs/appExplanationImgs/appExplanationRooms.jpg">
+          <p>I hope this website will make your days a bit more exciting 😁</p>
+        </div>
+      </div>
+    </div>
+  
+    <!--main-->
+    <div class="page--main hidden">
+      <div class="top_section">
+      <!-- <div class="switch--goals_rooms">
+        <div class="switch--goals">goals</div>
+        <div class="switch--rooms">rooms</div>
+        <button class="btn--switch" style="left: 60px"></button>
+      </div> -->
+      <!-- <p class="welcome">Welcome<br>??</p>
+      <h1 class="title">User's Days Counter</h1>
+      <div class="times_to_click">You can click <br>0 times today!</div>
+      <button class="btn--set_goal">Goals</button>
+      <button class="btn--create_room">Rooms</button> -->
+      <!-- <div class="date_and_times_left">
+      <p class="date"></p>
+      <div class="times_left-outside">
+        <p class="p_one">You can click</p>
+        <div class='times_left-inside'>?</div>
+      <p class="p_two">more times!</p></div>
+      <button class="btn--logout">Logout</button>
+      -->
+    <!-- </div> -->
+      </div>
+
+      <!--days counter-->
+      <div class="days_counter--container">
+        <!-- <p class="start_explanation">Let's first start by setting your goals!</p> -->
+
+        <!-- <div class="card" data-card="0"> -->
+        <!--
+        <div class="fukidashi_container">
+        <section class="details details--fukidashi">
+        <span>0 days are 0 hours</span>
+        <span>0 days are 0 minutes</span>
+        <span>0 days are 0 seconds</span>
+        </section>
+        </div>
+        <h2>Until sb's birthday</h2>
+        <div class="bottom_content">
+          <h1 class="remaining_days">days</h1>
+          <p>days</p>
+          <div class="details details--card">
+            <span>0 days are 0 weeks</span>
+            <span>0 days are 0 months</span>
+            <span>0 days are 0 years</span>
+          </div>
+        </div>
+        </div>
+        <div class="card" data-card="1">
+        <div class="fukidashi_container">
+        <section class="details details--fukidashi">
+        <span>0 days are 0 hours</span>
+        <span>0 days are 0 minutes</span>
+        <span>0 days are 0 seconds</span>
+        </section>
+        </div>
+        <h2>Until sb's birthday</h2>
+        <div class="bottom_content">
+          <h1 class="remaining_days">days</h1>
+          <p>days</p>
+          <div class="details details--card">
+            <span>0 days are 0 weeks</span>
+            <span>0 days are 0 months</span>
+            <span>0 days are 0 years</span>
+          </div>
+        </div>-->
+          <!-- <div class="comments hidden" contenteditable="true">
+            <p class="default_sentence--comments">Let's add comments here!</p>
+          </div>
+          <div class="to_do_lists hidden" contenteditable="true">
+            <div class="checkbox_container">
+              <input type="checkbox"   id="checkbox0">
+              Let's add To-Do lists here!
+            </div>
+          </div> -->
+      </div>
+      <div class="btn_warning_container hidden">
+        <button class="btn--count">Click here!</button> 
+        <div class="warning--counter hidden"></div> 
+      </div>
+      <button class="btn--app_explanation btn_app_explanation--how_to_use">how to use</button>
+      <button class="btn--settings">settings</button>
+      <p class="attribution_line attribution_line--main">Designed by Freepik and pixabay</p>
+
+
+      <div class="overlay--app_explanation overlay_app_explanation--how_to_use hidden">
+        <div class="overlay_in--app_explanation overlay_in_app_explanation--how_to_use">
+          <button class="btn--x btn_x--app_explanation" type="button">&times;</button>
+          <div class="overlay_in_app_explanation--inside">
+            <h2>I will explain how to use this app<br>step by step 😊</h2>
+            <img class="image_how_to_use--all" src="./src/imgs/appExplanationImgs/appExplanationAll.jpg">
+            <div class="to_set_goals_container">
+              <h5>➀ To set goals</h5>
+              <p class="p--how_to_use">Click the top right sun button ➀</p>
+              <img class="image_how_to_use--set_goals" src="./src/imgs/appExplanationImgs/appExplanationSetGoals.jpg">
+            </div>
+            <h5>➁ To create rooms</h5>
+            <p class="p--how_to_use">Click the top right house botton ➁</p>
+            <p>There are three ways for creating rooms<br>1. from the scratch, 2. by using existing goals you set,<br>3. by entering room IDs shared from your friends!</p>
+            <img class="image_how_to_use--create_rooms" src="./src/imgs/appExplanationImgs/appExplanationCreateRooms.jpg">
+            <h5>➂ To count down to your goals</h5>
+            <p class="p--how_to_use">Click the bottom green button on your goal page for counting down to your goals, and on your room page for counting down your sharing goals ➂</p>
+            <h5>➃ To check To-Do lists/comments</h5>
+            <p class="p--how_to_use">Click goal/room cards on the main page or on the page where you can create goals/rooms from the scratch ➃</p>
+            <p>If you click it once, To-Do lists will appear, if you click it twice, comments will appear!</p>
+            <h5>➄ To edit/delete your goals or rooms</h5>
+            <p class="p--how_to_use">Click the orange button for editing, the blue button for deleting</p>
+            <p>You can also edit/delete your goals on the page where you can set goals/rooms from the scratch</p>
+            <h6>~ When you want to edit To-Do lists/comments ~</h6>
+            <p class="p--how_to_use">Click the To-Do lists or comments you want to edit and change the content</p>
+            <h5>➅ To switch goal mode/room mode</h5>
+            <p class="p--how_to_use">Click the top left grey button ➅</p>
+            <h5>➆ To log out</h5>
+            <p class="p--how_to_use">click the top right logout button ➆</p>
+            <p>(You will be automatically logged out when there are no actions for 30 minutes)</p>
+            <h5>➇ To change/check account information</h5>
+            <p class="p--how_to_use">Click the bottom right gear button</p>
+            <p>You can change your username, email address, and password!<br>※The feature for closing your account will be introduced soon!</p>
+            <img class="image_how_to_use--settings" src="./src/imgs/appExplanationImgs/appExplanationSettings.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <div class="overlay hidden">
+        <form class="overlay_in--set_goal">
+          <button class="btn--x set_goal--btn_x" type="button">&times;</button>
+          <h1>Let's set your goals!</h1>
+          <p>You can set up to 10 goals!</p>
+
+          <div class="slider">
+            <button class="slider--btn 
+            btn--left">&larr;</button>
+            <button class="slider--btn btn--right">&rarr;</button>
+            <div class="dots"></div>
+          </div>
+          <button class="btn--next slider--btn_next">&larr;</button> 
+        </form> 
+      
+      <!-- overlay slider create rooms-->
+        <div class="overlay_in--how_to_create hidden">
+          <div class="overlay_in--how_to_create">
+            <button class="btn--x how_to_create--btn_x">&times;</button>
+            <h1>What do you want to do today?</h1>
+            <div class="btn_container--create_rooms">
+              <h2>Create rooms</h2>
+              <button class="btn--from_scratch">From scratch</button>
+              <button class="btn--from_you_have">From the goal you already set</button>
+              <button class="btn--from_id">Join a room with the id</button>
+            </div>
+          </div>
+        </div>
+
+      <!-- <form class="overlay_in overlay_in--create_room">
+       <button class="btn_x">&times;</button>
+        <h1>Let's set your To-do lists!</h1>
+       <div class="slider" data-slider="1">
+      
+        <button class="slider--btn 
+        slider--btn_left">&larr;</button>
+        <button class="slider--btn slider--btn_right">&rarr;</button>
+        <div class="slider--dots"></div>
+       </div>
+       <button class="btn_next">&larr;</button>
+      </form> -->
+      <!-- </div> -->
+      </div>
+    </div>
+
+    <div class="page--settings hidden">
+      <div class="settings_form">
+        <button class="btn--x settings--btn_x">&times;</button>
+        <h1>Account information</h1>
+        <h3>
+          Username
+        </h3>
+        <div class="settings--username">
+          <p>???</p>
+          <button class="btn--change_username">Change</button>        
+        </div>
+        <h3>
+          Email address
+        </h3>
+        <div class="settings--email">
+          <p>???</p>
+          <button class="btn--change_email">Change</button>        
+        </div>
+        <h3>Password</h3>
+        <div class="settings--password">
+          <button class="btn--change_password">change</button>
+        </div>
+      </div>
+      <p class="attribution_line attribution_line--settings">Designed by Freepik and pixabay</p>
+    </div>
+
+    <div class="overlay--message_spinner hidden">
+      <div class="spinner"></div>
+      <div class="message_container">
+        <button class="btn--x btn_x--message">&times;</button>
+        <h3 class="message_header">Message</h3>
+        <p></p>
+        <button class='btn--i_am_sure'>I'm sure</button>
+        <button class="btn--ok">OK</button>
+      </div>
+    </div>
+
+  </body>
+</html>

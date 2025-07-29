@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./src/styles/main.scss" />
+    <title>Days Counter</title>
+    <script type="module" defer src="./src/js/controllerNew.js"></script>
+  </head>
+  <body>
+
+   <!--login-->
+   <div class="page--login">
+    <div class="login">
+      <button class="btn_howtouse">how to use</button>
+      <h3>Let's make your days more exciting!</h3>
+      <h1>Days Counter</h1>
+      <form class="login--form">
+      <h2>Log in</h2>
+      <span class="login--error hidden">
+        Wrong username or password was entered!<br> Try again!
+      </span>
+      <input class="login--input_username" type="text" placeholder="username"></input>
+      <input class="login--input_password" type="text" placeholder="password"></input>
+      <button class="login--btn"> </button>
+    </form>
+    <p class="scroll--explanation">Click to create your account</p>
+     <button class="btn_scroll" href="#bottom_half">&larr;</button>
+  
+   </div>
+
+    <!--create a new account-->
+    <div class="bottom_half hidden"
+    id="bottom_half">
+      <form class="bottom_half--form">
+        <h1>Let's create your account</h1>
+        <p class="bottom_half--form_explanation">Fill the form to create your account!</p>
+        <p class="bottom_half--username_explanation">Set your username</p>
+        <p class="bottom_half--username_warning hidden">This username is already used!<br>Please choose different one!</p>
+        <input class="bottom_half--input_username" type="text" placeholder="username"></input>
+        <p class="bottom_half--password_explanation">Set your password</p>
+        <div class="password_explanation--tiny">
+        Use ? letters at minimam including <br>more than ? digit and ? special character!</div>
+        <input class="bottom_half--input_password" type="text" placeholder="password"></input>
+      <button class="btn--next bottom_half--btn_next">&larr;</button>
+      <!-- <div class="bottom_half--you_will_need">You will need this information in the next page!</div> -->
+    </form>
+    <!--change the design to the sun-->
+    <!-- <button class="btn_howtouse bottom--btn_howtouse">how to use</button> -->
+  </div>
+ </div>
+  
+    <!--main-->
+  <div class="page--main hidden">
+    <div class="top_section">
+      <p class="welcome">Welcome<br>??</p>
+      <h1 class="title">User's Days Counter</h1>
+      <div class="times_to_click">You can click <br>0 times today!</div>
+      <button class="btn--set_goal">Set your goals</button>
+      <button class="btn--create_room">Create rooms</button>
+      <!-- <div class="date_and_times_left">
+      <p class="date"></p>
+      <div class="times_left-outside">
+        <p class="p_one">You can click</p>
+        <div class='times_left-inside'>?</div>
+      <p class="p_two">more times!</p></div> -->
+    <!-- </div> -->
+    </div>
+
+      <!-- overlay slider set goals-->
+      <div class="overlay hidden">
+       <!-- <form class="overlay_in--set_goal"> -->
+        <!-- <button class="btn--x set_goal--btn_x">&times;</button>
+        <h1>Let's set your goals!</h1>
+        <p>You can set up to 10 goals!</p>
+
+       <div class="slider" >
+        <button class="slider--btn 
+        btn--left">&larr;</button>
+        <button class="slider--btn btn--right">&rarr;</button>
+        <div class="dots"></div>
+       </div>
+       <button class="btn--next slider--btn_next">&larr;</button> -->
+      <!-- </form> -->
+      
+      <!-- overlay slider create rooms-->
+      <div class="overlay_in--how_to_create hidden">
+       <button class="btn--x how_to_create--btn_x">&times;</button>
+       <h1>How do you want to create a room?</h1>
+       <div class="btn_container">
+        <button class="btn--from_scrach">From scrach</button>
+        <button class="btn--from_you_have">From the goal you already set</button>
+        <button class="btn--from_id">Join a room with the id</button>
+        </div>
+      </div>
+
+      <!-- <form class="overlay_in overlay_in--create_room">
+       <button class="btn_x">&times;</button>
+        <h1>Let's set your To-do lists!</h1>
+       <div class="slider" data-slider="1">
+      
+        <button class="slider--btn 
+        slider--btn_left">&larr;</button>
+        <button class="slider--btn slider--btn_right">&rarr;</button>
+        <div class="slider--dots"></div>
+       </div>
+       <button class="btn_next">&larr;</button>
+      </form> -->
+      </div>
+
+      <!--days counter-->
+      <div class="days_counter--container">
+      <!-- <p class="start_explanation">Let's first start by setting your goals!</p> -->
+
+      <!-- <div class="card" data-card="0">
+        <div class="fukidashi_container">
+        <section class="details details--fukidashi">
+        <span>0 days are 0 hours</span>
+        <span>0 days are 0 minutes</span>
+        <span>0 days are 0 seconds</span>
+        </section>
+        </div>
+        <h2>Until sb's birthday</h2>
+        <div class="bottom_content">
+          <h1 class="remaining_days">days</h1>
+          <p>days</p>
+          <div class="details details--card">
+            <span>0 days are 0 weeks</span>
+            <span>0 days are 0 months</span>
+            <span>0 days are 0 years</span>
+          </div>
+        </div>
+      </div>
+      <div class="card" data-card="1">
+        <div class="fukidashi_container">
+        <section class="details details--fukidashi">
+        <span>0 days are 0 hours</span>
+        <span>0 days are 0 minutes</span>
+        <span>0 days are 0 seconds</span>
+        </section>
+        </div>
+        <h2>Until sb's birthday</h2>
+        <div class="bottom_content">
+          <h1 class="remaining_days">days</h1>
+          <p>days</p>
+          <div class="details details--card">
+            <span>0 days are 0 weeks</span>
+            <span>0 days are 0 months</span>
+            <span>0 days are 0 years</span>
+          </div>
+        </div>
+      </div>-->
+    </div>
+    <div class="btn_warning_container">
+    <!-- <button class="btn--count">Click here!</button> 
+    <div class="warning--counter"></div>   -->
+    </div>
+  <button class="btn_howtouse">how to use</button>
+  </div>
+  </div>
+  </body>
+</html>

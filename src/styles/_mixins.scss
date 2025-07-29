@@ -1,0 +1,30 @@
+@mixin img-btn-style($color: $primary-font-color-white) {
+  background: transparent;
+  background-size: contain;
+  border: none;
+  color: $color;
+  font-family: $primary-font-family;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+@mixin btn-style($bg-color, $color: $primary-font-color-white) {
+  background-color: $bg-color;
+  color: $color;
+  font-family: $primary-font-family;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+@mixin img-background-style {
+  background-size: contain;
+}
+
+@mixin message-style($bg-color: #fa7304, $color: $primary-font-color-white) {
+  background-color: $bg-color;
+  color: $color;
+  box-shadow: 2px 2px 2px #0d0e4438;
+  height: fit-content;
+  width: fit-content;
+  text-align: center;
+}
