@@ -1091,5 +1091,5 @@ class UserManageApi {
 export default new UserManageApi();
 
 (async function () {
-  console.log(await health());
+  // console.log(await health());
 })();

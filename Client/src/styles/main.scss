@@ -19,6 +19,279 @@ body {
   text-align: center;
 }
 
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h3 {
+    margin-top: 8vh;
+    font-size: 2.5vw;
+    letter-spacing: 0.15vw;
+    word-spacing: 0.3vw;
+    color: #000000ad;
+  }
+
+  h1 {
+    margin-top: 2vw;
+    font-size: 2.8vw;
+    letter-spacing: 0.3vw;
+    word-spacing: 0.65vw;
+  }
+
+  .attribution_line--login {
+    position: absolute;
+    top: 2%;
+    right: 0.4%;
+  }
+
+  .login--form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    top: calc(2.2vw * 1.5);
+    background-image: linear-gradient(rgb(252, 166, 116), yellow);
+    border-radius: 3% / 4.5%;
+    width: 35vw;
+    aspect-ratio: 1 / 0.63;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    color: $primary-font-color-white;
+    z-index: 2;
+
+    h2 {
+      font-size: 2.2vw;
+      letter-spacing: 0.2vw;
+      margin-top: 5%;
+    }
+  }
+
+  #login--input_username,
+  #login--input_password {
+    height: 8.6%;
+    width: 52%;
+    box-sizing: border-box;
+    border-radius: 2.8% / 20%;
+    text-align: center;
+    letter-spacing: 0.1vw;
+    margin-top: 8.4%;
+    border-color: #bbbbbb;
+    font-size: 0.9vw;
+  }
+
+  .btn--password_visibility {
+    position: absolute;
+    @include img-btn-style();
+    background-image: url("../imgs/eye.svg");
+    background-size: 98%;
+    aspect-ratio: 1 / 1;
+  }
+
+  .btn_password_visibility--login_form {
+    width: 4%;
+    top: 58.3%;
+    right: 25.5%;
+  }
+
+  .password--visible {
+    background-image: url("../imgs/eyeOff.svg");
+  }
+
+  .login--btn {
+    @include img-btn-style();
+    background-image: url("../imgs/sun.svg");
+    background-size: cover;
+    height: 20%;
+    width: 15%;
+    margin-top: 4%;
+
+    &:hover {
+      transform: $btn-transform-hover;
+    }
+  }
+
+  .login--error {
+    @include message-style();
+    position: absolute;
+    border-radius: 2% / 12%;
+    top: 6%;
+    padding: 3%;
+    font-size: 1.3vw;
+  }
+
+  .link--forgot_password {
+    position: relative;
+    @include btn-style(none, rgb(180, 0, 180));
+    border-bottom: thin solid;
+    font-size: 1vw;
+    top: calc(1vw * 4.3);
+    letter-spacing: 0.2vw;
+    word-spacing: 0.3vw;
+
+    &:hover {
+      color: rgb(255, 37, 255);
+    }
+  }
+
+  .scroll--explanation {
+    font-size: 1.6vw;
+    margin-top: calc(1.6vw * 6);
+    letter-spacing: 0.2vw;
+    color: $primary-font-color-white;
+  }
+
+  .btn_scroll {
+    @include btn-style(#fcfce171);
+    transform: rotate(270deg);
+    border-radius: 100%;
+    border: none;
+    width: 5.5vw;
+    aspect-ratio: 1 / 1;
+    font-size: 1.6vw;
+    margin-top: calc(1.6vw * 1);
+  }
+
+  @media (width <= 320px) {
+    h3 {
+      margin-top: 10vh;
+      font-size: 4.2vw;
+      letter-spacing: 0.3vw;
+      word-spacing: 0.4vw;
+    }
+
+    h1 {
+      margin-top: 3vh;
+      font-size: 6vw;
+      letter-spacing: 0.5vw;
+      word-spacing: 0.9vw;
+    }
+
+    .login--form {
+      top: calc(6vw * 1.5);
+      width: 80vw;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+
+      h2 {
+        font-size: 6vw;
+        letter-spacing: 0.6vw;
+      }
+    }
+
+    #login--input_username,
+    #login--input_password {
+      height: 12%;
+      width: 60%;
+      margin-top: 6.5%;
+      font-size: 3vw;
+      letter-spacing: 0.3vw;
+    }
+
+    .btn_password_visibility--login_form {
+      width: 6%;
+      right: 22%;
+    }
+
+    .login--btn {
+      width: 17%;
+      margin-top: 1%;
+    }
+
+    .login--error {
+      font-size: 3.5vw;
+    }
+
+    .link--forgot_password {
+      border-bottom: none;
+      font-size: 3.5vw;
+      top: calc(3.5vw * 4.3);
+      letter-spacing: 0.4vw;
+      word-spacing: 0.4vw;
+    }
+
+    .scroll--explanation {
+      font-size: 5vw;
+      margin-top: calc(5vw * 6);
+      letter-spacing: 0.5vw;
+    }
+
+    .btn_scroll {
+      width: 13.5vw;
+      font-size: 5vw;
+      margin-top: calc(5vw * 1);
+    }
+  }
+
+  @media (320px < width <= 480px) {
+    h3 {
+      margin-top: 10vh;
+      font-size: 4vw;
+      letter-spacing: 0.3vw;
+      word-spacing: 0.4vw;
+    }
+
+    h1 {
+      margin-top: 3vh;
+      font-size: 5.6vw;
+      letter-spacing: 0.5vw;
+      word-spacing: 0.9vw;
+    }
+
+    .login--form {
+      top: calc(6vw * 1.5);
+      width: 70vw;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+
+      h2 {
+        font-size: 5vw;
+        letter-spacing: 0.5vw;
+      }
+    }
+
+    #login--input_username,
+    #login--input_password {
+      width: 60%;
+      height: 10%;
+      margin-top: 7.5%;
+      font-size: 2.5vw;
+      letter-spacing: 0.25vw;
+    }
+
+    .btn_password_visibility--login_form {
+      width: 5.5%;
+      right: 22%;
+    }
+
+    .login--btn {
+      width: 17%;
+      margin-top: 1.2%;
+    }
+
+    .login--error {
+      font-size: 3.1vw;
+    }
+
+    .link--forgot_password {
+      border-bottom: none;
+      font-size: 3vw;
+      top: calc(3vw * 4.3);
+      letter-spacing: 0.3vw;
+      word-spacing: 0.3vw;
+    }
+
+    .scroll--explanation {
+      font-size: 4vw;
+      margin-top: calc(4vw * 6);
+      letter-spacing: 0.4vw;
+    }
+
+    .btn_scroll {
+      width: 12vw;
+      font-size: 4vw;
+      margin-top: calc(4vw * 1);
+    }
+  }
+}
+
 .version_line {
   position: absolute;
   font-size: 1.1vw;
@@ -32,16 +305,16 @@ body {
   font-size: 1.05vw;
 }
 
-.attribution_line--login {
+.btn--password_visibility {
   position: absolute;
-  top: 2%;
-  right: 0.4%;
+  @include img-btn-style();
+  background-image: url("../imgs/eye.svg");
+  background-size: 98%;
+  aspect-ratio: 1 / 1;
 }
 
-.attribution_line--main,
-.attribution_line--settings {
-  margin-top: 1%;
-  padding-bottom: 0.7%;
+.password--visible {
+  background-image: url("../imgs/eyeOff.svg");
 }
 
 .btn--app_explanation {
@@ -70,146 +343,84 @@ body {
   font-size: 1.2vw;
 }
 
-.login h3 {
-  margin-top: 8vh;
-  font-size: 2.5vw;
-  letter-spacing: 0.15vw;
-  word-spacing: 0.3vw;
-  color: #000000ad;
+@media (width <= 320px) {
+  .version_line {
+    font-size: 2.6vw;
+    letter-spacing: 0.26vw;
+  }
+
+  .attribution_line {
+    font-size: 2.6vw;
+  }
+
+  .btn--app_explanation {
+    width: 35vw;
+    font-size: 3vw;
+    letter-spacing: 0.3vw;
+    padding-top: calc(35vw * 0.5 * 0.2);
+  }
+
+  .btn_app_explanation--about_this_web {
+    font-size: 3vw;
+  }
 }
 
-.login h1 {
-  margin-top: 2vw;
-  font-size: 2.8vw;
-  letter-spacing: 0.3vw;
-  word-spacing: 0.65vw;
+@media (320px < width <= 480px) {
+  .version_line {
+    font-size: 2.6vw;
+    letter-spacing: 0.26vw;
+  }
+
+  .attribution_line {
+    font-size: 2.6vw;
+  }
+
+  .btn--app_explanation {
+    width: 28vw;
+    font-size: 2.5vw;
+    letter-spacing: 0.25vw;
+    padding-top: calc(28vw * 0.5 * 0.2);
+  }
+
+  .btn_app_explanation--about_this_web {
+    font-size: 2.5vw;
+    left: 1vw;
+    bottom: 1vh;
+  }
 }
 
-.login--form {
+////////login bottom half///////////
+.bottom_half {
   position: relative;
   display: flex;
   flex-direction: column;
-  left: 32vw;
-  top: calc(2.2vw * 1.5);
-  background-image: linear-gradient(rgb(252, 166, 116), yellow);
-  border-radius: 3% / 4.5%;
-  width: 35vw;
-  aspect-ratio: 1 / 0.63;
-  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
   align-items: center;
-  color: $primary-font-color-white;
-  z-index: 2;
-
-  h2 {
-    font-size: 2.2vw;
-    letter-spacing: 0.2vw;
-    margin-top: 5%;
-  }
-}
-
-#login--input_username,
-#login--input_password {
-  height: 8.6%;
-  width: 52%;
-  border-radius: 2.8% / 20%;
-  text-align: center;
-  letter-spacing: 0.1vw;
-  margin-top: 8.4%;
-  border-color: #bbbbbb;
-  font-size: 0.9vw;
-}
-
-.btn--password_visibility {
-  position: absolute;
-  @include img-btn-style();
-  background-image: url("../imgs/eye.svg");
-  background-size: 98%;
-  aspect-ratio: 1 / 1;
-}
-
-.btn_password_visibility--login_form {
-  width: 4%;
-  top: 58.3%;
-  right: 25.5%;
-}
-
-.password--visible {
-  background-image: url("../imgs/eyeOff.svg");
-}
-
-.login--btn {
-  @include img-btn-style();
-  background-image: url("../imgs/sun.svg");
-  background-size: cover;
-  height: 20%;
-  width: 15%;
-  margin-top: 4%;
-
-  &:hover {
-    transform: $btn-transform-hover;
-  }
-}
-
-.login--error {
-  @include message-style();
-  position: absolute;
-  border-radius: 2% / 12%;
-  top: 6%;
-  padding: 3%;
-  font-size: 1.3vw;
-}
-
-.link--forgot_password {
-  position: relative;
-  @include btn-style(none, rgb(180, 0, 180));
-  border-bottom: thin solid;
-  font-size: 1vw;
-  top: calc(1vw * 4.3);
-  letter-spacing: 0.2vw;
-  word-spacing: 0.3vw;
-
-  &:hover {
-    color: rgb(255, 37, 255);
-  }
-}
-
-.scroll--explanation {
-  font-size: 1.6vw;
-  margin-top: calc(1.6vw * 6);
-  letter-spacing: 0.2vw;
-  color: $primary-font-color-white;
-}
-
-.btn_scroll {
-  @include btn-style(#fcfce171);
-  transform: rotate(270deg);
-  border-radius: 100%;
-  border: none;
-  width: 5.5vw;
-  height: 5.5vw;
-  font-size: 1.6vw;
-  margin-top: calc(1.6vw * 1);
-}
-
-.bottom_half {
-  position: relative;
   height: fit-content;
   padding-bottom: 10vh;
   top: 70vh;
 }
 
+@media (width<=320px) {
+  .bottom_half {
+    padding-bottom: 30vh;
+    top: 25vh;
+  }
+}
+
 .bottom_half--form {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-image: linear-gradient(#fafa01f6, orange);
   border-radius: 3% / 2%;
   box-shadow: 5px 5px 10px #0d0e4488;
   width: 48%;
-  height: fit-content;
+  aspect-ratio: 1 / 1.1;
   padding-bottom: 3%;
   padding-top: 3%;
   color: black;
   top: 5%;
-  left: 26%;
 
   h1 {
     color: #0359b6;
@@ -221,23 +432,23 @@ body {
   input {
     width: 20vw;
     aspect-ratio: 1 / 0.09;
-    letter-spacing: 0.1vw;
     font-size: 0.9vw;
-    padding-left: 0.5vw;
+    letter-spacing: 0.1vw;
+    padding-left: 1.5%;
+    box-sizing: border-box;
     border-radius: 2% / 15%;
     border-color: #bbbbbb;
-    margin-top: 5.5vh;
+    margin-top: 7%;
   }
 }
 
 .bottom_half--inputs {
   position: relative;
   width: 41vw;
-  height: fit-content;
+  aspect-ratio: 1 / 1.1;
   background-image: linear-gradient(#fff7f7, #fff4ef);
   padding: 7%;
   margin-top: 3%;
-  margin-left: 7%;
   margin-bottom: 4%;
   border-radius: 2%;
 }
@@ -245,7 +456,6 @@ body {
 .bottom_half--warning {
   @include message-style();
   position: relative;
-  // top: -10vh;
   font-size: 1.2vw;
   letter-spacing: 0.1vw;
   padding: 0.8%;
@@ -277,9 +487,77 @@ body {
 }
 
 .btn_password_visibility--login_bottom {
+  position: absolute;
   width: 3.6%;
-  top: 59.4%;
+  bottom: 38.8%;
   right: 27.4%;
+}
+
+.bottom_half--btn_next {
+  margin-top: 1.5%;
+}
+
+@media (width <= 320px) {
+  .bottom_half--form {
+    box-shadow: 3px 3px 7px #0d0e4488;
+    width: 86%;
+    padding-bottom: 3%;
+    padding-top: 4%;
+    margin-top: 25%;
+
+    h1 {
+      font-size: 4.6vw;
+      letter-spacing: 0.4vw;
+    }
+
+    input {
+      width: 50vw;
+      aspect-ratio: 1 / 0.11;
+      font-size: 3vw;
+      letter-spacing: 0.3vw;
+      padding-left: 3%;
+      margin-top: 6%;
+    }
+  }
+
+  .bottom_half--inputs {
+    width: 70vw;
+    padding: 5%;
+    padding-top: 2%;
+  }
+
+  .bottom_half--warning {
+    font-size: 3.3vw;
+    letter-spacing: 0.3vw;
+    padding: 1.5%;
+  }
+
+  .bottom_half--username_explanation,
+  .bottom_half--password_explanation,
+  .bottom_half--email_explanation {
+    font-size: 4vw;
+    letter-spacing: 0.3vw;
+    margin-top: 7%;
+    margin-bottom: 4%;
+  }
+
+  .username_explanation--tiny,
+  .password_explanation--tiny,
+  .email_explanation--tiny {
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.521);
+    font-size: 3vw;
+    letter-spacing: 0.3vw;
+  }
+
+  .btn_password_visibility--login_bottom {
+    width: 6%;
+    bottom: 34%;
+    right: 16.5%;
+  }
+
+  .bottom_half--btn_next {
+    margin-top: 0.6%;
+  }
 }
 
 .btn--next {
@@ -297,8 +575,11 @@ body {
   }
 }
 
-.bottom_half--btn_next {
-  margin-top: 1.5%;
+@media (width<=320px) {
+  .btn--next {
+    width: 17vw;
+    font-size: 4vw;
+  }
 }
 
 .forgot_password--form {
@@ -962,6 +1243,12 @@ body {
   &:hover {
     transform: $btn-transform-hover;
   }
+}
+
+.attribution_line--main,
+.attribution_line--settings {
+  margin-top: 1%;
+  padding-bottom: 0.7%;
 }
 
 .overlay {
