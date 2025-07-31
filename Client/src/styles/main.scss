@@ -68,15 +68,15 @@ body {
 
   #login--input_username,
   #login--input_password {
-    height: 8.6%;
-    width: 52%;
+    width: 55%;
+    aspect-ratio: 1 / 0.11;
     box-sizing: border-box;
     border-radius: 2.8% / 20%;
     text-align: center;
-    letter-spacing: 0.1vw;
-    margin-top: 8.4%;
+    margin-top: 7.7%;
     border-color: #bbbbbb;
-    font-size: 0.9vw;
+    font-size: 1vw;
+    letter-spacing: 0.1vw;
   }
 
   .btn--password_visibility {
@@ -88,9 +88,9 @@ body {
   }
 
   .btn_password_visibility--login_form {
-    width: 4%;
-    top: 58.3%;
-    right: 25.5%;
+    width: 4.3%;
+    top: 57.5%;
+    right: 24.5%;
   }
 
   .password--visible {
@@ -101,9 +101,9 @@ body {
     @include img-btn-style();
     background-image: url("../imgs/sun.svg");
     background-size: cover;
-    height: 20%;
     width: 15%;
-    margin-top: 4%;
+    aspect-ratio: 1 / 1.05;
+    margin-top: 3%;
 
     &:hover {
       transform: $btn-transform-hover;
@@ -123,10 +123,10 @@ body {
     position: relative;
     @include btn-style(none, rgb(180, 0, 180));
     border-bottom: thin solid;
-    font-size: 1vw;
-    top: calc(1vw * 4.3);
-    letter-spacing: 0.2vw;
-    word-spacing: 0.3vw;
+    font-size: 1.2vw;
+    top: calc(1vw * 4.5);
+    letter-spacing: 0.12vw;
+    word-spacing: 0.25vw;
 
     &:hover {
       color: rgb(255, 37, 255);
@@ -145,7 +145,7 @@ body {
     transform: rotate(270deg);
     border-radius: 100%;
     border: none;
-    width: 5.5vw;
+    width: 5.6vw;
     aspect-ratio: 1 / 1;
     font-size: 1.6vw;
     margin-top: calc(1.6vw * 1);
@@ -179,8 +179,8 @@ body {
 
     #login--input_username,
     #login--input_password {
-      height: 12%;
       width: 60%;
+      aspect-ratio: 1 / 0.13;
       margin-top: 6.5%;
       font-size: 3vw;
       letter-spacing: 0.3vw;
@@ -188,6 +188,7 @@ body {
 
     .btn_password_visibility--login_form {
       width: 6%;
+      top: 59%;
       right: 22%;
     }
 
@@ -250,7 +251,6 @@ body {
     #login--input_username,
     #login--input_password {
       width: 60%;
-      height: 10%;
       margin-top: 7.5%;
       font-size: 2.5vw;
       letter-spacing: 0.25vw;
@@ -258,6 +258,7 @@ body {
 
     .btn_password_visibility--login_form {
       width: 5.5%;
+      top: 59%;
       right: 22%;
     }
 
@@ -288,6 +289,144 @@ body {
       width: 12vw;
       font-size: 4vw;
       margin-top: calc(4vw * 1);
+    }
+  }
+
+  @media (480px < width <= 768px) {
+    h3 {
+      margin-top: 10vh;
+      font-size: 3.5vw;
+      letter-spacing: 0.25vw;
+      word-spacing: 0.35vw;
+    }
+
+    h1 {
+      margin-top: 3vh;
+      font-size: 5vw;
+      letter-spacing: 0.45vw;
+      word-spacing: 0.85vw;
+    }
+
+    .login--form {
+      top: calc(4vw * 2);
+      width: 55vw;
+      box-shadow: 3.3px 3.3px 3.3px rgba(0, 0, 0, 0.3);
+
+      h2 {
+        font-size: 3.5vw;
+        letter-spacing: 0.4vw;
+      }
+    }
+
+    #login--input_username,
+    #login--input_password {
+      width: 55%;
+      margin-top: 7.5%;
+      font-size: 2vw;
+      letter-spacing: 0.2vw;
+    }
+
+    .btn_password_visibility--login_form {
+      width: 5%;
+      top: 57%;
+      right: 23.5%;
+    }
+
+    .login--btn {
+      width: 15%;
+      margin-top: 2.5%;
+    }
+
+    .login--error {
+      font-size: 2.5vw;
+    }
+
+    .link--forgot_password {
+      font-size: 2.2vw;
+      top: calc(2.2vw * 5);
+      letter-spacing: 0.22vw;
+      word-spacing: 0.22vw;
+    }
+
+    .scroll--explanation {
+      font-size: 2.8vw;
+      margin-top: calc(2.8vw * 10);
+      letter-spacing: 0.28vw;
+    }
+
+    .btn_scroll {
+      width: 10vw;
+      font-size: 3.5vw;
+      margin-top: calc(3.5vw * 1);
+    }
+  }
+
+  @media (768px < width <= 1024px) {
+    h3 {
+      margin-top: 10vh;
+      font-size: 2.8vw;
+      letter-spacing: 0.2vw;
+      word-spacing: 0.3vw;
+    }
+
+    h1 {
+      margin-top: 3vh;
+      font-size: 3.6vw;
+      letter-spacing: 0.4vw;
+      word-spacing: 0.8vw;
+    }
+
+    .login--form {
+      top: calc(2.8vw * 1.8);
+      width: 45vw;
+      box-shadow: 3.5px 3.5px 3.5px rgba(0, 0, 0, 0.3);
+
+      h2 {
+        font-size: 2.8vw;
+        letter-spacing: 0.3vw;
+      }
+    }
+
+    #login--input_username,
+    #login--input_password {
+      width: 54%;
+      margin-top: 7.5%;
+      font-size: 1.5vw;
+      letter-spacing: 0.15vw;
+    }
+
+    .btn_password_visibility--login_form {
+      width: 4.3%;
+      top: 57%;
+      right: 24%;
+    }
+
+    .login--btn {
+      width: 14%;
+      margin-top: 3%;
+    }
+
+    .login--error {
+      font-size: 1.9vw;
+    }
+
+    .link--forgot_password {
+      font-size: 1.6vw;
+      top: calc(1.6vw * 4.9);
+      letter-spacing: 0.16vw;
+      word-spacing: 0.16vw;
+    }
+
+    .scroll--explanation {
+      font-size: 2.1vw;
+      margin-top: calc(2.1vw * 9);
+      letter-spacing: 0.21vw;
+    }
+
+    .btn_scroll {
+      width: 7vw;
+      font-size: 2.5vw;
+      margin-top: calc(2.5vw * 1);
     }
   }
 }
@@ -331,7 +470,7 @@ body {
   padding-right: 1.5vw;
   font-size: 1.4vw;
   letter-spacing: 0.1vw;
-  z-index: 0;
+  z-index: 1;
   white-space: nowrap;
 
   &:hover {
@@ -389,6 +528,54 @@ body {
   }
 }
 
+@media (480px < width <= 768px) {
+  .version_line {
+    font-size: 2vw;
+    letter-spacing: 0.2vw;
+  }
+
+  .attribution_line {
+    font-size: 2vw;
+  }
+
+  .btn--app_explanation {
+    width: 23vw;
+    font-size: 2vw;
+    letter-spacing: 0.2vw;
+    padding-top: calc(23vw * 0.5 * 0.2);
+  }
+
+  .btn_app_explanation--about_this_web {
+    font-size: 1.9vw;
+    left: 1vw;
+    bottom: 1vh;
+  }
+}
+
+@media (768px < width <= 1024px) {
+  .version_line {
+    font-size: 1.5vw;
+    letter-spacing: 0.15vw;
+  }
+
+  .attribution_line {
+    font-size: 1.5vw;
+  }
+
+  .btn--app_explanation {
+    width: 20vw;
+    font-size: 1.5vw;
+    letter-spacing: 0.15vw;
+    padding-top: calc(20vw * 0.5 * 0.2);
+  }
+
+  .btn_app_explanation--about_this_web {
+    font-size: 1.5vw;
+    left: 1vw;
+    bottom: 1vh;
+  }
+}
+
 ////////login bottom half///////////
 .bottom_half {
   position: relative;
@@ -398,187 +585,395 @@ body {
   height: fit-content;
   padding-bottom: 10vh;
   top: 70vh;
-}
+  // z-index: ;
 
-@media (width<=320px) {
-  .bottom_half {
-    padding-bottom: 30vh;
-    top: 25vh;
+  .bottom_half--form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(#fafa01f6, orange);
+    border-radius: 3% / 2%;
+    box-shadow: 5px 5px 10px #0d0e4488;
+    width: 48%;
+    aspect-ratio: 1 / 1.1;
+    padding-bottom: 3%;
+    padding-top: 3%;
+    color: black;
+    margin-top: 1%;
+
+    h1 {
+      color: #0359b6;
+      font-size: 2.4vw;
+      letter-spacing: 0.2vw;
+      margin-bottom: 3%;
+    }
+
+    .bottom_half--warning {
+      @include message-style();
+      position: relative;
+      font-size: 1.4vw;
+      letter-spacing: 0.1vw;
+      padding: 1.2%;
+      border-radius: 1% / 14%;
+    }
+
+    .bottom_half--btn_next {
+      margin-top: 1.5%;
+    }
+
+    .bottom_half--inputs {
+      position: relative;
+      width: 41vw;
+      aspect-ratio: 1 / 1.1;
+      background-image: linear-gradient(#fff7f7, #fff4ef);
+      padding: 7%;
+      margin-top: 3%;
+      margin-bottom: 4%;
+      border-radius: 2%;
+
+      .bottom_half--username_explanation,
+      .bottom_half--password_explanation,
+      .bottom_half--email_explanation {
+        margin-top: 10%;
+        margin-bottom: 4%;
+        font-size: 1.7vw;
+        letter-spacing: 0.2vw;
+      }
+
+      .bottom_half--username_explanation {
+        margin-top: 0%;
+      }
+
+      .username_explanation--tiny,
+      .password_explanation--tiny,
+      .email_explanation--tiny {
+        @include message-style(#f8efcf, black);
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.521);
+        font-size: 1.1vw;
+        letter-spacing: 0.1vw;
+        padding: 1.5%;
+        border-radius: 1% / 9%;
+      }
+
+      input {
+        width: 25vw;
+        aspect-ratio: 1 / 0.09;
+        font-size: 1vw;
+        letter-spacing: 0.1vw;
+        padding-left: 1.5%;
+        box-sizing: border-box;
+        border-radius: 2% / 15%;
+        border-color: #bbbbbb;
+        margin-top: 7%;
+      }
+
+      .btn_password_visibility--login_bottom {
+        position: absolute;
+        width: 4%;
+        bottom: 40.1%;
+        right: 21.5%;
+      }
+    }
   }
-}
 
-.bottom_half--form {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-image: linear-gradient(#fafa01f6, orange);
-  border-radius: 3% / 2%;
-  box-shadow: 5px 5px 10px #0d0e4488;
-  width: 48%;
-  aspect-ratio: 1 / 1.1;
-  padding-bottom: 3%;
-  padding-top: 3%;
-  color: black;
-  top: 5%;
+  .btn--next {
+    @include btn-style(#00a9dd);
+    width: 9.3vw;
+    aspect-ratio: 1 / 0.4;
+    border-radius: 10% / 25%;
+    border: none;
+    font-size: 2.2vw;
+    padding-bottom: calc(10vw * 0.4 * 0.1);
+    transform: rotate(180deg);
 
-  h1 {
-    color: #0359b6;
-    font-size: 2.3vw;
-    letter-spacing: 0.2vw;
-    margin-bottom: 3%;
+    &:hover {
+      background-color: #33ffcc;
+    }
   }
-
-  input {
-    width: 20vw;
-    aspect-ratio: 1 / 0.09;
-    font-size: 0.9vw;
-    letter-spacing: 0.1vw;
-    padding-left: 1.5%;
-    box-sizing: border-box;
-    border-radius: 2% / 15%;
-    border-color: #bbbbbb;
-    margin-top: 7%;
-  }
-}
-
-.bottom_half--inputs {
-  position: relative;
-  width: 41vw;
-  aspect-ratio: 1 / 1.1;
-  background-image: linear-gradient(#fff7f7, #fff4ef);
-  padding: 7%;
-  margin-top: 3%;
-  margin-bottom: 4%;
-  border-radius: 2%;
-}
-
-.bottom_half--warning {
-  @include message-style();
-  position: relative;
-  font-size: 1.2vw;
-  letter-spacing: 0.1vw;
-  padding: 0.8%;
-  border-radius: 1% / 14%;
-}
-
-.bottom_half--username_explanation,
-.bottom_half--password_explanation,
-.bottom_half--email_explanation {
-  margin-top: 10%;
-  margin-bottom: 4%;
-  font-size: 1.6vw;
-  letter-spacing: 0.2vw;
-}
-
-.bottom_half--username_explanation {
-  margin-top: 0%;
-}
-
-.username_explanation--tiny,
-.password_explanation--tiny,
-.email_explanation--tiny {
-  @include message-style(#f8efcf, black);
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.521);
-  font-size: 1vw;
-  letter-spacing: 0.1vw;
-  padding: 1.5%;
-  border-radius: 1% / 9%;
-}
-
-.btn_password_visibility--login_bottom {
-  position: absolute;
-  width: 3.6%;
-  bottom: 38.8%;
-  right: 27.4%;
-}
-
-.bottom_half--btn_next {
-  margin-top: 1.5%;
 }
 
 @media (width <= 320px) {
-  .bottom_half--form {
-    box-shadow: 3px 3px 7px #0d0e4488;
-    width: 86%;
-    padding-bottom: 3%;
-    padding-top: 4%;
-    margin-top: 25%;
+  .bottom_half {
+    padding-bottom: 16vh;
+    top: 25vh;
 
-    h1 {
-      font-size: 4.6vw;
-      letter-spacing: 0.4vw;
+    .bottom_half--form {
+      box-shadow: 3px 3px 7px #0d0e4488;
+      width: 86%;
+      padding-bottom: 3%;
+      padding-top: 4%;
+      margin-top: 25%;
+
+      h1 {
+        font-size: 4.6vw;
+        letter-spacing: 0.4vw;
+      }
+
+      .bottom_half--warning {
+        font-size: 3.3vw;
+        letter-spacing: 0.3vw;
+        padding: 1.5%;
+      }
+
+      .bottom_half--btn_next {
+        margin-top: 0.6%;
+      }
+
+      .bottom_half--inputs {
+        width: 70vw;
+        padding: 5%;
+        padding-top: 2%;
+
+        .bottom_half--username_explanation,
+        .bottom_half--password_explanation,
+        .bottom_half--email_explanation {
+          font-size: 4vw;
+          letter-spacing: 0.3vw;
+          margin-top: 7%;
+          margin-bottom: 4%;
+        }
+
+        .username_explanation--tiny,
+        .password_explanation--tiny,
+        .email_explanation--tiny {
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.521);
+          font-size: 3vw;
+          letter-spacing: 0.3vw;
+        }
+
+        input {
+          width: 50vw;
+          aspect-ratio: 1 / 0.11;
+          font-size: 3vw;
+          letter-spacing: 0.3vw;
+          padding-left: 3%;
+          margin-top: 6%;
+        }
+
+        .btn_password_visibility--login_bottom {
+          width: 6%;
+          bottom: 34.3%;
+          right: 16.5%;
+        }
+      }
     }
 
-    input {
-      width: 50vw;
-      aspect-ratio: 1 / 0.11;
+    .btn--next {
+      width: 17vw;
+      font-size: 4vw;
+    }
+  }
+}
+
+@media (320px < width <= 480px) {
+  .bottom_half {
+    padding-bottom: 15vh;
+    top: 20vh;
+
+    .bottom_half--form {
+      box-shadow: 3px 3px 7px #0d0e4488;
+      width: 80%;
+      padding-bottom: 5%;
+      padding-top: 4%;
+      margin-top: 5%;
+
+      h1 {
+        font-size: 4.2vw;
+        letter-spacing: 0.35vw;
+      }
+
+      .bottom_half--warning {
+        font-size: 3.2vw;
+        letter-spacing: 0.3vw;
+        padding: 1.5%;
+      }
+
+      .bottom_half--btn_next {
+        margin-top: 1%;
+      }
+
+      .bottom_half--inputs {
+        width: 65vw;
+        padding: 5%;
+        padding-top: 2%;
+
+        .bottom_half--username_explanation,
+        .bottom_half--password_explanation,
+        .bottom_half--email_explanation {
+          font-size: 3.3vw;
+          letter-spacing: 0.3vw;
+          margin-top: 7%;
+          margin-bottom: 4%;
+        }
+
+        .username_explanation--tiny,
+        .password_explanation--tiny,
+        .email_explanation--tiny {
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.521);
+          font-size: 2.5vw;
+          letter-spacing: 0.25vw;
+        }
+
+        input {
+          width: 45vw;
+          aspect-ratio: 1 / 0.11;
+          font-size: 2.5vw;
+          letter-spacing: 0.25vw;
+          padding-left: 3%;
+          margin-top: 6%;
+        }
+
+        .btn_password_visibility--login_bottom {
+          width: 6%;
+          bottom: 34.9%;
+          right: 16.5%;
+        }
+      }
+    }
+    .btn--next {
+      width: 15vw;
+      font-size: 3.5vw;
+    }
+  }
+}
+
+@media (480px < width <= 768px) {
+  .bottom_half {
+    padding-bottom: 20vh;
+    top: 25vh;
+
+    .bottom_half--form {
+      box-shadow: 3.5px 3.5px 8px #0d0e4488;
+      width: 70%;
+      // padding-bottom: 5%;
+      padding-top: 5%;
+      margin-top: 2%;
+
+      h1 {
+        font-size: 3.5vw;
+        letter-spacing: 0.3vw;
+      }
+
+      .bottom_half--warning {
+        font-size: 2.4vw;
+        letter-spacing: 0.24vw;
+        padding: 1.5%;
+      }
+
+      .bottom_half--btn_next {
+        margin-top: 1%;
+      }
+
+      .bottom_half--inputs {
+        width: 60vw;
+        // padding: 5%;
+        padding-top: 2%;
+
+        .bottom_half--username_explanation,
+        .bottom_half--password_explanation,
+        .bottom_half--email_explanation {
+          font-size: 2.7vw;
+          letter-spacing: 0.25vw;
+          margin-top: 7%;
+          // margin-bottom: 4%;
+        }
+
+        .username_explanation--tiny,
+        .password_explanation--tiny,
+        .email_explanation--tiny {
+          box-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.521);
+          font-size: 1.9vw;
+          letter-spacing: 0.19vw;
+        }
+
+        input {
+          width: 40vw;
+          aspect-ratio: 1 / 0.11;
+          font-size: 2vw;
+          letter-spacing: 0.2vw;
+        }
+
+        .btn_password_visibility--login_bottom {
+          width: 5%;
+          bottom: 38.1%;
+          right: 17.5%;
+        }
+      }
+    }
+    .btn--next {
+      width: 15vw;
+      font-size: 3.5vw;
+    }
+  }
+}
+
+@media (768px < width <= 1024px) {
+  .bottom_half {
+    padding-bottom: 20vh;
+    top: 25vh;
+
+    .bottom_half--form {
+      box-shadow: 3.7px 3.7px 9px #0d0e4488;
+      width: 60%;
+      // padding-bottom: 5%;
+      padding-top: 5%;
+      margin-top: 2%;
+
+      h1 {
+        font-size: 3vw;
+        letter-spacing: 0.25vw;
+      }
+
+      .bottom_half--warning {
+        font-size: 1.9vw;
+        letter-spacing: 0.19vw;
+        padding: 1%;
+      }
+
+      .bottom_half--btn_next {
+        margin-top: 1%;
+      }
+
+      .bottom_half--inputs {
+        width: 50vw;
+        padding-top: 2%;
+
+        .bottom_half--username_explanation,
+        .bottom_half--password_explanation,
+        .bottom_half--email_explanation {
+          font-size: 2.1vw;
+          letter-spacing: 0.21vw;
+          margin-top: 7%;
+          // margin-bottom: 4%;
+        }
+
+        .username_explanation--tiny,
+        .password_explanation--tiny,
+        .email_explanation--tiny {
+          box-shadow: 1.7px 1.7px 3px rgba(0, 0, 0, 0.521);
+          font-size: 1.5vw;
+          letter-spacing: 0.15vw;
+        }
+
+        input {
+          width: 30vw;
+          aspect-ratio: 1 / 0.11;
+          font-size: 1.5vw;
+          letter-spacing: 0.15vw;
+        }
+
+        .btn_password_visibility--login_bottom {
+          width: 4.5%;
+          bottom: 38.5%;
+          right: 21%;
+        }
+      }
+    }
+    .btn--next {
+      width: 12vw;
       font-size: 3vw;
-      letter-spacing: 0.3vw;
-      padding-left: 3%;
-      margin-top: 6%;
     }
-  }
-
-  .bottom_half--inputs {
-    width: 70vw;
-    padding: 5%;
-    padding-top: 2%;
-  }
-
-  .bottom_half--warning {
-    font-size: 3.3vw;
-    letter-spacing: 0.3vw;
-    padding: 1.5%;
-  }
-
-  .bottom_half--username_explanation,
-  .bottom_half--password_explanation,
-  .bottom_half--email_explanation {
-    font-size: 4vw;
-    letter-spacing: 0.3vw;
-    margin-top: 7%;
-    margin-bottom: 4%;
-  }
-
-  .username_explanation--tiny,
-  .password_explanation--tiny,
-  .email_explanation--tiny {
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.521);
-    font-size: 3vw;
-    letter-spacing: 0.3vw;
-  }
-
-  .btn_password_visibility--login_bottom {
-    width: 6%;
-    bottom: 34%;
-    right: 16.5%;
-  }
-
-  .bottom_half--btn_next {
-    margin-top: 0.6%;
-  }
-}
-
-.btn--next {
-  @include btn-style(#00a9dd);
-  width: 9vw;
-  aspect-ratio: 1 / 0.4;
-  border-radius: 10% / 25%;
-  border: none;
-  font-size: 2.2vw;
-  padding-bottom: calc(10vw * 0.4 * 0.1);
-  transform: rotate(180deg);
-
-  &:hover {
-    background-color: #33ffcc;
-  }
-}
-
-@media (width<=320px) {
-  .btn--next {
-    width: 17vw;
-    font-size: 4vw;
   }
 }
 
@@ -796,6 +1191,358 @@ body {
 
     .to_set_goals_container {
       transform: translateY(10%);
+    }
+  }
+
+  @media (width <= 320px) {
+    .overlay_in--app_explanation {
+      width: 85vw;
+      margin: 10%;
+      border-radius: 2% / 1%;
+    }
+
+    .btn_x--app_explanation {
+      font-size: 7.5vw;
+      top: -1.3%;
+      right: 1%;
+    }
+
+    .overlay_in_app_explanation--inside {
+      width: 90%;
+
+      h1 {
+        font-size: 5vw;
+        letter-spacing: 0.2vw;
+        margin-bottom: 5%;
+      }
+
+      h2 {
+        font-size: 2vw;
+        letter-spacing: 0.1vw;
+        margin-bottom: 5%;
+      }
+
+      h5 {
+        font-size: 1.7vw;
+        letter-spacing: 0.1vw;
+        margin-top: 10%;
+
+        &:first-child {
+          margin-top: 5%;
+        }
+      }
+
+      h6 {
+        font-size: 1.4vw;
+        letter-spacing: 0.05vw;
+        margin-top: 5%;
+      }
+
+      .p--how_to_use {
+        text-decoration: red underline;
+        letter-spacing: 0.1vw;
+      }
+
+      p {
+        font-size: 3.5vw;
+        margin-top: 7%;
+      }
+
+      img {
+        width: 98%;
+        margin-bottom: 3%;
+      }
+
+      .image_about_this_web--goals {
+        aspect-ratio: 1 / 0.6;
+        margin-top: 6%;
+      }
+
+      .image_how_to_use--all {
+        width: 102%;
+        margin-top: 5%;
+      }
+
+      .image_how_to_use--set_goals {
+        transform: scale(70%);
+      }
+
+      .image_how_to_use--create_rooms {
+        transform: scale(115%);
+        margin-top: 7%;
+        margin-bottom: 7%;
+      }
+
+      .image_how_to_use--settings {
+        margin-top: 7%;
+      }
+
+      .to_set_goals_container {
+        transform: translateY(10%);
+      }
+    }
+  }
+
+  @media (320px < width <= 480px) {
+    .overlay_in_app_explanation--about_this_web {
+      border-radius: 2% / 1%;
+    }
+
+    .overlay_in_app_explanation--how_to_use {
+      border-radius: 2% / 0.4%;
+    }
+
+    .overlay_in--app_explanation {
+      width: 80vw;
+      margin: 8%;
+    }
+
+    .btn_x--app_explanation {
+      font-size: 5.5vw;
+      top: -1%;
+      right: 2%;
+    }
+
+    .overlay_in_app_explanation--inside {
+      h1 {
+        font-size: 4.2vw;
+        letter-spacing: 0.2vw;
+        margin-bottom: 7%;
+      }
+
+      h2 {
+        font-size: 2vw;
+        letter-spacing: 0.1vw;
+        margin-bottom: 5%;
+      }
+
+      h5 {
+        font-size: 1.7vw;
+        letter-spacing: 0.1vw;
+        margin-top: 10%;
+
+        &:first-child {
+          margin-top: 5%;
+        }
+      }
+
+      h6 {
+        font-size: 1.4vw;
+        letter-spacing: 0.05vw;
+        margin-top: 5%;
+      }
+
+      .p--how_to_use {
+        text-decoration: red underline;
+        letter-spacing: 0.1vw;
+      }
+
+      p {
+        font-size: 2.7vw;
+        margin-top: 7%;
+      }
+
+      img {
+        width: 96%;
+      }
+
+      .image_how_to_use--all {
+        width: 102%;
+        margin-top: 5%;
+      }
+
+      .image_how_to_use--set_goals {
+        transform: scale(70%);
+      }
+
+      .image_how_to_use--create_rooms {
+        transform: scale(115%);
+        margin-top: 7%;
+        margin-bottom: 7%;
+      }
+
+      .image_how_to_use--settings {
+        margin-top: 7%;
+      }
+
+      .to_set_goals_container {
+        transform: translateY(10%);
+      }
+    }
+  }
+
+  @media (480px < width <= 768px) {
+    .overlay_in_app_explanation--about_this_web {
+      border-radius: 2% / 1%;
+    }
+
+    .overlay_in_app_explanation--how_to_use {
+      border-radius: 2% / 0.4%;
+    }
+
+    .overlay_in--app_explanation {
+      width: 70vw;
+      margin: 5%;
+    }
+
+    .btn_x--app_explanation {
+      font-size: 4vw;
+      top: -0.6%;
+      right: 2%;
+    }
+
+    .overlay_in_app_explanation--inside {
+      h1 {
+        font-size: 3.3vw;
+        letter-spacing: 0.2vw;
+      }
+
+      h2 {
+        font-size: 2vw;
+        letter-spacing: 0.1vw;
+        margin-bottom: 5%;
+      }
+
+      h5 {
+        font-size: 1.7vw;
+        letter-spacing: 0.1vw;
+        margin-top: 10%;
+
+        &:first-child {
+          margin-top: 5%;
+        }
+      }
+
+      h6 {
+        font-size: 1.4vw;
+        letter-spacing: 0.05vw;
+        margin-top: 5%;
+      }
+
+      .p--how_to_use {
+        text-decoration: red underline;
+        letter-spacing: 0.1vw;
+      }
+
+      p {
+        font-size: 2vw;
+        margin-top: 7%;
+      }
+
+      img {
+        width: 95%;
+        margin-bottom: 3%;
+      }
+
+      .image_how_to_use--all {
+        width: 102%;
+        margin-top: 5%;
+      }
+
+      .image_how_to_use--set_goals {
+        transform: scale(70%);
+      }
+
+      .image_how_to_use--create_rooms {
+        transform: scale(115%);
+        margin-top: 7%;
+        margin-bottom: 7%;
+      }
+
+      .image_how_to_use--settings {
+        margin-top: 7%;
+      }
+
+      .to_set_goals_container {
+        transform: translateY(10%);
+      }
+    }
+  }
+
+  @media (768px < width <= 1024px) {
+    .overlay_in--app_explanation {
+      width: 60vw;
+      margin: 5%;
+    }
+
+    .btn_x--app_explanation {
+      font-size: 3vw;
+      top: -0.3%;
+      right: 2%;
+    }
+
+    .overlay_in_app_explanation--about_this_web {
+      border-radius: 2% / 1%;
+    }
+
+    .overlay_in_app_explanation--how_to_use {
+      border-radius: 2% / 0.4%;
+    }
+
+    .overlay_in_app_explanation--inside {
+      h1 {
+        font-size: 2.8vw;
+        letter-spacing: 0.2vw;
+      }
+
+      h2 {
+        font-size: 2vw;
+        letter-spacing: 0.1vw;
+        margin-bottom: 5%;
+      }
+
+      h5 {
+        font-size: 1.7vw;
+        letter-spacing: 0.1vw;
+        margin-top: 10%;
+
+        &:first-child {
+          margin-top: 5%;
+        }
+      }
+
+      h6 {
+        font-size: 1.4vw;
+        letter-spacing: 0.05vw;
+        margin-top: 5%;
+      }
+
+      .p--how_to_use {
+        text-decoration: red underline;
+        letter-spacing: 0.1vw;
+      }
+
+      p {
+        font-size: 1.8vw;
+        margin-top: 8%;
+      }
+
+      img {
+        width: 92%;
+      }
+
+      .image_how_to_use--all {
+        width: 102%;
+        margin-top: 5%;
+      }
+
+      .image_how_to_use--set_goals {
+        transform: scale(70%);
+      }
+
+      .image_how_to_use--create_rooms {
+        transform: scale(115%);
+        margin-top: 7%;
+        margin-bottom: 7%;
+      }
+
+      .image_how_to_use--settings {
+        margin-top: 7%;
+      }
+
+      .to_set_goals_container {
+        transform: translateY(10%);
+      }
     }
   }
 }
