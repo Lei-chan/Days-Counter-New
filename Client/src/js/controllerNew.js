@@ -19,9 +19,80 @@ import settingsView from "./views/settingsView.js";
 import contenteditableView from "./views/contenteditableView.js";
 import overlayView from "./views/overlayView.js";
 import overlayMessageSpinnerView from "./views/overlayMessageSpinnerView.js";
-import idRoomsSliderView from "./views/idRoomsSliderView.js";
 
 let curUser;
+
+curUser = {
+  username: "leichan!",
+  email: "",
+  goals: [
+    {
+      title: "Spring",
+      date: "04/30/2026",
+      comments: "",
+      toDoLists: "",
+      toDoListsCheckbox: [],
+    },
+    {
+      title: "Spring",
+      date: "04/30/2026",
+      comments: "",
+      toDoLists: "",
+      toDoListsCheckbox: [],
+    },
+    {
+      title: "Spring",
+      date: "04/30/2026",
+      comments: "",
+      toDoLists: "",
+      toDoListsCheckbox: [],
+    },
+    {
+      title: "Spring",
+      date: "04/30/2026",
+      comments: "",
+      toDoLists: "",
+      toDoListsCheckbox: [],
+    },
+    {
+      title: "Spring",
+      date: "04/30/2026",
+      comments: "",
+      toDoLists: "",
+      toDoListsCheckbox: [],
+    },
+  ],
+  remainingDaysPrev: [3650],
+  remainingDaysNow: [300],
+  howManyTimesClick: [65],
+  rooms: [
+    {
+      roomId: "hkskjjkdjksjksk",
+      usernames: ["leichan", "haha"],
+      title: "Summer",
+      date: "08/21/2025",
+      comments: "",
+      toDoLists: "",
+      toDoListsCheckbox: [],
+    },
+  ],
+  remainingDaysPrevRooms: [22],
+  remainingDaysNowRooms: [20],
+  howManyTimesClickRooms: [2],
+};
+
+mainTopSectionView.type =
+  mainDaysCounterContainerView.type =
+  mainWholeView.type =
+    "goals";
+
+mainTopSectionView.renderToParentEle(curUser);
+mainTopSectionView._changeSwitch();
+mainDaysCounterContainerView.renderToParentEle(curUser);
+mainDaysCounterContainerView.init();
+mainWholeView.init(curUser);
+loginWholeView.close();
+mainWholeView.open();
 
 export const setCurUserToNull = function () {
   curUser = null;

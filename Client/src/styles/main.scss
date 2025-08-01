@@ -563,7 +563,7 @@ body {
   }
 
   .btn--app_explanation {
-    width: 20vw;
+    width: 22vw;
     font-size: 1.5vw;
     letter-spacing: 0.15vw;
     padding-top: calc(20vw * 0.5 * 0.2);
@@ -1547,6 +1547,7 @@ body {
   }
 }
 
+/////Responsive design from here!////
 .page--main {
   text-align: center;
   font-family: $primary-font-family;
@@ -1557,133 +1558,296 @@ body {
   position: relative;
   width: 100vw;
   aspect-ratio: 1 / 0.2;
-}
 
-.switch--goals_rooms {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  top: 4%;
-  left: 3%;
-  border: thick rgb(221, 221, 221) solid;
-  border-radius: 3% / 9%;
-  color: $primary-font-color-white;
-  height: fit-content;
-  width: 10vw;
-  aspect-ratio: 1 / 0.3;
-}
+  .switch--goals_rooms {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    top: 4%;
+    left: 3%;
+    border: thick rgb(221, 221, 221) solid;
+    border-radius: 3% / 9%;
+    box-sizing: border-box;
 
-.switch--goals,
-.switch--rooms {
-  padding: 2%;
-  padding-left: 6%;
-  padding-right: 6%;
-  font-size: 1.15vw;
-  letter-spacing: 0.1vw;
-  width: 50%;
-  height: 100%;
-}
-
-.switch--goals {
-  background-image: linear-gradient(rgb(255, 174, 0), rgb(255, 102, 0));
-}
-
-.switch--rooms {
-  background-image: linear-gradient(rgb(0, 140, 255), blue);
-}
-
-.btn--switch {
-  position: absolute;
-  @include btn-style-gradient(
-    linear-gradient(rgb(226, 226, 226), rgb(160, 158, 158))
-  );
-  width: 51%;
-  height: 100%;
-  border: none;
-  transition: all 0.5s;
-}
-
-.welcome {
-  @include img-background-style();
-  position: absolute;
-  top: 5%;
-  left: 6%;
-  background-image: url("../imgs/cloud.svg");
-  background-size: 101%;
-  width: 18.5vw;
-  height: 18.5vw;
-  font-size: 1.7vw;
-  letter-spacing: 0.1vw;
-  padding-top: calc(19vw * 0.4);
-  pointer-events: none;
-}
-
-.title {
-  font-size: 3.2vw;
-  letter-spacing: 0.2vw;
-  word-spacing: 0.6vw;
-  margin-top: 5%;
-  font-family: $primary-font-family;
-}
-
-.times_to_click {
-  position: absolute;
-  @include img-background-style();
-  background-image: url("../imgs/fukidashi.svg");
-  background-size: 100%;
-  width: 12vw;
-  aspect-ratio: 1 / 0.75;
-  padding-top: 2.5%;
-  font-size: 1.3vw;
-  line-height: 168%;
-  top: 0%;
-  left: 66%;
-}
-
-.btn--set_goal,
-.btn--create_room {
-  @include img-btn-style();
-
-  position: absolute;
-  height: 10%;
-  padding-top: 8%;
-  font-size: 1.5vw;
-  top: 20%;
-
-  &:hover {
-    transform: $btn-transform-hover;
+    color: $primary-font-color-white;
+    height: fit-content;
+    width: 10vw;
+    aspect-ratio: 1 / 0.3;
   }
-}
 
-.btn--set_goal {
-  @include img-btn-style();
-  background-image: url("../imgs/sun.svg");
-  background-size: 105%;
-  width: 8%;
-  left: 79%;
-}
+  .switch--goals,
+  .switch--rooms {
+    padding: 2%;
+    padding-left: 6%;
+    padding-right: 6%;
+    font-size: 1.15vw;
+    letter-spacing: 0.1vw;
+    width: 50%;
+    height: 100%;
+  }
 
-.btn--create_room {
-  @include img-btn-style();
-  background-image: url("../imgs/house.svg");
-  background-size: 105%;
-  width: 7%;
-  left: 88%;
-}
+  .switch--goals {
+    background-image: linear-gradient(rgb(255, 174, 0), rgb(255, 102, 0));
+  }
 
-.btn--logout {
-  @include btn-style(rgba(204, 249, 255, 0.541), black);
-  position: absolute;
-  top: 4%;
-  right: 2%;
-  border: none;
-  border-radius: 3%;
-  padding: 0.6%;
-  letter-spacing: 0.1vw;
-  font-size: 1vw;
+  .switch--rooms {
+    background-image: linear-gradient(rgb(0, 140, 255), blue);
+  }
 
-  &:hover {
-    transform: $btn-transform-hover;
+  .btn--switch {
+    position: absolute;
+    @include btn-style-gradient(
+      linear-gradient(rgb(226, 226, 226), rgb(160, 158, 158))
+    );
+    width: 51%;
+    height: 100%;
+    border: none;
+    transition: all 0.5s;
+  }
+
+  .welcome {
+    @include img-background-style();
+    position: absolute;
+    top: 5%;
+    left: 6%;
+    background-image: url("../imgs/cloud.svg");
+    background-size: 101%;
+    width: 18.5vw;
+    aspect-ratio: 1 / 1;
+    font-size: 1.7vw;
+    letter-spacing: 0.1vw;
+    padding-top: calc(19vw * 0.4);
+    pointer-events: none;
+  }
+
+  .title {
+    font-size: 3.2vw;
+    letter-spacing: 0.2vw;
+    word-spacing: 0.6vw;
+    margin-top: 5%;
+    font-family: $primary-font-family;
+  }
+
+  .times_to_click {
+    position: absolute;
+    @include img-background-style();
+    background-image: url("../imgs/fukidashi.svg");
+    background-size: 100%;
+    width: 12vw;
+    aspect-ratio: 1 / 0.75;
+    padding-top: 2.5%;
+    font-size: 1.3vw;
+    line-height: 168%;
+    top: 0%;
+    left: 66%;
+  }
+
+  .btn--set_goal,
+  .btn--create_room {
+    @include img-btn-style();
+
+    position: absolute;
+    height: 10%;
+    padding-top: 8%;
+    font-size: 1.5vw;
+    top: 20%;
+
+    &:hover {
+      transform: $btn-transform-hover;
+    }
+  }
+
+  .btn--set_goal {
+    @include img-btn-style();
+    background-image: url("../imgs/sun.svg");
+    background-size: 105%;
+    width: 8%;
+    left: 79%;
+  }
+
+  .btn--create_room {
+    @include img-btn-style();
+    background-image: url("../imgs/house.svg");
+    background-size: 105%;
+    width: 7%;
+    left: 88%;
+  }
+
+  .btn--logout {
+    @include btn-style(rgba(204, 249, 255, 0.541), black);
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    border: none;
+    border-radius: 3%;
+    padding: 0.6%;
+    letter-spacing: 0.1vw;
+    font-size: 1vw;
+
+    &:hover {
+      transform: $btn-transform-hover;
+    }
+  }
+
+  @media (768px < width <= 1024px) {
+    .switch--goals_rooms {
+      width: 11vw;
+    }
+
+    .switch--goals,
+    .switch--rooms {
+      font-size: 1.2vw;
+    }
+
+    .title {
+      font-size: 3.3vw;
+    }
+
+    .times_to_click {
+      width: 12.5vw;
+      font-size: 1.35vw;
+    }
+
+    .btn--set_goal,
+    .btn--create_room {
+      height: 11%;
+      padding-top: 9%;
+      font-size: 1.55vw;
+    }
+
+    .btn--set_goal {
+      width: 9%;
+    }
+
+    .btn--create_room {
+      width: 8%;
+    }
+
+    .btn--logout {
+      font-size: 1.1vw;
+    }
+  }
+
+  @media (480px < width <= 768px) {
+    .switch--goals_rooms {
+      width: 13.5vw;
+    }
+
+    .switch--goals,
+    .switch--rooms {
+      font-size: 1.5vw;
+      letter-spacing: 0.15vw;
+    }
+
+    .welcome {
+      top: 10%;
+      left: 3%;
+      width: 20vw;
+      font-size: 2vw;
+      letter-spacing: 0.15vw;
+      padding-top: calc(20vw * 0.43);
+    }
+
+    .title {
+      font-size: 3.8vw;
+      letter-spacing: 0.25vw;
+      margin-top: 6%;
+    }
+
+    .times_to_click {
+      width: 14.5vw;
+      font-size: 1.65vw;
+      letter-spacing: 0.03vw;
+      padding-top: 2.8%;
+    }
+
+    .btn--set_goal,
+    .btn--create_room {
+      top: 26%;
+      height: 20%;
+      padding-top: 10%;
+      font-size: 1.9vw;
+    }
+
+    .btn--set_goal {
+      width: 10%;
+      left: 78%;
+    }
+
+    .btn--create_room {
+      width: 9%;
+    }
+
+    .btn--logout {
+      right: 4%;
+      font-size: 1.4vw;
+      letter-spacing: 0.14vw;
+    }
+  }
+
+  @media (320px < width <= 480px) {
+    .switch--goals_rooms {
+      top: 6%;
+      left: 3%;
+      width: 18vw;
+      border: 4px rgb(221, 221, 221) solid;
+    }
+
+    .switch--goals,
+    .switch--rooms {
+      font-size: 2.1vw;
+      letter-spacing: 0.2vw;
+    }
+
+    .welcome {
+      top: 21%;
+      left: -1%;
+      width: 24vw;
+      font-size: 2.5vw;
+      letter-spacing: 0.15vw;
+      padding-top: calc(24vw * 0.43);
+    }
+
+    .title {
+      font-size: 4vw;
+      letter-spacing: 0.2vw;
+      word-spacing: 0.6vw;
+      margin-top: 9%;
+    }
+
+    .times_to_click {
+      width: 17vw;
+      padding-top: 3.5%;
+      font-size: 1.9vw;
+      letter-spacing: 0.05vw;
+    }
+
+    .btn--set_goal,
+    .btn--create_room {
+      height: 25%;
+      padding-top: 12%;
+      font-size: 2.5vw;
+    }
+
+    .btn--set_goal {
+      width: 13%;
+      top: 30%;
+      left: 81%;
+    }
+
+    .btn--create_room {
+      width: 10%;
+      top: 108%;
+      left: 82.5%;
+    }
+
+    .btn--logout {
+      top: 5%;
+      right: 7%;
+      padding: 0.9%;
+      font-size: 2vw;
+      letter-spacing: 0.2vw;
+    }
   }
 }
 
@@ -1694,121 +1858,369 @@ body {
   column-gap: 1vw;
   row-gap: 5vh;
   margin-top: 3vh;
-}
+  justify-items: center;
 
-.start_explanation {
-  font-size: 2.5vw;
-  letter-spacing: 0.2vw;
-  color: $primary-font-color-white;
-  margin-top: 5%;
-}
-
-.card {
-  position: relative;
-  width: 45vw;
-  aspect-ratio: 1 / 0.6;
-  background-color: #fffd78;
-  border-radius: 2.5% / 3.5%;
-  margin-left: 2vw;
-  z-index: 2;
-}
-
-.title--outer {
-  // background-color: #007bff;
-  position: relative;
-  width: 64%;
-  top: -20%;
-  left: 13%;
-  margin-bottom: 3%;
-  h2 {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 2vw;
+  .start_explanation {
+    font-size: 2.5vw;
     letter-spacing: 0.2vw;
+    color: $primary-font-color-white;
+    margin-top: 5%;
+  }
+
+  .card {
+    position: relative;
+    width: 45vw;
+    aspect-ratio: 1 / 0.6;
+    background-color: #fffd78;
+    border-radius: 2.5% / 3.5%;
+    z-index: 2;
+
+    .title--outer {
+      // background-color: #007bff;
+      position: relative;
+      width: 64%;
+      top: -20%;
+      left: 13%;
+      margin-bottom: 3%;
+      h2 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 2vw;
+        letter-spacing: 0.2vw;
+      }
+    }
+
+    .room_id_container {
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      height: 7%;
+      width: fit-content;
+      top: 2%;
+      left: 3%;
+      gap: 4.5%;
+      white-space: nowrap;
+
+      .room_id {
+        font-size: 1.2vw;
+      }
+
+      .btn--room_id_copy {
+        @include img-btn-style();
+        background-image: url("../imgs/copy.svg");
+        background-position: center;
+        background-size: 115%;
+        width: 2.4vw;
+        margin-top: 0.7%;
+      }
+
+      .room_id--copied {
+        background-image: url("../imgs/check.svg");
+        background-size: contain;
+      }
+
+      .copied_explanation {
+        position: absolute;
+        top: 3%;
+        right: -21%;
+        font-size: 1.1vw;
+        letter-spacing: 0.03vw;
+        padding: 1%;
+        background-color: #83ffe0a1;
+        border-radius: 10% / 25%;
+      }
+    }
+
+    .usernames_container {
+      position: relative;
+      @include img-background-style();
+      background: url("../imgs/fukidashiYellow.svg");
+      background-size: cover;
+      width: 80%;
+      height: 35%;
+      top: -33%;
+      left: 15%;
+      padding: 4%;
+      padding-left: 8%;
+      font-size: 1.3vw;
+      letter-spacing: 0.1vw;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      opacity: 0;
+      transition: all 0.5s;
+      pointer-events: none;
+
+      p {
+        margin-bottom: 1%;
+      }
+
+      .usernames {
+        color: #009baf;
+      }
+    }
+
+    .btn--usernames {
+      position: absolute;
+      @include btn-style-gradient(linear-gradient(rgb(204, 204, 204), grey));
+      border-radius: 100%;
+      border: none;
+      font-size: 1.2vw;
+      letter-spacing: 0.1vw;
+      padding: 1.2%;
+      top: 3%;
+      right: 3%;
+    }
+
+    .btns_edit_delete--days_counter {
+      top: 19%;
+    }
+
+    .bottom_content--days_counter {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      top: -7%;
+      left: 5%;
+      height: 55%;
+      width: 100%;
+
+      p {
+        font-size: 1.5vw;
+        margin-top: 13%;
+        letter-spacing: 0.1vw;
+        margin-left: 4%;
+      }
+    }
+
+    .comments--days_counter,
+    .to_do_lists--days_counter {
+      position: relative;
+      background-image: linear-gradient(white, rgb(253, 246, 246));
+      height: 60%;
+      width: 90%;
+      top: -18%;
+      margin-left: 5%;
+    }
+
+    .details--outer {
+      height: 80%;
+      width: 55%;
+      border-radius: 3.3% / 6%;
+      margin-left: 5%;
+      background-color: #fac104;
+      overflow: hidden;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      padding: 8%;
+      line-height: 175%;
+      font-size: 1.5vw;
+      letter-spacing: 0.2vw;
+      text-align: left;
+      white-space: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-color: rgb(255, 238, 0) orange;
+      scroll-behavior: smooth;
+    }
+
+    .remaining_days--outer {
+      text-align: center;
+      width: 20%;
+      height: 55%;
+      background-color: #fff5c7;
+      border-radius: 7%;
+      overflow: hidden;
+    }
+
+    .remaining_days {
+      width: 100%;
+      height: 100%;
+      padding-top: 23%;
+      font-size: 3vw;
+      letter-spacing: 0.3vw;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgb(255, 250, 237) rgb(255, 234, 44);
+      scroll-behavior: smooth;
+    }
   }
 }
 
-.room_id_container {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  height: 7%;
-  width: fit-content;
-  top: 2%;
-  left: 3%;
-  gap: 4.5%;
-  white-space: nowrap;
+@media (768px < width <= 1024px) {
+  .days_counter--container {
+    column-gap: 0vw;
+    row-gap: 4.5vh;
 
-  .room_id {
-    font-size: 1.2vw;
-  }
+    //later
+    .start_explanation {
+      font-size: 2.5vw;
+      letter-spacing: 0.2vw;
+      margin-top: 5%;
+    }
 
-  .btn--room_id_copy {
-    @include img-btn-style();
-    background-image: url("../imgs/copy.svg");
-    background-position: center;
-    background-size: 115%;
-    width: 2.4vw;
-    margin-top: 0.7%;
-  }
+    .card {
+      h2 {
+        font-size: 2.3vw;
+      }
 
-  .room_id--copied {
-    background-image: url("../imgs/check.svg");
-    background-size: contain;
-  }
+      .room_id_container {
+        .room_id {
+          font-size: 1.4vw;
+        }
 
-  .copied_explanation {
-    position: absolute;
-    top: 3%;
-    right: -21%;
-    font-size: 1.1vw;
-    letter-spacing: 0.03vw;
-    padding: 1%;
-    background-color: #83ffe0a1;
-    border-radius: 10% / 25%;
-  }
-}
+        .btn--room_id_copy {
+          width: 2.5vw;
+        }
 
-.usernames_container {
-  position: relative;
-  @include img-background-style();
-  background: url("../imgs/fukidashiYellow.svg");
-  background-size: cover;
-  width: 80%;
-  height: 35%;
-  top: -33%;
-  left: 15%;
-  padding: 4%;
-  padding-left: 8%;
-  font-size: 1.3vw;
-  letter-spacing: 0.1vw;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  opacity: 0;
-  transition: all 0.5s;
-  pointer-events: none;
+        .copied_explanation {
+          top: 2%;
+          right: -33%;
+          font-size: 1.2vw;
+        }
+      }
 
-  p {
-    margin-bottom: 1%;
-  }
+      .usernames_container {
+        font-size: 1.45vw;
+      }
 
-  .usernames {
-    color: #009baf;
+      .btn--usernames {
+        font-size: 1.3vw;
+        padding: 1.5%;
+      }
+
+      .bottom_content--days_counter {
+        p {
+          font-size: 1.7vw;
+        }
+      }
+
+      //later
+      .comments--days_counter,
+      .to_do_lists--days_counter {
+        height: 60%;
+        width: 90%;
+        top: -18%;
+        margin-left: 5%;
+      }
+
+      .details {
+        padding: 7%;
+        font-size: 1.55vw;
+      }
+    }
   }
 }
 
-.btn--usernames {
-  position: absolute;
-  @include btn-style-gradient(linear-gradient(rgb(204, 204, 204), grey));
-  border-radius: 100%;
-  border: none;
-  font-size: 1.2vw;
-  letter-spacing: 0.1vw;
-  padding: 1.2%;
-  top: 3%;
-  right: 3%;
+@media (480px < width <= 768px) {
+  .days_counter--container {
+    column-gap: 0vw;
+    row-gap: 3vh;
+    margin-top: 4vh;
+
+    ////later
+    .start_explanation {
+      font-size: 2.5vw;
+      letter-spacing: 0.2vw;
+      color: $primary-font-color-white;
+      margin-top: 5%;
+    }
+
+    .card {
+      .title--outer {
+        h2 {
+          font-size: 2.5vw;
+          letter-spacing: 0.25vw;
+        }
+      }
+
+      .room_id_container {
+        height: 9%;
+        top: 2%;
+        left: 3%;
+        gap: 5%;
+
+        .room_id {
+          font-size: 1.65vw;
+          letter-spacing: 0.05vw;
+        }
+
+        .btn--room_id_copy {
+          width: 2.9vw;
+        }
+
+        .copied_explanation {
+          right: -40%;
+          font-size: 1.8vw;
+        }
+      }
+
+      .usernames_container {
+        width: 87%;
+        height: 38%;
+        top: -37%;
+        left: 10%;
+        font-size: 1.8vw;
+        letter-spacing: 0.1vw;
+      }
+
+      .btn--usernames {
+        font-size: 1.6vw;
+        padding: 1.5%;
+      }
+
+      .btns_edit_delete--days_counter {
+        top: 20%;
+      }
+
+      .bottom_content--days_counter {
+        height: 60%;
+        p {
+          font-size: 1.9vw;
+          margin-top: 12%;
+          margin-left: 3%;
+        }
+      }
+
+      .details--outer {
+        height: 85%;
+        width: 57%;
+        border-radius: 3.3% / 6%;
+        margin-left: 3%;
+      }
+
+      .details {
+        padding: 5%;
+        line-height: 175%;
+        font-size: 2vw;
+        letter-spacing: 0.15vw;
+      }
+
+      .remaining_days--outer {
+        text-align: center;
+        width: 20%;
+        height: 55%;
+      }
+
+      .remaining_days {
+        padding-top: 27%;
+        letter-spacing: 0.25vw;
+      }
+    }
+  }
+}
+
+@media (320px < width <= 480px) {
+}
+
+@media (width <= 320px) {
 }
 
 .btns--edit_delete {
@@ -1838,6 +2250,7 @@ body {
     transform: translateY(-1px);
   }
 }
+
 .btn--edit,
 .btn--finish {
   @include btn-style-gradient(linear-gradient(orange, rgb(255, 102, 0)));
@@ -1847,23 +2260,6 @@ body {
   @include btn-style-gradient(
     linear-gradient(rgb(0, 195, 255), rgb(0, 153, 255))
   );
-}
-
-.bottom_content--days_counter {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  top: -7%;
-  left: 5%;
-  height: 55%;
-  width: 100%;
-
-  p {
-    font-size: 1.5vw;
-    margin-top: 13%;
-    letter-spacing: 0.1vw;
-    margin-left: 4%;
-  }
 }
 
 .comments,
@@ -1876,16 +2272,6 @@ body {
   letter-spacing: 0.1vw;
 }
 
-.comments--days_counter,
-.to_do_lists--days_counter {
-  position: relative;
-  background-image: linear-gradient(white, rgb(253, 246, 246));
-  height: 60%;
-  width: 90%;
-  top: -18%;
-  margin-left: 5%;
-}
-
 .checkbox_container {
   input {
     width: 1.3vw;
@@ -1893,86 +2279,38 @@ body {
   }
 }
 
-.details--outer {
-  height: 80%;
-  width: 55%;
-  border-radius: 3.3% / 6%;
-  margin-left: 5%;
-  background-color: #fac104;
-  overflow: hidden;
-}
-
-.details {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-  padding: 8%;
-  line-height: 175%;
-  font-size: 1.5vw;
-  letter-spacing: 0.2vw;
-  text-align: left;
-  white-space: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-color: rgb(255, 238, 0) orange;
-  scroll-behavior: smooth;
-}
-
-.remaining_days--outer {
-  text-align: center;
-  width: 20%;
-  height: 55%;
-  background-color: #fff5c7;
-  border-radius: 7%;
-  overflow: hidden;
-}
-
-.remaining_days {
-  width: 100%;
-  height: 100%;
-  padding-top: 23%;
-  font-size: 3vw;
-  letter-spacing: 0.3vw;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: thin;
-  scrollbar-color: rgb(255, 250, 237) rgb(255, 234, 44);
-  scroll-behavior: smooth;
-}
-
 .btn_warning_container {
   position: relative;
   margin-top: 8vh;
   margin-bottom: 8vh;
-}
 
-.btn--count {
-  @include btn-style(rgb(39, 194, 0));
-  height: fit-content;
-  width: fit-content;
-  border: none;
-  border-radius: 5% / 10%;
-  box-shadow: 2px 2px 3px #0000006e;
-  font-size: 1.4vw;
-  letter-spacing: 0.1vw;
-  padding: 1.5%;
+  .btn--count {
+    @include btn-style(rgb(39, 194, 0));
+    height: fit-content;
+    width: fit-content;
+    border: none;
+    border-radius: 5% / 10%;
+    box-shadow: 2px 2px 3px #0000006e;
+    font-size: 1.4vw;
+    letter-spacing: 0.1vw;
+    padding: 1.5%;
 
-  &:hover {
-    transform: $btn-transform-hover;
+    &:hover {
+      transform: $btn-transform-hover;
+    }
   }
-}
 
-/////border radius
-.warning--counter {
-  position: absolute;
-  @include message-style();
-  top: -8%;
-  left: 60%;
-  border-radius: 5px;
-  font-size: 1.3vw;
-  letter-spacing: 0.1vw;
-  padding: 1.5%;
+  /////border radius
+  .warning--counter {
+    position: absolute;
+    @include message-style();
+    top: -8%;
+    left: 60%;
+    border-radius: 5px;
+    font-size: 1.3vw;
+    letter-spacing: 0.1vw;
+    padding: 1.5%;
+  }
 }
 
 .btn--settings {
@@ -1996,6 +2334,112 @@ body {
 .attribution_line--settings {
   margin-top: 1%;
   padding-bottom: 0.7%;
+}
+
+@media (768px < width <= 1024px) {
+  .btns--edit_delete {
+    width: 25%;
+  }
+
+  .btn--edit,
+  .btn--finish,
+  .btn--delete {
+    font-size: 1.15vw;
+  }
+
+  .comments,
+  .to_do_lists {
+    font-size: 1.6vw;
+  }
+
+  .checkbox_container {
+    input {
+      width: 1.4vw;
+      height: 1.4vw;
+    }
+  }
+
+  .btn_warning_container {
+    margin-top: 7vh;
+    margin-bottom: 6vh;
+
+    .btn--count {
+      font-size: 1.55vw;
+      letter-spacing: 0.12vw;
+    }
+
+    /// later
+    .warning--counter {
+      // top: -8%;
+      // left: 60%;
+      font-size: 1.45vw;
+      letter-spacing: 0.12vw;
+      // padding: 1.5%;
+    }
+  }
+
+  .btn--settings {
+    bottom: 5vh;
+    right: 3vw;
+    width: 12vw;
+    height: 12vw;
+    padding-top: calc(12vw * 0.8);
+    font-size: 1.55vw;
+    letter-spacing: 0.12vw;
+  }
+}
+
+@media (480px < width <= 768px) {
+  .btns--edit_delete {
+    width: 28%;
+  }
+
+  .btn--edit,
+  .btn--finish,
+  .btn--delete {
+    font-size: 1.4vw;
+  }
+
+  .comments,
+  .to_do_lists {
+    font-size: 1.8vw;
+  }
+
+  .checkbox_container {
+    input {
+      width: 1.6vw;
+      height: 1.6vw;
+    }
+  }
+
+  .btn_warning_container {
+    margin-top: 7.5vh;
+    margin-bottom: 6vh;
+
+    .btn--count {
+      font-size: 1.85vw;
+      letter-spacing: 0.15vw;
+    }
+
+    /// later
+    .warning--counter {
+      // top: -8%;
+      // left: 60%;
+      font-size: 1.45vw;
+      letter-spacing: 0.12vw;
+      // padding: 1.5%;
+    }
+  }
+
+  .btn--settings {
+    bottom: 5vh;
+    right: 3vw;
+    width: 14vw;
+    height: 14vw;
+    padding-top: calc(14vw * 0.8);
+    font-size: 1.8vw;
+    letter-spacing: 0.15vw;
+  }
 }
 
 .overlay {
