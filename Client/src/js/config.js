@@ -1,3 +1,5 @@
+///For dev
+// export const BASE_URL = "http://localhost:3000/api";
 export const BASE_URL =
   "https://days-counter-api-production.up.railway.app/api";
 export const USERNAME_MAX_LENGTH = 12;

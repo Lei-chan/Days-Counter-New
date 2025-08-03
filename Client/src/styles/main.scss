@@ -482,6 +482,21 @@ body {
   font-size: 1.2vw;
 }
 
+.btn--next {
+  @include btn-style(#00a9dd);
+  width: 9.3vw;
+  aspect-ratio: 1 / 0.4;
+  border-radius: 10% / 25%;
+  border: none;
+  font-size: 2.2vw;
+  padding-bottom: calc(10vw * 0.4 * 0.1);
+  transform: rotate(180deg);
+
+  &:hover {
+    background-color: #33ffcc;
+  }
+}
+
 @media (width <= 320px) {
   .version_line {
     font-size: 2.6vw;
@@ -501,6 +516,11 @@ body {
 
   .btn_app_explanation--about_this_web {
     font-size: 3vw;
+  }
+
+  .btn--next {
+    width: 17vw;
+    font-size: 4vw;
   }
 }
 
@@ -526,6 +546,11 @@ body {
     left: 1vw;
     bottom: 1vh;
   }
+
+  .btn--next {
+    width: 15vw;
+    font-size: 3.5vw;
+  }
 }
 
 @media (480px < width <= 768px) {
@@ -550,6 +575,11 @@ body {
     left: 1vw;
     bottom: 1vh;
   }
+
+  .btn--next {
+    width: 15vw;
+    font-size: 3.5vw;
+  }
 }
 
 @media (768px < width <= 1024px) {
@@ -573,6 +603,11 @@ body {
     font-size: 1.5vw;
     left: 1vw;
     bottom: 1vh;
+  }
+
+  .btn--next {
+    width: 12vw;
+    font-size: 3vw;
   }
 }
 
@@ -676,21 +711,6 @@ body {
       }
     }
   }
-
-  .btn--next {
-    @include btn-style(#00a9dd);
-    width: 9.3vw;
-    aspect-ratio: 1 / 0.4;
-    border-radius: 10% / 25%;
-    border: none;
-    font-size: 2.2vw;
-    padding-bottom: calc(10vw * 0.4 * 0.1);
-    transform: rotate(180deg);
-
-    &:hover {
-      background-color: #33ffcc;
-    }
-  }
 }
 
 @media (width <= 320px) {
@@ -757,11 +777,6 @@ body {
           right: 16.5%;
         }
       }
-    }
-
-    .btn--next {
-      width: 17vw;
-      font-size: 4vw;
     }
   }
 }
@@ -901,10 +916,6 @@ body {
         }
       }
     }
-    .btn--next {
-      width: 15vw;
-      font-size: 3.5vw;
-    }
   }
 }
 
@@ -969,10 +980,6 @@ body {
           right: 21%;
         }
       }
-    }
-    .btn--next {
-      width: 12vw;
-      font-size: 3vw;
     }
   }
 }
@@ -1171,8 +1178,10 @@ body {
     }
 
     .image_how_to_use--all {
-      width: 102%;
+      position: relative;
+      width: 110%;
       margin-top: 5%;
+      right: 5%;
     }
 
     .image_how_to_use--set_goals {
@@ -1180,7 +1189,7 @@ body {
     }
 
     .image_how_to_use--create_rooms {
-      transform: scale(115%);
+      transform: scale(117%);
       margin-top: 7%;
       margin-bottom: 7%;
     }
@@ -1191,271 +1200,6 @@ body {
 
     .to_set_goals_container {
       transform: translateY(10%);
-    }
-  }
-
-  @media (width <= 320px) {
-    .overlay_in--app_explanation {
-      width: 85vw;
-      margin: 10%;
-      border-radius: 2% / 1%;
-    }
-
-    .btn_x--app_explanation {
-      font-size: 7.5vw;
-      top: -1.3%;
-      right: 1%;
-    }
-
-    .overlay_in_app_explanation--inside {
-      width: 90%;
-
-      h1 {
-        font-size: 5vw;
-        letter-spacing: 0.2vw;
-        margin-bottom: 5%;
-      }
-
-      h2 {
-        font-size: 2vw;
-        letter-spacing: 0.1vw;
-        margin-bottom: 5%;
-      }
-
-      h5 {
-        font-size: 1.7vw;
-        letter-spacing: 0.1vw;
-        margin-top: 10%;
-
-        &:first-child {
-          margin-top: 5%;
-        }
-      }
-
-      h6 {
-        font-size: 1.4vw;
-        letter-spacing: 0.05vw;
-        margin-top: 5%;
-      }
-
-      .p--how_to_use {
-        text-decoration: red underline;
-        letter-spacing: 0.1vw;
-      }
-
-      p {
-        font-size: 3.5vw;
-        margin-top: 7%;
-      }
-
-      img {
-        width: 98%;
-        margin-bottom: 3%;
-      }
-
-      .image_about_this_web--goals {
-        aspect-ratio: 1 / 0.6;
-        margin-top: 6%;
-      }
-
-      .image_how_to_use--all {
-        width: 102%;
-        margin-top: 5%;
-      }
-
-      .image_how_to_use--set_goals {
-        transform: scale(70%);
-      }
-
-      .image_how_to_use--create_rooms {
-        transform: scale(115%);
-        margin-top: 7%;
-        margin-bottom: 7%;
-      }
-
-      .image_how_to_use--settings {
-        margin-top: 7%;
-      }
-
-      .to_set_goals_container {
-        transform: translateY(10%);
-      }
-    }
-  }
-
-  @media (320px < width <= 480px) {
-    .overlay_in_app_explanation--about_this_web {
-      border-radius: 2% / 1%;
-    }
-
-    .overlay_in_app_explanation--how_to_use {
-      border-radius: 2% / 0.4%;
-    }
-
-    .overlay_in--app_explanation {
-      width: 80vw;
-      margin: 8%;
-    }
-
-    .btn_x--app_explanation {
-      font-size: 5.5vw;
-      top: -1%;
-      right: 2%;
-    }
-
-    .overlay_in_app_explanation--inside {
-      h1 {
-        font-size: 4.2vw;
-        letter-spacing: 0.2vw;
-        margin-bottom: 7%;
-      }
-
-      h2 {
-        font-size: 2vw;
-        letter-spacing: 0.1vw;
-        margin-bottom: 5%;
-      }
-
-      h5 {
-        font-size: 1.7vw;
-        letter-spacing: 0.1vw;
-        margin-top: 10%;
-
-        &:first-child {
-          margin-top: 5%;
-        }
-      }
-
-      h6 {
-        font-size: 1.4vw;
-        letter-spacing: 0.05vw;
-        margin-top: 5%;
-      }
-
-      .p--how_to_use {
-        text-decoration: red underline;
-        letter-spacing: 0.1vw;
-      }
-
-      p {
-        font-size: 2.7vw;
-        margin-top: 7%;
-      }
-
-      img {
-        width: 96%;
-      }
-
-      .image_how_to_use--all {
-        width: 102%;
-        margin-top: 5%;
-      }
-
-      .image_how_to_use--set_goals {
-        transform: scale(70%);
-      }
-
-      .image_how_to_use--create_rooms {
-        transform: scale(115%);
-        margin-top: 7%;
-        margin-bottom: 7%;
-      }
-
-      .image_how_to_use--settings {
-        margin-top: 7%;
-      }
-
-      .to_set_goals_container {
-        transform: translateY(10%);
-      }
-    }
-  }
-
-  @media (480px < width <= 768px) {
-    .overlay_in_app_explanation--about_this_web {
-      border-radius: 2% / 1%;
-    }
-
-    .overlay_in_app_explanation--how_to_use {
-      border-radius: 2% / 0.4%;
-    }
-
-    .overlay_in--app_explanation {
-      width: 70vw;
-      margin: 5%;
-    }
-
-    .btn_x--app_explanation {
-      font-size: 4vw;
-      top: -0.6%;
-      right: 2%;
-    }
-
-    .overlay_in_app_explanation--inside {
-      h1 {
-        font-size: 3.3vw;
-        letter-spacing: 0.2vw;
-      }
-
-      h2 {
-        font-size: 2vw;
-        letter-spacing: 0.1vw;
-        margin-bottom: 5%;
-      }
-
-      h5 {
-        font-size: 1.7vw;
-        letter-spacing: 0.1vw;
-        margin-top: 10%;
-
-        &:first-child {
-          margin-top: 5%;
-        }
-      }
-
-      h6 {
-        font-size: 1.4vw;
-        letter-spacing: 0.05vw;
-        margin-top: 5%;
-      }
-
-      .p--how_to_use {
-        text-decoration: red underline;
-        letter-spacing: 0.1vw;
-      }
-
-      p {
-        font-size: 2vw;
-        margin-top: 7%;
-      }
-
-      img {
-        width: 95%;
-        margin-bottom: 3%;
-      }
-
-      .image_how_to_use--all {
-        width: 102%;
-        margin-top: 5%;
-      }
-
-      .image_how_to_use--set_goals {
-        transform: scale(70%);
-      }
-
-      .image_how_to_use--create_rooms {
-        transform: scale(115%);
-        margin-top: 7%;
-        margin-bottom: 7%;
-      }
-
-      .image_how_to_use--settings {
-        margin-top: 7%;
-      }
-
-      .to_set_goals_container {
-        transform: translateY(10%);
-      }
     }
   }
 
@@ -1486,30 +1230,16 @@ body {
       }
 
       h2 {
-        font-size: 2vw;
-        letter-spacing: 0.1vw;
-        margin-bottom: 5%;
+        font-size: 2.5vw;
       }
 
       h5 {
-        font-size: 1.7vw;
-        letter-spacing: 0.1vw;
-        margin-top: 10%;
-
-        &:first-child {
-          margin-top: 5%;
-        }
+        font-size: 2.2vw;
       }
 
       h6 {
-        font-size: 1.4vw;
-        letter-spacing: 0.05vw;
-        margin-top: 5%;
-      }
-
-      .p--how_to_use {
-        text-decoration: red underline;
-        letter-spacing: 0.1vw;
+        font-size: 1.9vw;
+        margin-top: 8%;
       }
 
       p {
@@ -1521,33 +1251,222 @@ body {
         width: 92%;
       }
 
-      .image_how_to_use--all {
-        width: 102%;
-        margin-top: 5%;
-      }
-
       .image_how_to_use--set_goals {
-        transform: scale(70%);
-      }
-
-      .image_how_to_use--create_rooms {
-        transform: scale(115%);
-        margin-top: 7%;
-        margin-bottom: 7%;
+        transform: scale(80%);
       }
 
       .image_how_to_use--settings {
+        margin-top: 8%;
+        transform: scale(110%);
+      }
+    }
+  }
+
+  @media (480px < width <= 768px) {
+    .overlay_in_app_explanation--about_this_web {
+      border-radius: 2% / 1%;
+    }
+
+    .overlay_in--app_explanation {
+      width: 70vw;
+      margin: 5%;
+    }
+
+    .btn_x--app_explanation {
+      font-size: 4vw;
+      top: -0.3%;
+      right: 2%;
+    }
+
+    .overlay_in_app_explanation--inside {
+      h1 {
+        font-size: 3.3vw;
+        letter-spacing: 0.2vw;
+      }
+
+      h2 {
+        font-size: 3vw;
+        letter-spacing: 0.1vw;
+        margin-bottom: 5%;
+      }
+
+      h5 {
+        font-size: 2.5vw;
+      }
+
+      h6 {
+        font-size: 2.3vw;
         margin-top: 7%;
       }
 
+      p {
+        font-size: 2vw;
+        margin-top: 7%;
+      }
+
+      img {
+        width: 95%;
+        margin-bottom: 3%;
+      }
+
+      .image_how_to_use--set_goals {
+        transform: scale(80%);
+      }
+
+      .image_how_to_use--create_rooms {
+        transform: scale(114%);
+      }
+
+      .image_how_to_use--settings {
+        transform: scale(110%);
+      }
+
       .to_set_goals_container {
-        transform: translateY(10%);
+        transform: translateY(8%);
+      }
+    }
+  }
+  @media (320px < width <= 480px) {
+    .overlay_in_app_explanation--about_this_web {
+      border-radius: 2% / 1%;
+    }
+
+    .overlay_in--app_explanation {
+      width: 80vw;
+      margin: 8%;
+    }
+
+    .btn_x--app_explanation {
+      font-size: 5.5vw;
+      top: -0.3%;
+      right: 2%;
+    }
+
+    .overlay_in_app_explanation--inside {
+      h1 {
+        font-size: 4.2vw;
+        letter-spacing: 0.2vw;
+        margin-bottom: 7%;
+      }
+
+      h2 {
+        font-size: 4.3vw;
+        letter-spacing: 0.2vw;
+      }
+
+      h5 {
+        font-size: 3.9vw;
+        letter-spacing: 0.2vw;
+        margin-top: 12%;
+      }
+
+      h6 {
+        font-size: 3.4vw;
+        letter-spacing: 0.1vw;
+        margin-top: 7%;
+      }
+
+      p {
+        font-size: 3vw;
+        margin-top: 7%;
+        letter-spacing: 0.07vw;
+      }
+
+      img {
+        width: 96%;
+      }
+
+      .image_how_to_use--set_goals {
+        transform: scale(80%);
+      }
+
+      .image_how_to_use--create_rooms {
+        transform: scale(114%);
+      }
+
+      .image_how_to_use--settings {
+        transform: scale(105%);
+      }
+
+      .to_set_goals_container {
+        transform: translateY(8%);
+      }
+    }
+  }
+
+  @media (width <= 320px) {
+    .overlay_in--app_explanation {
+      width: 85vw;
+      margin: 10%;
+      border-radius: 2% / 1%;
+    }
+
+    .overlay_in_app_explanation--how_to_use {
+      border-radius: 2% / 0.4%;
+    }
+
+    .btn_x--app_explanation {
+      font-size: 7.5vw;
+      top: -0.45%;
+      right: 1%;
+    }
+
+    .overlay_in_app_explanation--inside {
+      width: 90%;
+
+      h1 {
+        font-size: 5vw;
+        letter-spacing: 0.2vw;
+        margin-bottom: 5%;
+      }
+
+      h2 {
+        font-size: 5vw;
+      }
+
+      h5 {
+        font-size: 4.6vw;
+      }
+
+      h6 {
+        font-size: 4vw;
+        letter-spacing: 0.1vw;
+        margin-top: 7%;
+      }
+
+      .p--how_to_use {
+        letter-spacing: 0.2vw;
+      }
+
+      p {
+        font-size: 4vw;
+      }
+
+      img {
+        width: 98%;
+        margin-bottom: 3%;
+      }
+
+      .image_about_this_web--goals {
+        aspect-ratio: 1 / 0.6;
+        margin-top: 6%;
+      }
+
+      .image_how_to_use--set_goals {
+        transform: scale(80%);
+      }
+
+      .image_how_to_use--create_rooms {
+        transform: scale(111%);
+      }
+
+      .image_how_to_use--settings {
+        transform: scale(105%);
       }
     }
   }
 }
 
-/////Responsive design from here!////
 .page--main {
   text-align: center;
   font-family: $primary-font-family;
@@ -1739,6 +1658,12 @@ body {
       letter-spacing: 0.15vw;
     }
 
+    @media (480px < width <=600px) {
+      .switch--goals_rooms {
+        border: 3.8px rgb(221, 221, 221) solid;
+      }
+    }
+
     .welcome {
       top: 10%;
       left: 3%;
@@ -1799,6 +1724,19 @@ body {
       letter-spacing: 0.2vw;
     }
 
+    @media (320px < width <= 370px) {
+      .switch--goals_rooms {
+        width: 19vw;
+        border: 3px rgb(221, 221, 221) solid;
+      }
+
+      .switch--goals,
+      .switch--rooms {
+        font-size: 2.3vw;
+        padding-left: 4%;
+      }
+    }
+
     .welcome {
       top: 21%;
       left: -1%;
@@ -1816,9 +1754,9 @@ body {
     }
 
     .times_to_click {
-      width: 17vw;
+      width: 18vw;
       padding-top: 3.5%;
-      font-size: 1.9vw;
+      font-size: 2.1vw;
       letter-spacing: 0.05vw;
     }
 
@@ -1837,7 +1775,7 @@ body {
 
     .btn--create_room {
       width: 10%;
-      top: 108%;
+      top: 110%;
       left: 82.5%;
     }
 
@@ -1847,6 +1785,82 @@ body {
       padding: 0.9%;
       font-size: 2vw;
       letter-spacing: 0.2vw;
+    }
+  }
+
+  @media (width <= 320px) {
+    .switch--goals_rooms {
+      top: 13%;
+      width: 24vw;
+      border: 3.7px rgb(221, 221, 221) solid;
+    }
+
+    .switch--goals,
+    .switch--rooms {
+      font-size: 3vw;
+      letter-spacing: 0.2vw;
+      padding-left: 5%;
+    }
+
+    // @media (320px < width <= 370px) {
+    //   .switch--goals_rooms {
+    //     width: 19vw;
+    //     border: 3px rgb(221, 221, 221) solid;
+    //   }
+
+    //   .switch--goals,
+    //   .switch--rooms {
+    //     font-size: 2.3vw;
+    //     padding-left: 4%;
+    //   }
+    // }
+
+    .welcome {
+      top: 40%;
+      left: -3%;
+      width: 30vw;
+      font-size: 3vw;
+      letter-spacing: 0.3vw;
+      padding-top: calc(30vw * 0.43);
+    }
+
+    .title {
+      font-size: 5.7vw;
+      letter-spacing: 0.3vw;
+      word-spacing: 0.8vw;
+      margin-top: 11%;
+    }
+
+    .times_to_click {
+      width: 26vw;
+      padding-top: 5%;
+      font-size: 3vw;
+      left: 58%;
+    }
+
+    .btn--set_goal,
+    .btn--create_room {
+      height: 30%;
+      padding-top: 14%;
+      font-size: 4vw;
+    }
+
+    .btn--set_goal {
+      width: 15%;
+      top: 45%;
+      left: 84.5%;
+    }
+
+    .btn--create_room {
+      width: 11%;
+      top: 110%;
+      left: 87%;
+    }
+
+    .btn--logout {
+      top: 3%;
+      right: 1%;
+      font-size: 3vw;
     }
   }
 }
@@ -1876,7 +1890,6 @@ body {
     z-index: 2;
 
     .title--outer {
-      // background-color: #007bff;
       position: relative;
       width: 64%;
       top: -20%;
@@ -2059,11 +2072,9 @@ body {
     column-gap: 0vw;
     row-gap: 4.5vh;
 
-    //later
     .start_explanation {
-      font-size: 2.5vw;
-      letter-spacing: 0.2vw;
-      margin-top: 5%;
+      font-size: 3vw;
+      margin-top: 7%;
     }
 
     .card {
@@ -2127,14 +2138,15 @@ body {
 
     ////later
     .start_explanation {
-      font-size: 2.5vw;
+      font-size: 3.2vw;
       letter-spacing: 0.2vw;
-      color: $primary-font-color-white;
-      margin-top: 5%;
+      margin-top: 9%;
     }
 
     .card {
       .title--outer {
+        left: 14%;
+        width: 60%;
         h2 {
           font-size: 2.5vw;
           letter-spacing: 0.25vw;
@@ -2218,9 +2230,223 @@ body {
 }
 
 @media (320px < width <= 480px) {
+  .days_counter--container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 3vh;
+    margin-top: 10vh;
+
+    .start_explanation {
+      font-size: 4vw;
+      margin-top: 14%;
+    }
+
+    .card {
+      width: 63vw;
+
+      .title--outer {
+        // top: -20%;
+        left: 14%;
+        // margin-bottom: 3%;
+        width: 60%;
+
+        h2 {
+          font-size: 3.8vw;
+          letter-spacing: 0.3vw;
+        }
+      }
+
+      .room_id_container {
+        height: 9%;
+        // top: 2%;
+        // left: 3%;
+        // gap: 4.5%;
+
+        .room_id {
+          font-size: 2.5vw;
+        }
+
+        .btn--room_id_copy {
+          width: 3.8vw;
+        }
+
+        .copied_explanation {
+          right: -30%;
+          font-size: 2.4vw;
+        }
+      }
+
+      .usernames_container {
+        width: 88%;
+        height: 38%;
+        top: -37%;
+        left: 10%;
+        font-size: 2.5vw;
+        letter-spacing: 0.15vw;
+      }
+
+      .btn--usernames {
+        top: 4%;
+
+        font-size: 2.3vw;
+        letter-spacing: 0.2vw;
+      }
+
+      .btns_edit_delete--days_counter {
+        top: 22%;
+      }
+
+      .bottom_content--days_counter {
+        p {
+          font-size: 2.4vw;
+          letter-spacing: 0.2vw;
+          margin-left: 3.5%;
+        }
+      }
+
+      ///later
+      .comments--days_counter,
+      .to_do_lists--days_counter {
+        height: 60%;
+        width: 90%;
+        top: -18%;
+        margin-left: 5%;
+      }
+
+      .details--outer {
+        height: 90%;
+      }
+
+      .details {
+        padding: 5%;
+        padding-top: 8%;
+        font-size: 2.5vw;
+        scrollbar-width: thin;
+      }
+
+      .remaining_days {
+        padding-top: 29%;
+        font-size: 3.8vw;
+        letter-spacing: 0.3vw;
+      }
+    }
+  }
 }
 
 @media (width <= 320px) {
+  .days_counter--container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 3vh;
+    margin-top: 7vh;
+
+    .start_explanation {
+      font-size: 6vw;
+      letter-spacing: 0.3vw;
+      margin-top: 13%;
+    }
+
+    .card {
+      width: 67vw;
+
+      .title--outer {
+        // top: -20%;
+
+        width: 54%;
+        // left: 17%;
+
+        h2 {
+          font-size: 4vw;
+          letter-spacing: 0.3vw;
+        }
+      }
+
+      .room_id_container {
+        height: 10%;
+        top: 2%;
+        left: 3%;
+        gap: 5%;
+
+        .room_id {
+          font-size: 3vw;
+        }
+
+        .btn--room_id_copy {
+          width: 5.5vw;
+        }
+
+        .copied_explanation {
+          top: 3%;
+          right: -30%;
+          font-size: 3vw;
+        }
+      }
+
+      .usernames_container {
+        width: 95%;
+        height: 40%;
+        top: -40%;
+        left: 7%;
+        padding: 3%;
+        padding-left: 4%;
+        font-size: 3.2vw;
+        letter-spacing: 0.2vw;
+      }
+
+      .btn--usernames {
+        font-size: 3.5vw;
+        letter-spacing: 0.15vw;
+        padding: 1.3%;
+        top: 3%;
+        right: 3%;
+      }
+
+      .btns_edit_delete--days_counter {
+        top: 25%;
+      }
+
+      .bottom_content--days_counter {
+        // position: relative;
+        // display: flex;
+        // flex-direction: row;
+        top: -10%;
+        left: 2%;
+        // height: 55%;
+        // width: 100%;
+
+        p {
+          font-size: 3.5vw;
+          margin-top: 13%;
+          letter-spacing: 0.15vw;
+          margin-left: 2%;
+        }
+      }
+
+      .details--outer {
+        height: 100%;
+        width: 56%;
+        margin-left: 3%;
+      }
+
+      .details {
+        padding: 5%;
+        line-height: 170%;
+        font-size: 3.5vw;
+        letter-spacing: 0.2vw;
+        scrollbar-width: thin;
+      }
+
+      .remaining_days--outer {
+        width: 22%;
+        height: 57%;
+      }
+
+      .remaining_days {
+        padding-top: 25%;
+        font-size: 4.5vw;
+      }
+    }
+  }
 }
 
 .btns--edit_delete {
@@ -2231,10 +2457,6 @@ body {
   gap: 10%;
   right: 0%;
   cursor: auto;
-}
-
-.btns_edit_delete--days_counter {
-  top: 19%;
 }
 
 .btn--edit,
@@ -2300,16 +2522,16 @@ body {
     }
   }
 
-  /////border radius
   .warning--counter {
     position: absolute;
     @include message-style();
     top: -8%;
     left: 60%;
-    border-radius: 5px;
+    border-radius: 2% / 8%;
     font-size: 1.3vw;
     letter-spacing: 0.1vw;
     padding: 1.5%;
+    z-index: 2;
   }
 }
 
@@ -2368,13 +2590,8 @@ body {
       letter-spacing: 0.12vw;
     }
 
-    /// later
     .warning--counter {
-      // top: -8%;
-      // left: 60%;
-      font-size: 1.45vw;
-      letter-spacing: 0.12vw;
-      // padding: 1.5%;
+      font-size: 1.5vw;
     }
   }
 
@@ -2421,13 +2638,9 @@ body {
       letter-spacing: 0.15vw;
     }
 
-    /// later
     .warning--counter {
-      // top: -8%;
-      // left: 60%;
-      font-size: 1.45vw;
+      font-size: 1.7vw;
       letter-spacing: 0.12vw;
-      // padding: 1.5%;
     }
   }
 
@@ -2439,6 +2652,127 @@ body {
     padding-top: calc(14vw * 0.8);
     font-size: 1.8vw;
     letter-spacing: 0.15vw;
+  }
+}
+
+@media (320px < width <= 480px) {
+  .btns--edit_delete {
+    width: 29%;
+  }
+
+  .btn--edit,
+  .btn--finish,
+  .btn--delete {
+    padding: 4%;
+    font-size: 2.2vw;
+    letter-spacing: 0.15vw;
+  }
+
+  .comments,
+  .to_do_lists {
+    padding: 4%;
+    font-size: 2.55vw;
+    letter-spacing: 0.2vw;
+  }
+
+  .checkbox_container {
+    input {
+      width: 2.5vw;
+      height: 2.5vw;
+    }
+  }
+
+  .btn_warning_container {
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+
+    .btn--count {
+      font-size: 2.9vw;
+      letter-spacing: 0.2vw;
+      padding: 2%;
+    }
+
+    .warning--counter {
+      top: 120%;
+      left: 24%;
+      font-size: 2.5vw;
+      letter-spacing: 0.15vw;
+    }
+  }
+
+  .btn--settings {
+    width: 15vw;
+    height: 15vw;
+    padding-top: calc(15vw * 0.8);
+    font-size: 2.5vw;
+    letter-spacing: 0.25vw;
+  }
+
+  .attribution_line--main,
+  .attribution_line--settings {
+    margin-top: 1%;
+    padding-bottom: 0.7%;
+  }
+}
+
+@media (width <= 320px) {
+  .btns--edit_delete {
+    width: 32%;
+  }
+
+  .btn--edit,
+  .btn--finish,
+  .btn--delete {
+    padding: 4%;
+    font-size: 2.7vw;
+  }
+
+  .comments,
+  .to_do_lists {
+    padding: 4%;
+    font-size: 3.2vw;
+    letter-spacing: 0.2vw;
+  }
+
+  .checkbox_container {
+    input {
+      width: 3.1vw;
+      height: 3.1vw;
+    }
+  }
+
+  .btn_warning_container {
+    margin-top: 8vh;
+    margin-bottom: 8vh;
+
+    .btn--count {
+      font-size: 4vw;
+      letter-spacing: 0.1vw;
+      padding: 2%;
+    }
+
+    .warning--counter {
+      top: 121%;
+      left: 13%;
+      font-size: 3.5vw;
+      letter-spacing: 0.2vw;
+    }
+  }
+
+  .btn--settings {
+    bottom: 6vh;
+    right: 3vw;
+    width: 17vw;
+    height: 17vw;
+    padding-top: calc(17vw * 0.8);
+    font-size: 3vw;
+    letter-spacing: 0.2vw;
+  }
+
+  .attribution_line--main,
+  .attribution_line--settings {
+    margin-top: 1%;
+    padding-bottom: 3%;
   }
 }
 
@@ -3008,5 +3342,5 @@ body {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }

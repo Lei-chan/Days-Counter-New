@@ -90,21 +90,29 @@ class MainTopSectionView extends View {
         }"></button>
       </div>
       <p class="welcome">Welcome<br>${this._data.username}</p>
-      <h1 class="title">${
-        // this.type === "rooms"
-        //   ? "".padStart(2, "\u00A0") + this._data.username
-        //   : this._data.username
-        this._data.username
-      }'s ${
-      this.type === "rooms"
-        ? "".padStart(1, "\u00A0") + "Rooms"
-        : "Days Counter"
-    }</h1>
+      <h1 class="title">${this._changeTitleStyle()}</h1>
       <div class="times_to_click">You can click <br>${howManyTimesClickMax} times!</div>
       <button class="btn--set_goal">Goals</button>
       <button class="btn--create_room">Rooms</button>
       <button class="btn--logout">Logout</button>
     `;
+  }
+
+  _changeTitleStyle() {
+    const userViewportWidth = window.innerWidth;
+    // console.log(userViewportWidth);
+
+    return userViewportWidth <= 320
+      ? `${this._data.username}'s<br>${
+          this.type === "rooms"
+            ? "".padStart(1, "\u00A0") + "Rooms"
+            : "Days Counter"
+        }`
+      : `${this._data.username}'s ${
+          this.type === "rooms"
+            ? "".padStart(1, "\u00A0") + "Rooms"
+            : "Days Counter"
+        }`;
   }
 }
 

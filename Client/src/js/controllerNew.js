@@ -22,77 +22,77 @@ import overlayMessageSpinnerView from "./views/overlayMessageSpinnerView.js";
 
 let curUser;
 
-curUser = {
-  username: "leichan!",
-  email: "",
-  goals: [
-    {
-      title: "Spring",
-      date: "04/30/2026",
-      comments: "",
-      toDoLists: "",
-      toDoListsCheckbox: [],
-    },
-    {
-      title: "Spring",
-      date: "04/30/2026",
-      comments: "",
-      toDoLists: "",
-      toDoListsCheckbox: [],
-    },
-    {
-      title: "Spring",
-      date: "04/30/2026",
-      comments: "",
-      toDoLists: "",
-      toDoListsCheckbox: [],
-    },
-    {
-      title: "Spring",
-      date: "04/30/2026",
-      comments: "",
-      toDoLists: "",
-      toDoListsCheckbox: [],
-    },
-    {
-      title: "Spring",
-      date: "04/30/2026",
-      comments: "",
-      toDoLists: "",
-      toDoListsCheckbox: [],
-    },
-  ],
-  remainingDaysPrev: [3650],
-  remainingDaysNow: [300],
-  howManyTimesClick: [65],
-  rooms: [
-    {
-      roomId: "hkskjjkdjksjksk",
-      usernames: ["leichan", "haha"],
-      title: "Summer",
-      date: "08/21/2025",
-      comments: "",
-      toDoLists: "",
-      toDoListsCheckbox: [],
-    },
-  ],
-  remainingDaysPrevRooms: [22],
-  remainingDaysNowRooms: [20],
-  howManyTimesClickRooms: [2],
-};
+// curUser = {
+//   username: "leichan!",
+//   email: "",
+//   goals: [
+//     {
+//       title: "Springringringringringkkkkkkkkkkkkk",
+//       date: "04/30/2026",
+//       comments: "",
+//       toDoLists: "",
+//       toDoListsCheckbox: [],
+//     },
+//     {
+//       title: "Spring",
+//       date: "04/30/2026",
+//       comments: "",
+//       toDoLists: "",
+//       toDoListsCheckbox: [],
+//     },
+//     {
+//       title: "Spring",
+//       date: "04/30/2026",
+//       comments: "",
+//       toDoLists: "",
+//       toDoListsCheckbox: [],
+//     },
+//     {
+//       title: "Spring",
+//       date: "04/30/2026",
+//       comments: "",
+//       toDoLists: "",
+//       toDoListsCheckbox: [],
+//     },
+//     {
+//       title: "Spring",
+//       date: "04/30/2026",
+//       comments: "",
+//       toDoLists: "",
+//       toDoListsCheckbox: [],
+//     },
+//   ],
+//   remainingDaysPrev: [3650],
+//   remainingDaysNow: [300],
+//   howManyTimesClick: [65],
+//   rooms: [
+//     // {
+//     //   roomId: "hkskjjkdjksjksk",
+//     //   usernames: ["leichan", "haha"],
+//     //   title: "Summer",
+//     //   date: "08/21/2025",
+//     //   comments: "",
+//     //   toDoLists: "",
+//     //   toDoListsCheckbox: [],
+//     // },
+//   ],
+//   remainingDaysPrevRooms: [22],
+//   remainingDaysNowRooms: [20],
+//   howManyTimesClickRooms: [2],
+// };
 
-mainTopSectionView.type =
-  mainDaysCounterContainerView.type =
-  mainWholeView.type =
-    "goals";
+// mainTopSectionView.type =
+//   mainDaysCounterContainerView.type =
+//   mainWholeView.type =
+//     "goals";
 
-mainTopSectionView.renderToParentEle(curUser);
-mainTopSectionView._changeSwitch();
-mainDaysCounterContainerView.renderToParentEle(curUser);
-mainDaysCounterContainerView.init();
-mainWholeView.init(curUser);
-loginWholeView.close();
-mainWholeView.open();
+// mainTopSectionView.renderToParentEle(curUser);
+// mainTopSectionView._changeSwitch();
+// mainDaysCounterContainerView.renderToParentEle(curUser);
+// mainDaysCounterContainerView.init();
+// mainWholeView.init(curUser);
+// loginWholeView.close();
+// mainWholeView.open();
 
 export const setCurUserToNull = function () {
   curUser = null;
@@ -392,12 +392,12 @@ const controlSaveContenteditable = async function (
   }
 };
 
+/////change
 const controlDaysCounter = async function (type) {
   try {
     helpers._resetSetTimeoutLogout();
 
-    await UserManageApi.updateRemainingDaysPrev(type);
-    await UserManageApi.saveHowManyTimesClick(type);
+    await UserManageApi._updateForDaysCounter(type);
 
     curUser = UserManageApi._curUser;
 
@@ -626,7 +626,9 @@ const controlUpdateUsernameEmail = async function (
 
     if (section !== "username") return;
 
-    mainTopSectionView.renderToParentEle(curUser);
+    pageMainInit("rooms");
+    // mainTopSectionView.renderToParentEle(curUser);
+    // mainDaysCounterContainerView.renderToParentEle(curUser);
   } catch (err) {
     helpers._resetSetTimeoutLogout();
 

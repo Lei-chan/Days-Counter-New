@@ -6,8 +6,6 @@ import overlayMessageSpinnerView from "./overlayMessageSpinnerView.js";
 class MainDaysCounterContainerView extends View {
   _parentElement = document.querySelector(".days_counter--container");
   _deleteGoalRoomIndex;
-  // _eventListenerAttachedGoals;
-  // _eventListenerAttachedRooms;
   _eventAttached;
   _data; //currentAccount
   type;
@@ -194,7 +192,7 @@ class MainDaysCounterContainerView extends View {
 
     if (!calcFor.length)
       return `
-         <p class="start_explanation">Let's first start by setting your ${this.type}!</p>`;
+         <p class="start_explanation">${this._setStartExplanationStyle()}</p>`;
 
     const markup = calcFor
       .map((goal, i) => {
@@ -283,11 +281,24 @@ class MainDaysCounterContainerView extends View {
     return markup;
   }
 
+  _setStartExplanationStyle() {
+    const userViewportWidth = window.innerWidth;
+    return userViewportWidth <= 320
+      ? `Let's first start<br>by setting your ${this.type}!`
+      : `Let's first start by setting your ${this.type}!`;
+  }
+
   _setDaysCounterStyle(length) {
     this._parentElement.style.display = length ? "grid" : "block";
-    this._parentElement.style.gridTemplateColumns = length
-      ? "repeat(2, 1fr)"
-      : "none";
+
+    if (!length) this._parentElement.style.gridTemplateColumns = "none";
+
+    if (length)
+      this._parentElement.style.gridTemplateColumns =
+        window.innerWidth <= 480 ? "repeat(1, 1fr)" : "repeat(2, 1fr)";
+    // !length
+    //   ? this._parentElement.classList.add("no_card_style")
+    //   : this._parentElement.classList.remove("no_card_style");
   }
 
   //after render
@@ -305,12 +316,17 @@ class MainDaysCounterContainerView extends View {
     contenteditableView._commentsContainers =
       this._parentElement.querySelectorAll(".comments");
 
+    //////there is a bug after creating a goal or a room, some card's checkbox event wasn't attached
+    console.log(
+      contenteditableView._toDoListsContainers,
+      contenteditableView._commentsContainers
+    );
+
     contenteditableView._renderContenteditable();
+    contenteditableView._addEventCheckbox();
 
     if (this._eventAttached) return;
-    contenteditableView._addEventCheckbox();
     this._addEventModifiedInside();
-
     this._eventAttached = true;
   }
 }

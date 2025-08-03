@@ -34,88 +34,98 @@ class UserManageApi {
         res = await fetch(`${BASE_URL}${url}`, options);
       }
 
-      return res;
+      // return res;
+      const data = await res.json();
+      if (!res.ok) {
+        const err = new Error(data.message);
+        err.statusCode = res.status;
+        err.name = data.name || "";
+        throw err;
+      }
+
+      return data;
     } catch (err) {
-      console.error("Error while using _apiCall", err);
       throw err;
     }
   }
 
   async _refreshAccessToken() {
     try {
-      const res = await this._apiCall("/user/refresh", {
+      const data = await this._apiCall("/user/refresh", {
         method: "POST",
         credentials: "include",
       });
-
-      if (!res.ok) throw new Error("Refresh failed");
-
-      const data = await res.json();
       this._accessToken = data.accessToken;
       return data.accessToken;
     } catch (err) {
-      console.error("Error while refreshing token:", err);
-      throw err;
+      err.message = `Error while refreshing token: ${err}`;
+      throw newError;
     }
   }
 
+  /////OK!
   async login(username, password) {
     try {
-      const res = await this._apiCall("/user/login", {
+      const data = await this._apiCall("/user/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
         body: JSON.stringify({ username, password }),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        const err = new Error(data.message);
-        err.statusCode = res.status;
-        throw err;
-      }
-
       this._accessToken = data.accessToken;
-      this._curUser = await this.getCurrentUser();
+      this._curUser = data.user;
 
-      const newRemainingDaysNow = this._calcRemainingDays("goals");
-      const newRemainingDaysNowRooms = this._calcRemainingDays("rooms");
-
+      let newRemainingDaysNow;
+      let newRemainingDaysNowRooms;
+      let newHowManyTimesClick;
+      let newHowManyTimesClickRooms;
       let updatedRooms;
 
+      if (this._curUser.goals.length) {
+        newRemainingDaysNow = this._calcRemainingDays("goals");
+        newHowManyTimesClick = this._calcHowManyTimesClick(
+          this._curUser.remainingDaysPrev,
+          newRemainingDaysNow
+        );
+      }
+
       if (this._curUser.rooms.length) {
+        newRemainingDaysNowRooms = this._calcRemainingDays("rooms");
+        newHowManyTimesClickRooms = this._calcHowManyTimesClick(
+          this._curUser.remainingDaysPrevRooms,
+          newRemainingDaysNowRooms
+        );
+
         const roomIds = this._curUser.rooms.map((room) => room.roomId);
 
         updatedRooms = await this._getRooms(roomIds);
       }
 
       await this.updateUser({
-        remainingDaysNow: newRemainingDaysNow,
-        remainingDaysNowRooms: newRemainingDaysNowRooms,
+        remainingDaysNow: newRemainingDaysNow || [],
+        remainingDaysNowRooms: newRemainingDaysNowRooms || [],
+        howManyTimesClick: newHowManyTimesClick || [],
+        howManyTimesClickRooms: newHowManyTimesClickRooms || [],
         rooms: updatedRooms || [],
       });
 
-      const newHowManyTimesClick = this._calcHowManyTimesClick("goals");
-      const newHowManyTimesClickRooms = this._calcHowManyTimesClick("rooms");
+      this._changeOrders("goals");
+      this._changeOrders("rooms");
 
-      await this.updateUser({
-        howManyTimesClick: newHowManyTimesClick,
-        howManyTimesClickRooms: newHowManyTimesClickRooms,
-      });
-
-      return data.message;
+      console.log(this._curUser);
     } catch (err) {
       throw err;
     }
   }
 
+  ////OK
   //UserInfo = { username, password, email=''}
   async createUser({ email = undefined, ...others }) {
     try {
       const userInfo = email ? { ...others, email } : { ...others };
 
-      const res = await this._apiCall("/user/create", {
+      const data = await this._apiCall("/user/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -124,57 +134,45 @@ class UserManageApi {
         body: JSON.stringify(userInfo),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        const err = new Error(data.message);
-        err.statusCode = res.status;
-        err.name = data.name;
-        throw err;
-      }
-
       this._accessToken = data.accessToken;
-
-      this._curUser = await this.getCurrentUser();
-
-      return data.message;
+      this._curUser = data.user;
     } catch (err) {
       throw err;
     }
   }
 
-  async getCurrentUser() {
-    try {
-      if (!this._accessToken) await this._refreshAccessToken();
-      const res = await this._apiCall("/user/get", {
-        headers: {
-          Authorization: `Bearer ${this._accessToken}`,
-        },
-        credentials: "include",
-      });
+  // async getCurrentUser() {
+  //   try {
+  //     if (!this._accessToken) await this._refreshAccessToken();
+  //     const res = await this._apiCall("/user/get", {
+  //       headers: {
+  //         Authorization: `Bearer ${this._accessToken}`,
+  //       },
+  //       credentials: "include",
+  //     });
 
-      const data = await res.json();
+  //     const data = await res.json();
 
-      if (!res.ok)
-        return {
-          success: false,
-          message: data.message,
-          statusCode: res.status,
-        };
+  //     if (!res.ok)
+  //       return {
+  //         success: false,
+  //         message: data.message,
+  //         statusCode: res.status,
+  //       };
 
-      return data.user;
-    } catch (err) {
-      console.error(err);
-      return null;
-    }
-  }
+  //     return data.user;
+  //   } catch (err) {
+  //     console.error(err);
+  //     return null;
+  //   }
+  // }
 
   //updateInfo = { updateField: updateValue }
   async updateUser(updateInfo) {
     try {
       if (!this._accessToken) await this._refreshAccessToken();
 
-      const res = await this._apiCall("/user/update/general", {
+      const data = await this._apiCall("/user/update/general", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -184,15 +182,6 @@ class UserManageApi {
         body: JSON.stringify(updateInfo),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        const err = new Error(data.message);
-        err.statusCode = res.status;
-        err.name = data.name;
-        throw err;
-      }
-
       this._curUser = data.user;
 
       return data;
@@ -201,9 +190,10 @@ class UserManageApi {
     }
   }
 
+  //////OK
   async logout() {
     try {
-      const res = await this._apiCall("/user/logout", {
+      await this._apiCall("/user/logout", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${this._accessToken}`,
@@ -211,53 +201,61 @@ class UserManageApi {
         credentials: "include",
       });
 
-      const data = await res.json();
-
-      if (!res.ok)
-        return {
-          success: false,
-          message: data.message,
-          statusCode: res.status,
-        };
-
       this._removeCurUserInfo();
     } catch (err) {
       throw err;
     }
   }
 
-  async deleteUser(password) {
+  /////Soon!!!
+  // async deleteUser(password) {
+  //   try {
+  //     if (!this._accessToken) await this._refreshAccessToken();
+
+  //     const data = await this._apiCall("/user/delete", {
+  //       method: "DELETE",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: `Bearer ${this._accessToken}`,
+  //       },
+  //       credentials: "include",
+  //       body: JSON.stringify({ password }),
+  //     });
+
+  //     this._removeCurUserInfo();
+
+  //     console.log(data.message);
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
+
+  /////OK!
+  async _updateForDaysCounter(type) {
     try {
-      if (!this._accessToken) await this._refreshAccessToken();
+      const updatedRemainingDaysPrev = this._calcUpdatedRemainingDaysPrev(type);
+      const updatedHowManyTimesClick = this._calcHowManyTimesClick(
+        updatedRemainingDaysPrev,
+        type === "goals"
+          ? this._curUser.remainingDaysNow
+          : this._curUser.remainingDaysNowRooms
+      );
 
-      const res = await this._apiCall("/user/delete", {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${this._accessToken}`,
-        },
-        credentials: "include",
-        body: JSON.stringify({ password }),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok)
-        return {
-          success: false,
-          message: data.message,
-          statusCode: res.status,
-        };
-
-      this._curUser = null;
-
-      return data.message;
+      type === "goals"
+        ? await this.updateUser({
+            remainingDaysPrev: updatedRemainingDaysPrev,
+            howManyTimesClick: updatedHowManyTimesClick,
+          })
+        : await this.updateUser({
+            remainingDaysPrevRooms: updatedRemainingDaysPrev,
+            howManyTimesClickRooms: updatedHowManyTimesClick,
+          });
     } catch (err) {
-      console.error(err);
-      return null;
+      throw err;
     }
   }
 
+  /////OK
   async saveToDoListsComments(
     type,
     modifiedCard,
@@ -316,13 +314,12 @@ class UserManageApi {
             })
           : await this.updateRoom(modifiedRoomId, { comments: newComments });
       }
-
-      console.log("To-Do lists / comments saved successfully!");
     } catch (err) {
       throw err;
     }
   }
 
+  /////OK!
   async saveGoalsInfo(goalsInfo) {
     try {
       const type = "goals";
@@ -337,14 +334,22 @@ class UserManageApi {
         ...this._calcRemainingDays(type, goalsInfo),
       ];
 
+      const newHowManyTimesClick = this._calcHowManyTimesClick(
+        newRemainingDaysPrev,
+        newRemainingDaysNow
+      );
+      console.log("howManyTimesClick:", this._curUser.howManyTimesClick);
+      console.log("newHowManyTimesClick:", newHowManyTimesClick);
+
       await this.updateUser({
         goals: [...this._curUser.goals, ...goalsInfo],
         remainingDaysPrev: newRemainingDaysPrev,
         remainingDaysNow: newRemainingDaysNow,
+        howManyTimesClick: newHowManyTimesClick,
       });
 
-      await this._changeOrders(type);
-      await this.saveHowManyTimesClick(type);
+      this._changeOrders(type);
+      // await this.saveHowManyTimesClick(type);
 
       return {
         message: `${
@@ -356,29 +361,59 @@ class UserManageApi {
     }
   }
 
+  /////OK!
   async saveRoomsInfo(roomsInfo, roomType) {
     try {
       const type = "rooms";
 
-      const sharingUserNames = await this.findUsersRooms(roomsInfo, roomType);
+      if (roomType !== "id") await this._roomsCreateSelect(type, roomsInfo);
 
-      if (roomType !== "id")
-        await this._roomsCreateSelect(type, roomsInfo, sharingUserNames);
+      // await this._roomsCreateSelect(type, roomsInfo, sharingUsernames);
 
-      if (roomType === "id")
-        await this._roomsJoinId(type, roomsInfo, sharingUserNames);
+      if (roomType === "id") {
+        const sharingUsernames = await this._findUserRooms(roomsInfo, roomType);
+        await this._roomsJoinId(type, roomsInfo, sharingUsernames);
+      }
 
-      await this._changeOrders(type);
-      await this.saveHowManyTimesClick(type);
+      this._changeOrders(type);
     } catch (err) {
       throw err;
     }
   }
 
-  async _roomsCreateSelect(type, roomsInfo, sharingUserNames) {
+  /////OK!
+  async _findUserRooms(roomsInfo) {
     try {
-      const newRoomsWithUsernames = roomsInfo.map(function (room, i) {
-        return { ...room, usernames: sharingUserNames[i] };
+      const data = await Promise.all(
+        roomsInfo.map((roomId) =>
+          this._apiCall(`/room/findUsers/${roomId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+        )
+      );
+
+      const sharingUsernames = data.map((data) => [
+        ...data.usernames,
+        this._curUser.username,
+      ]);
+
+      console.log(sharingUsernames);
+
+      return sharingUsernames;
+    } catch (err) {
+      console.error("Error while finding users for room", err);
+      throw err;
+    }
+  }
+
+  /////OK!
+  async _roomsCreateSelect(type, roomsInfo) {
+    try {
+      const newRoomsWithUsernames = roomsInfo.map((room) => {
+        return { ...room, usernames: [this._curUser.username] };
       });
 
       await this.createRooms(newRoomsWithUsernames);
@@ -394,20 +429,30 @@ class UserManageApi {
         ...this._calcRemainingDays(type, roomsInfo),
       ];
 
+      const newHowManyTimesClickRooms = this._calcHowManyTimesClick(
+        newRemainingDaysPrevRooms,
+        newRemainingDaysNowRooms
+      );
+
       await this.updateUser({
         rooms: [...this._curUser.rooms, ...newRoomsWithUsernames],
         remainingDaysPrevRooms: newRemainingDaysPrevRooms,
         remainingDaysNowRooms: newRemainingDaysNowRooms,
+        howManyTimesClickRooms: newHowManyTimesClickRooms,
       });
     } catch (err) {
       throw err;
     }
   }
 
-  async _roomsJoinId(type, roomIds, sharingUserNames) {
+  /////OK!
+  async _roomsJoinId(type, roomIds, sharingUsernames) {
     try {
-      for (const roomId of roomIds)
-        await this.updateRoom(roomId, { usernames: sharingUserNames });
+      await Promise.all(
+        roomIds.map((roomId, i) =>
+          this.updateRoom(roomId, { usernames: sharingUsernames[i] })
+        )
+      );
 
       const rooms = await this._getRooms(roomIds);
 
@@ -422,125 +467,72 @@ class UserManageApi {
         ...this._calcRemainingDays(type, rooms),
       ];
 
+      const newHowManyTimesClickRooms = this._calcHowManyTimesClick(
+        newRemainingDaysPrevRooms,
+        newRemainingDaysNowRooms
+      );
+
       await this.updateUser({
         rooms: [...this._curUser.rooms, ...rooms],
         remainingDaysPrevRooms: newRemainingDaysPrevRooms,
         remainingDaysNowRooms: newRemainingDaysNowRooms,
+        howManyTimesClickRooms: newHowManyTimesClickRooms,
       });
     } catch (err) {
       throw err;
     }
   }
 
+  /////OK!
   async createRooms(newRoomsWithUsernames) {
     try {
-      let rooms = [];
-      for (let i = 0; i < newRoomsWithUsernames.length; i++) {
-        const room = newRoomsWithUsernames[i];
-
-        const res = await this._apiCall("/room/create", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(room),
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-          const err = new Error(data.message);
-          err.statusCode = res.status;
-          throw err;
-        }
-
-        rooms.push(data.room);
-      }
-
-      return {
-        message: "Room created successfully",
-        rooms,
-      };
+      const data = await Promise.all(
+        newRoomsWithUsernames.map((newRoom) =>
+          this._apiCall("/room/create", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newRoom),
+          })
+        )
+      );
     } catch (err) {
-      console.error("Error while creaing room", err);
       throw err;
     }
   }
 
+  /////OK!
   async _getRooms(roomIds) {
     try {
       if (!this._accessToken) await this._refreshAccessToken();
 
-      let rooms = [];
-      for (const roomId of roomIds) {
-        const res = await this._apiCall(`/room/${roomId}`, {
-          headers: {
-            Authorization: `Bearer ${this._accessToken}`,
-          },
-          credentials: "include",
-        });
-        const data = await res.json();
+      const data = await Promise.all(
+        roomIds.map((roomId) =>
+          this._apiCall(`/room/${roomId}`, {
+            headers: {
+              Authorization: `Bearer ${this._accessToken}`,
+            },
+            credentials: "include",
+          })
+        )
+      );
 
-        if (!res.ok) {
-          const err = new Error(data.message);
-          err.statusCode = res.status;
-          throw err;
-        }
-
-        rooms.push(data.room);
-      }
+      const rooms = data.map((data) => data.room);
 
       return rooms;
     } catch (err) {
-      console.error("Error while getting rooms with ids");
+      err.message = "Error while getting rooms";
       throw err;
     }
   }
 
-  async findUsersRooms(roomsInfo, roomType) {
-    try {
-      let sharingUsernames = [];
-
-      const formattedRoomsInfo = Array.isArray(roomsInfo)
-        ? roomsInfo
-        : [roomsInfo];
-
-      const roomIds =
-        roomType === "id"
-          ? formattedRoomsInfo
-          : formattedRoomsInfo.map((room) => room.roomId);
-
-      for (const roomId of roomIds) {
-        const res = await this._apiCall(`/room/findUsers/${roomId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        const data = await res.json();
-
-        if (!res.ok) {
-          const err = new Error(data.message);
-          err.statusCode = res.status;
-          throw err;
-        }
-
-        sharingUsernames.push(...data.usernames, this._curUser.username);
-      }
-
-      return sharingUsernames;
-    } catch (err) {
-      console.error("Error while finding users for room", err);
-      throw err;
-    }
-  }
-
+  //////OK
   async updateRoom(roomId, updateInfo) {
     try {
       if (!this._accessToken) await this._refreshAccessToken();
 
-      const res = await this._apiCall(`/room/update/${roomId}`, {
+      const data = await this._apiCall(`/room/update/${roomId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -550,20 +542,14 @@ class UserManageApi {
         body: JSON.stringify(updateInfo),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        const err = new Error(data.message);
-        err.statusCode = res.status;
-        throw err;
-      }
-
+      console.log(data.room);
       return data.room;
     } catch (err) {
       throw err;
     }
   }
 
+  ////////OK
   async editGoalRoom(editGoalRoomIndex, editedGoalRoomInfo, type) {
     try {
       if (type === "goals") {
@@ -585,16 +571,17 @@ class UserManageApi {
           editGoalRoomIndex + 1
         );
 
+        const newHowManyTimesClick = this._calcHowManyTimesClick(
+          newRemainingDaysPrev,
+          newRemainingDaysNow
+        );
+
         await this.updateUser({
           goals: newGoals,
           remainingDaysPrev: newRemainingDaysPrev,
           remainingDaysNow: newRemainingDaysNow,
+          howManyTimesClick: newHowManyTimesClick,
         });
-
-        // await this.updateUser({
-        //   remainingDaysPrev: newRemainingDaysPrev,
-        //   remainingDaysNow: this._calcRemainingDays(type),
-        // });
       }
 
       if (type === "rooms") {
@@ -618,22 +605,28 @@ class UserManageApi {
             editGoalRoomIndex + 1
           );
 
+        const newHowManyTimesClickRooms = this._calcHowManyTimesClick(
+          newRemainingDaysPrevRooms,
+          newRemainingDaysNowRooms
+        );
+
         await this.updateUser({
           rooms: newRooms,
           remainingDaysPrevRooms: newRemainingDaysPrevRooms,
           remainingDaysNowRooms: newRemainingDaysNowRooms,
+          howManyTimesClickRooms: newHowManyTimesClickRooms,
         });
 
         await this.updateRoom(editedGoalRoomInfo.roomId, editedGoalRoomInfo);
       }
 
-      await this._changeOrders(type);
-      await this.saveHowManyTimesClick(type);
+      this._changeOrders(type);
     } catch (err) {
       throw err;
     }
   }
 
+  ////OK
   async deleteGoal(deleteGoalIndex) {
     try {
       const newGoals = this._curUser.goals.toSpliced(deleteGoalIndex, 1);
@@ -661,6 +654,7 @@ class UserManageApi {
     }
   }
 
+  ////OK
   async deleteRoom(deleteRoomIndex) {
     try {
       const deleteRoom = this._curUser.rooms[deleteRoomIndex];
@@ -696,11 +690,12 @@ class UserManageApi {
     }
   }
 
+  /////OK
   async deleteRoomDatabase(roomId) {
     try {
       if (!this._accessToken) await this._refreshAccessToken();
 
-      const res = await this._apiCall(`/room/delete/${roomId}`, {
+      const data = await this._apiCall(`/room/delete/${roomId}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${this._accessToken}`,
@@ -708,20 +703,14 @@ class UserManageApi {
         credentials: "include",
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        const err = new Error(data.message);
-        err.statusCode = res.status;
-        throw err;
-      }
-
+      console.log(data);
       return data;
     } catch (err) {
       throw err;
     }
   }
 
+  /////OK
   async removeSelected(selectedGoal) {
     try {
       const selectedGoalIndex = this._curUser.goals.findIndex(
@@ -742,6 +731,7 @@ class UserManageApi {
     }
   }
 
+  /////OK!
   //////////add selected for selected goals
   async saveSelectedGoals(selectedGoalsIndex) {
     try {
@@ -780,62 +770,8 @@ class UserManageApi {
 
     return remainingDays;
   }
-  ///remainingDaysNow, remainingDaysPrev, or remainingDaysBoth
-  // async _saveRemainingDays(option, type = "goals") {
-  //   try {
-  //     if (option === "remainingDaysNow")
-  //       type === "goals"
-  //         ? await this.updateUser({
-  //             remainingDaysNow: this._calcRemainingDays(type),
-  //           })
-  //         : await this.updateUser({
-  //             remainingDaysNowRooms: this._calcRemainingDays(type),
-  //           });
 
-  //     if (option === "remainingDaysPrev")
-  //       type === "goals"
-  //         ? await this.updateUser({
-  //             remainingDaysPrev: this._calcRemainingDays(type),
-  //           })
-  //         : await this.updateUser({
-  //             remainingDaysPrevRooms: this._calcRemainingDays(type),
-  //           });
-
-  //     if (option === "remainingDaysBoth")
-  //       type === "goals"
-  //         ? await this.updateUser({
-  //             remainingDaysNow: this._calcRemainingDays(type),
-  //             remainingDaysPrev: this._calcRemainingDays(type),
-  //           })
-  //         : await this.updateUser({
-  //             remainingDaysNowRooms: this._calcRemainingDays(type),
-  //             remainingDaysPrevRooms: this._calcRemainingDays(type),
-  //           });
-
-  //     return {
-  //       message: `Updated ${option} for ${type} successfully`,
-  //     };
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
-
-  async updateRemainingDaysPrev(type) {
-    try {
-      type === "goals"
-        ? await this.updateUser({
-            remainingDaysPrev: this._calcUpdatedRemainingDaysPrev(type),
-          })
-        : await this.updateUser({
-            remainingDaysPrevRooms: this._calcUpdatedRemainingDaysPrev(type),
-          });
-
-      return `RemainingDaysPrev for ${type} updated successfully`;
-    } catch (err) {
-      throw err;
-    }
-  }
-
+  ////OK
   _calcUpdatedRemainingDaysPrev(type) {
     const remainingDaysNow =
       type === "goals"
@@ -860,33 +796,8 @@ class UserManageApi {
     return updatedRemainingDaysPrev;
   }
 
-  async saveHowManyTimesClick(type) {
-    try {
-      type === "goals"
-        ? await this.updateUser({
-            howManyTimesClick: this._calcHowManyTimesClick(type),
-          })
-        : await this.updateUser({
-            howManyTimesClickRooms: this._calcHowManyTimesClick(type),
-          });
-
-      return `howManyTimesClick for ${type} updated successfully`;
-    } catch (err) {
-      throw err;
-    }
-  }
-
-  _calcHowManyTimesClick(type) {
-    const remainingDaysNow =
-      type === "goals"
-        ? this._curUser.remainingDaysNow
-        : this._curUser.remainingDaysNowRooms;
-
-    const remainingDaysPrev =
-      type === "goals"
-        ? this._curUser.remainingDaysPrev
-        : this._curUser.remainingDaysPrevRooms;
-
+  //////OK
+  _calcHowManyTimesClick(remainingDaysPrev, remainingDaysNow) {
     const howManyTimesClick = remainingDaysPrev.map((daysPrev, i) => {
       const daysNow = remainingDaysNow[i];
       //1) User can not click for the goal
@@ -898,48 +809,51 @@ class UserManageApi {
     return howManyTimesClick;
   }
 
-  async _changeOrders(type = "goals") {
+  /////Check tomorrow
+  _changeOrders(type = "goals") {
     try {
-      const goals =
+      const goalsOrRooms =
         type === "goals" ? this._curUser.goals : this._curUser.rooms;
-      const sortedGoals = this._changeOrderGoals(goals);
+      const sortedGoalsOrRooms = this._changeOrderGoals(goalsOrRooms);
 
-      const [sortedRemainingDaysPrev, sortedRemainingDaysNow] =
-        this._changeOrderRemainingDays(goals, sortedGoals, type);
+      const [
+        sortedRemainingDaysPrev,
+        sortedRemainingDaysNow,
+        sortedHowManyTimesClick,
+      ] = this._changeOrderRemainingDaysHowManyTimesClick(
+        goalsOrRooms,
+        sortedGoalsOrRooms,
+        type
+      );
 
       if (type === "goals") {
-        await this.updateUser({ goals: sortedGoals });
-        await this.updateUser({
-          remainingDaysPrev: sortedRemainingDaysPrev,
-          remainingDaysNow: sortedRemainingDaysNow,
-        });
+        this._curUser.goals = sortedGoalsOrRooms;
+        this._curUser.remainingDaysPrev = sortedRemainingDaysPrev;
+        this._curUser.remainingDaysNow = sortedRemainingDaysNow;
+        this._curUser.howManyTimesClick = sortedHowManyTimesClick;
       }
 
       if (type === "rooms") {
-        await this.updateUser({ rooms: sortedGoals });
-        await this.updateUser({
-          remainingDaysPrevRooms: sortedRemainingDaysPrev,
-          remainingDaysNowRooms: sortedRemainingDaysNow,
-        });
+        this._curUser.rooms = sortedGoalsOrRooms;
+        this._curUser.remainingDaysPrevRooms = sortedRemainingDaysPrev;
+        this._curUser.remainingDaysNowRooms = sortedRemainingDaysNow;
+        this._curUser.howManyTimesClickRooms = sortedHowManyTimesClick;
       }
-
-      return {
-        message: `${
-          type.at(0).toUpperCase + type.slice(1)
-        } and remainingDaysBoth updated successfully`,
-      };
     } catch (err) {
       throw err;
     }
   }
 
-  _changeOrderGoals(goals) {
+  /////Check tomorrow
+  _changeOrderGoals(goalsOrRooms) {
     //Create array with undefined goal dates
-    const undefinedDates = goals.filter((goal) => !goal.date);
+    const undefinedDates = goalsOrRooms.filter(
+      (goalOrRoom) => !goalOrRoom.date
+    );
 
     //Sort goals in chronological order
-    const sortedGoalsWithDates = goals
-      .filter((goal) => goal.date)
+    const sortedGoalsOrRoomsWithDates = goalsOrRooms
+      .filter((goalOrRoom) => goalOrRoom.date)
       .toSorted((a, b) => {
         const dateA = new Date(a.date);
         const dateB = new Date(b.date);
@@ -958,11 +872,19 @@ class UserManageApi {
       });
 
     //Put undefined dates at the end of sorted goals
-    const sortedGoals = [...sortedGoalsWithDates, ...undefinedDates];
-    return sortedGoals;
+    const sortedGoalsOrRooms = [
+      ...sortedGoalsOrRoomsWithDates,
+      ...undefinedDates,
+    ];
+    return sortedGoalsOrRooms;
   }
 
-  _changeOrderRemainingDays(originalGoals, sortedGoals, type) {
+  /////Check tomorrow
+  _changeOrderRemainingDaysHowManyTimesClick(
+    originalGoalsOrRooms,
+    sortedGoalsOrRooms,
+    type
+  ) {
     const remainingDaysNow =
       type === "goals"
         ? this._curUser.remainingDaysNow
@@ -973,14 +895,20 @@ class UserManageApi {
         ? this._curUser.remainingDaysPrev
         : this._curUser.remainingDaysPrevRooms;
 
+    const howManyTimesClick =
+      type === "goals"
+        ? this._curUser.howManyTimesClick
+        : this._curUser.howManyTimesClickRooms;
+
     //Create empty arrays with the same length of remainingDays arrays
     let sortedRemainingDaysPrev = new Array(remainingDaysPrev.length);
     let sortedRemainingDaysNow = new Array(remainingDaysNow.length);
+    let sortedHowManyTimesClick = new Array(howManyTimesClick.length);
 
-    originalGoals.forEach((originalGoal, i) => {
+    originalGoalsOrRooms.forEach((originalGoalOrRoom, i) => {
       //Goal index in the current goals array is ...↓
-      const curIndex = sortedGoals.findIndex(
-        (sortedGoal) => sortedGoal === originalGoal
+      const curIndex = sortedGoalsOrRooms.findIndex(
+        (sortedGoalOrRoom) => sortedGoalOrRoom === originalGoalOrRoom
       );
 
       //Putting remaining days for the goal to the goal index place in the current goals array
@@ -990,28 +918,56 @@ class UserManageApi {
         curIndex + 1
       );
       sortedRemainingDaysNow.fill(remainingDaysNow[i], curIndex, curIndex + 1);
+      sortedHowManyTimesClick.fill(
+        howManyTimesClick[i],
+        curIndex,
+        curIndex + 1
+      );
     });
 
-    return [sortedRemainingDaysPrev, sortedRemainingDaysNow];
+    return [
+      sortedRemainingDaysPrev,
+      sortedRemainingDaysNow,
+      sortedHowManyTimesClick,
+    ];
   }
 
+  /////OK
   async _updateUsernameEmail(updateInput, section) {
     try {
       const updateInfo =
         section === "username"
           ? { username: updateInput }
           : { email: updateInput };
-      const data = await this.updateUser(updateInfo);
 
-      return data.updatedFields;
+      if (section !== "username" || !this._curUser.rooms.length)
+        return await this.updateUser(updateInfo);
+
+      const roomIds = this._curUser.rooms.map((room) => room.roomId);
+
+      const sharingUsernamesWithourCurUser = this._curUser.rooms.map((room) =>
+        room.usernames.filter((username) => username !== this._curUser.username)
+      );
+      console.log(sharingUsernamesWithourCurUser);
+
+      const data = await Promise.all(
+        roomIds.map((roomId, i) =>
+          this.updateRoom(roomId, {
+            usernames: [...sharingUsernamesWithourCurUser[i], updateInput],
+          })
+        )
+      );
+
+      await this.updateUser({ ...updateInfo, rooms: data });
     } catch (err) {
       throw err;
     }
   }
 
+  //////OK
   async _updatePassword(curPassword, newPassword) {
     try {
-      const res = await this._apiCall("/user/update/password", {
+      await this._apiCall("/user/update/password", {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -1021,75 +977,64 @@ class UserManageApi {
         body: JSON.stringify({ curPassword, newPassword }),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        const err = new Error(data.message);
-        err.statusCode = res.status;
-        throw err;
-      }
-
-      return data.message;
+      // return data.message;
     } catch (err) {
       throw err;
     }
   }
 
   //For dev
-  async deleteAll() {
-    try {
-      const deletedUsers = await this._deleteAllUsers();
-      const deletedTokens = await this._deleteAllTokens();
-      const deletedRooms = await this._deleteAllRooms();
+  // async deleteAll() {
+  //   try {
+  //     const deletedUsers = await this._deleteAllUsers();
+  //     const deletedTokens = await this._deleteAllTokens();
+  //     const deletedRooms = await this._deleteAllRooms();
 
-      console.log("deletedUsers", deletedUsers);
-      console.log("deletedTokens", deletedTokens);
-      console.log("deletedRooms", deletedRooms);
-    } catch (err) {
-      console.error("Error while deleting Users, tokens, and Rooms", err);
-    }
-  }
+  //     console.log("deletedUsers", deletedUsers);
+  //     console.log("deletedTokens", deletedTokens);
+  //     console.log("deletedRooms", deletedRooms);
+  //   } catch (err) {
+  //     console.error("Error while deleting Users, tokens, and Rooms", err);
+  //   }
+  // }
 
-  async _deleteAllUsers() {
-    try {
-      const res = await this._apiCall("/user/deleteAll", {
-        method: "DELETE",
-      });
+  // async _deleteAllUsers() {
+  //   try {
+  //     const data = await this._apiCall("/user/deleteAll", {
+  //       method: "DELETE",
+  //     });
 
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      throw err;
-    }
-  }
+  //     return data;
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
 
-  async _deleteAllTokens() {
-    try {
-      const res = await this._apiCall("/user/deleteTokens", {
-        method: "DELETE",
-      });
+  // async _deleteAllTokens() {
+  //   try {
+  //     const data = await this._apiCall("/user/deleteTokens", {
+  //       method: "DELETE",
+  //     });
 
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      throw err;
-    }
-  }
+  //     return data;
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
 
-  async _deleteAllRooms() {
-    try {
-      const res = await this._apiCall("/room/deleteAll", { method: "DELETE" });
+  // async _deleteAllRooms() {
+  //   try {
+  //     const data = await this._apiCall("/room/deleteAll", { method: "DELETE" });
 
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      throw err;
-    }
-  }
+  //     return data;
+  //   } catch (err) {
+  //     throw err;
+  //   }
+  // }
 }
 
 export default new UserManageApi();
 
 (async function () {
-  // console.log(await health());
+  console.log(await health());
 })();
