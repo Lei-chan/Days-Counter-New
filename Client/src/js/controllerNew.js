@@ -98,6 +98,17 @@ export const setCurUserToNull = function () {
   curUser = null;
 };
 
+const controlSaveUserData = function () {
+  try {
+    UserManageApi._saveUserData();
+  } catch (err) {
+    console.error(
+      "Server error! Something went wrong 🙇‍♂️ User updated data wasn't saved properly.",
+      err.message
+    );
+  }
+};
+
 const pageMainInit = function (type) {
   mainTopSectionView.type =
     mainDaysCounterContainerView.type =
@@ -652,6 +663,8 @@ const controlUpdateUsernameEmail = async function (
 };
 
 const init = function () {
+  helpers._saveUserDataWhenUserLeaves(controlSaveUserData);
+
   entireAppView._addEventClickPasswordVisibility();
 
   loginWholeView._addHandlerClickAppExplanation(controlAboutThisWeb);

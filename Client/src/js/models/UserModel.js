@@ -63,6 +63,16 @@ class UserManageApi {
     }
   }
 
+  async _saveUserData() {
+    try {
+      console.log("Final user data in UserManageApi", this._curUser);
+      const data = await this.updateUser(this._curUser);
+      console.log("User updated data was saved successfully 🎉", data.user);
+    } catch (err) {
+      throw err;
+    }
+  }
+
   /////OK!
   async login(username, password) {
     try {

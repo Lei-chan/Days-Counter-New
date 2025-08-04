@@ -59,6 +59,13 @@ class Helpers {
       }
     }, minutes * 60 * 1000);
   }
+
+  ///////////save contenteditable / daysCounter / goals /rooms / userInfo only in userModel curUser first => When user leaves the site, save curUser to the database
+  _saveUserDataWhenUserLeaves(handler) {
+    window.addEventListener("visibilityChange", (e) => {
+      handler();
+    });
+  }
 }
 
 export default new Helpers();
