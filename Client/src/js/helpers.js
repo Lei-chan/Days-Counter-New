@@ -60,10 +60,11 @@ class Helpers {
     }, minutes * 60 * 1000);
   }
 
-  ///////////save contenteditable / daysCounter / goals /rooms / userInfo only in userModel curUser first => When user leaves the site, save curUser to the database
+  //contenteditable/daysCounter OK!
+  ///////////save contenteditable / daysCounter! only in userModel curUser first => When user leaves the site, save curUser to the database
   _saveUserDataWhenUserLeaves(handler) {
-    window.addEventListener("visibilityChange", (e) => {
-      handler();
+    document.addEventListener("visibilitychange", (e) => {
+      if (document.visibilityState === "hidden") handler();
     });
   }
 }

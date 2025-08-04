@@ -65,9 +65,14 @@ class UserManageApi {
 
   async _saveUserData() {
     try {
-      console.log("Final user data in UserManageApi", this._curUser);
-      const data = await this.updateUser(this._curUser);
-      console.log("User updated data was saved successfully 🎉", data.user);
+      if (!this._curUser) return;
+
+      navigator.sendBeacon(
+        `${BASE_URL}/user/saveUserData`,
+        JSON.stringify(this._curUser)
+      );
+
+      this._removeCurUserInfo();
     } catch (err) {
       throw err;
     }
@@ -211,6 +216,7 @@ class UserManageApi {
         credentials: "include",
       });
 
+      this._saveUserData();
       this._removeCurUserInfo();
     } catch (err) {
       throw err;
@@ -240,92 +246,55 @@ class UserManageApi {
   //   }
   // }
 
-  /////OK!
-  async _updateForDaysCounter(type) {
-    try {
-      const updatedRemainingDaysPrev = this._calcUpdatedRemainingDaysPrev(type);
-      const updatedHowManyTimesClick = this._calcHowManyTimesClick(
-        updatedRemainingDaysPrev,
-        type === "goals"
-          ? this._curUser.remainingDaysNow
-          : this._curUser.remainingDaysNowRooms
-      );
-
+  /////OK
+  _updateForDaysCounter(type) {
+    const updatedRemainingDaysPrev = this._calcUpdatedRemainingDaysPrev(type);
+    const updatedHowManyTimesClick = this._calcHowManyTimesClick(
+      updatedRemainingDaysPrev,
       type === "goals"
-        ? await this.updateUser({
-            remainingDaysPrev: updatedRemainingDaysPrev,
-            howManyTimesClick: updatedHowManyTimesClick,
-          })
-        : await this.updateUser({
-            remainingDaysPrevRooms: updatedRemainingDaysPrev,
-            howManyTimesClickRooms: updatedHowManyTimesClick,
-          });
-    } catch (err) {
-      throw err;
+        ? this._curUser.remainingDaysNow
+        : this._curUser.remainingDaysNowRooms
+    );
+
+    if (type === "goals") {
+      this._curUser.remainingDaysPrev = updatedRemainingDaysPrev;
+      this._curUser.howManyTimesClick = updatedHowManyTimesClick;
+    }
+
+    if (type === "rooms") {
+      this._curUser.remainingDaysPrevRooms = updatedRemainingDaysPrev;
+      this._curUser.howManyTimesClickRooms = updatedHowManyTimesClick;
     }
   }
 
   /////OK
-  async saveToDoListsComments(
+  saveToDoListsComments(
     type,
     modifiedCard,
     newToDoLists,
     checkedOrNotArr,
     newComments
   ) {
-    try {
-      //update user
-      const updateFor =
-        type === "goals"
-          ? this._curUser.goals[modifiedCard]
-          : this._curUser.rooms[modifiedCard];
-
-      let updatedGoalRoom;
+    if (type === "goals") {
       if (newToDoLists || newToDoLists === "") {
-        const { toDoLists, toDoListsCheckbox, ...others } = updateFor;
-        updatedGoalRoom = {
-          toDoLists: newToDoLists,
-          toDoListsCheckbox: checkedOrNotArr || [],
-          ...others,
-        };
+        this._curUser.goals[modifiedCard].toDoLists = newToDoLists;
+        this._curUser.goals[modifiedCard].toDoListsCheckbox =
+          checkedOrNotArr || [];
       }
 
-      if (newComments || newComments === "") {
-        const { comments, ...others } = updateFor;
-        updatedGoalRoom = { comments: newComments, ...others };
+      if (newComments || newComments === "")
+        this._curUser.goals[modifiedCard].comments = newComments;
+    }
+
+    if (type === "rooms") {
+      if (newToDoLists || newToDoLists === "") {
+        this._curUser.rooms[modifiedCard].toDoLists = newToDoLists;
+        this._curUser.rooms[modifiedCard].toDoListsCheckbox =
+          checkedOrNotArr || [];
       }
 
-      if (type === "goals") {
-        const newGoals = this._curUser.goals.toSpliced(
-          modifiedCard,
-          1,
-          updatedGoalRoom
-        );
-
-        await this.updateUser({ goals: newGoals });
-      }
-
-      if (type === "rooms") {
-        const newRooms = this._curUser.rooms.toSpliced(
-          modifiedCard,
-          1,
-          updatedGoalRoom
-        );
-
-        await this.updateUser({ rooms: newRooms });
-
-        ///Update room
-        const modifiedRoomId = this._curUser.rooms[modifiedCard].roomId;
-
-        newToDoLists || newToDoLists === ""
-          ? await this.updateRoom(modifiedRoomId, {
-              toDoLists: newToDoLists,
-              toDoListsCheckbox: checkedOrNotArr || [],
-            })
-          : await this.updateRoom(modifiedRoomId, { comments: newComments });
-      }
-    } catch (err) {
-      throw err;
+      if (newComments || newComments === "")
+        this._curUser.rooms[modifiedCard].comments = newComments;
     }
   }
 
@@ -359,7 +328,6 @@ class UserManageApi {
       });
 
       this._changeOrders(type);
-      // await this.saveHowManyTimesClick(type);
 
       return {
         message: `${
@@ -377,8 +345,6 @@ class UserManageApi {
       const type = "rooms";
 
       if (roomType !== "id") await this._roomsCreateSelect(type, roomsInfo);
-
-      // await this._roomsCreateSelect(type, roomsInfo, sharingUsernames);
 
       if (roomType === "id") {
         const sharingUsernames = await this._findUserRooms(roomsInfo, roomType);
@@ -444,11 +410,13 @@ class UserManageApi {
         newRemainingDaysNowRooms
       );
 
+      //////also save goals to save selected goals
       await this.updateUser({
         rooms: [...this._curUser.rooms, ...newRoomsWithUsernames],
         remainingDaysPrevRooms: newRemainingDaysPrevRooms,
         remainingDaysNowRooms: newRemainingDaysNowRooms,
         howManyTimesClickRooms: newHowManyTimesClickRooms,
+        goals: this._curUser.goals,
       });
     } catch (err) {
       throw err;
@@ -689,11 +657,13 @@ class UserManageApi {
       const newHowManyTimesClickRooms =
         this._curUser.howManyTimesClickRooms.toSpliced(deleteRoomIndex, 1);
 
+      //also save goals to save goals that selected mark were removed
       await this.updateUser({
         rooms: newRooms,
         remainingDaysPrevRooms: newRemainingDaysPrevRooms,
         remainingDaysNowRooms: newRemainingDaysNowRooms,
         howManyTimesClickRooms: newHowManyTimesClickRooms,
+        goals: this._curUser.goals,
       });
     } catch (err) {
       throw err;
@@ -720,45 +690,19 @@ class UserManageApi {
     }
   }
 
-  /////OK
-  async removeSelected(selectedGoal) {
-    try {
-      const selectedGoalIndex = this._curUser.goals.findIndex(
-        (goal) => goal === selectedGoal
-      );
-
-      const { selected, ...others } = selectedGoal;
-
-      const newGoals = this._curUser.goals.fill(
-        { ...others },
-        selectedGoalIndex,
-        selectedGoalIndex + 1
-      );
-
-      await this.updateUser({ goals: newGoals });
-    } catch (err) {
-      throw err;
-    }
+  //////add selected for selected goals
+  _saveSelectedGoals(selectedGoalsIndex) {
+    selectedGoalsIndex.forEach(
+      (index) => (this._curUser.goals[index].selected = true)
+    );
   }
 
-  /////OK!
-  //////////add selected for selected goals
-  async saveSelectedGoals(selectedGoalsIndex) {
-    try {
-      let goalsWithSelected = this._curUser.goals;
-      selectedGoalsIndex.forEach(
-        (index) =>
-          (goalsWithSelected = this._curUser.goals.fill(
-            { ...this._curUser.goals[index], selected: true },
-            index,
-            index + 1
-          ))
-      );
+  _removeSelected(selectedGoal) {
+    const selectedGoalIndex = this._curUser.goals.findIndex(
+      (goal) => goal === selectedGoal
+    );
 
-      await this.updateUser({ goals: goalsWithSelected });
-    } catch (err) {
-      throw err;
-    }
+    this._curUser.goals[selectedGoalIndex].selected = false;
   }
 
   //when !goalRoom, _curUser's goals/rooms' dates are calculated, when goalRoom,  exists goalRoom's date is calculated

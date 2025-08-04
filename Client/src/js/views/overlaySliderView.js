@@ -441,10 +441,11 @@ class OverlaySliderView extends View {
 
     contenteditableView._renderContenteditable();
 
-    if (this._eventAttached) return;
-
-    contenteditableView._addEventCheckbox();
+    ////////Fixed bug?? Chack if inputs in the slider can be clickable!
     this._addEventStopPropagationCheckbox();
+    contenteditableView._addEventCheckbox();
+
+    if (this._eventAttached) return;
     this._addEventModifiedInside();
 
     this._eventAttached = true;

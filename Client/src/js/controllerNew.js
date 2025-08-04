@@ -101,6 +101,7 @@ export const setCurUserToNull = function () {
 const controlSaveUserData = function () {
   try {
     UserManageApi._saveUserData();
+    setCurUserToNull();
   } catch (err) {
     console.error(
       "Server error! Something went wrong 🙇‍♂️ User updated data wasn't saved properly.",
@@ -337,9 +338,9 @@ const controlDeleteGoalRoom = async function (
 
     overlayMessageSpinnerView._asyncInit("spinner");
 
-    ///remove selected mark from selected goal
+    //remove selected from selected goal
     if (type === "rooms" && selectedGoal)
-      await UserManageApi.removeSelected(selectedGoal);
+      UserManageApi._removeSelected(selectedGoal);
 
     type === "goals"
       ? await UserManageApi.deleteGoal(deleteGoalRoomIndex)
@@ -369,64 +370,37 @@ const controlDeleteGoalRoom = async function (
   }
 };
 
-const controlSaveContenteditable = async function (
+const controlSaveContenteditable = function (
   type,
   modifiedCard,
   toDoLists = null,
   checkedOrNotArr = null,
   comments = null
 ) {
-  try {
-    helpers._resetSetTimeoutLogout();
+  helpers._resetSetTimeoutLogout();
 
-    await UserManageApi.saveToDoListsComments(
-      type,
-      modifiedCard,
-      toDoLists,
-      checkedOrNotArr,
-      comments
-    );
+  UserManageApi.saveToDoListsComments(
+    type,
+    modifiedCard,
+    toDoLists,
+    checkedOrNotArr,
+    comments
+  );
 
-    curUser = UserManageApi._curUser;
-  } catch (err) {
-    helpers._resetSetTimeoutLogout();
-
-    console.error(err);
-
-    overlayMessageSpinnerView._asyncInit(
-      "message",
-      "error",
-      `Server error while saving ${
-        toDoLists ? "To-Do lists" : "comments"
-      } 🙇‍♂️ <br> Please try again this later!`
-    );
-  }
+  curUser = UserManageApi._curUser;
 };
 
-/////change
-const controlDaysCounter = async function (type) {
-  try {
-    helpers._resetSetTimeoutLogout();
+const controlDaysCounter = function (type) {
+  helpers._resetSetTimeoutLogout();
 
-    await UserManageApi._updateForDaysCounter(type);
+  UserManageApi._updateForDaysCounter(type);
 
-    curUser = UserManageApi._curUser;
+  curUser = UserManageApi._curUser;
 
-    mainTopSectionView.renderToParentEle(curUser);
-    mainDaysCounterContainerView.renderToParentEle(curUser);
-    mainDaysCounterContainerView._handleHidden();
-    mainWholeView.init(curUser);
-  } catch (err) {
-    helpers._resetSetTimeoutLogout();
-
-    console.error(err);
-
-    overlayMessageSpinnerView._asyncInit(
-      "message",
-      "error",
-      overlayMessageSpinnerView._errorMessage
-    );
-  }
+  mainTopSectionView.renderToParentEle(curUser);
+  mainDaysCounterContainerView.renderToParentEle(curUser);
+  mainDaysCounterContainerView._handleHidden();
+  mainWholeView.init(curUser);
 };
 
 /////////////Goals/Rooms/////////////////
@@ -482,45 +456,50 @@ const controlRoomsId = function () {
   overlaySliderView.open();
 };
 
-const controlRoomsSaveSelected = async function (selectedGoalsIndex) {
-  try {
-    helpers._resetSetTimeoutLogout();
+// const controlRoomsSaveSelected = function (selectedGoalsIndex) {
+//   // try {
+//   helpers._resetSetTimeoutLogout();
 
-    overlayMessageSpinnerView._asyncInit("spinner");
+//   // overlayMessageSpinnerView._asyncInit("spinner");
 
-    await UserManageApi.saveSelectedGoals(selectedGoalsIndex);
+//   UserManageApi._saveSelectedGoals(selectedGoalsIndex);
 
-    curUser = UserManageApi._curUser;
-  } catch (err) {
-    helpers._resetSetTimeoutLogout();
+//   curUser = UserManageApi._curUser;
+//   console.log(curUser);
+//   // } catch (err) {
+//   //   helpers._resetSetTimeoutLogout();
 
-    console.error(err);
+//   //   console.error(err);
 
-    overlayMessageSpinnerView._asyncInit(
-      "message",
-      "error",
-      `Server error while creating room${
-        goalsOrRoomsInfo.length >= 2 ? "s" : ""
-      } 🙇‍♂️ <br> Please try again this later!`
-    );
-  }
-};
+//   //   overlayMessageSpinnerView._asyncInit(
+//   //     "message",
+//   //     "error",
+//   //     `Server error while creating room${
+//   //       goalsOrRoomsInfo.length >= 2 ? "s" : ""
+//   //     } 🙇‍♂️ <br> Please try again this later!`
+//   //   );
+//   // }
+// };
 
 const controlGoalsRoomsSubmit = async function (
   goalsOrRoomsInfo,
   type,
-  roomType = null
+  roomType = null,
+  selectedGoalsIndex = null
 ) {
   try {
     helpers._resetSetTimeoutLogout();
-
     overlayMessageSpinnerView._asyncInit("spinner");
+
+    if (selectedGoalsIndex)
+      UserManageApi._saveSelectedGoals(selectedGoalsIndex);
 
     type === "goals"
       ? await UserManageApi.saveGoalsInfo(goalsOrRoomsInfo)
       : await UserManageApi.saveRoomsInfo(goalsOrRoomsInfo, roomType);
 
     curUser = UserManageApi._curUser;
+    console.log(curUser);
 
     pageMainInit(type);
 
@@ -705,10 +684,11 @@ const init = function () {
   overlaySliderView.addHandlerClickOutsideContenteditable(
     controlSaveContenteditable
   );
-  overlaySliderView.addHandlerSubmit(
-    controlGoalsRoomsSubmit,
-    controlRoomsSaveSelected
-  );
+  overlaySliderView.addHandlerSubmit(controlGoalsRoomsSubmit);
+  // overlaySliderView.addHandlerSubmit(
+  //   controlGoalsRoomsSubmit,
+  //   controlRoomsSaveSelected
+  // );
 
   overlayCreateRoomsView.addHandlerClick(
     controlRoomsScratch,

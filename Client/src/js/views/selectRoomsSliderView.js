@@ -43,7 +43,7 @@ class SelectRoomsSliderView {
 
       const newSelectedGoalsIndex = this._newSelectedGoalsIndex(btnSelected);
 
-      await handlerSaveSelected(newSelectedGoalsIndex);
+      // handlerSaveSelected(newSelectedGoalsIndex);
 
       const roomsInfo = newSelectedGoalsIndex.map((newSelectedIndex) => {
         const selectedSlide = this._allSlides[newSelectedIndex];
@@ -73,7 +73,12 @@ class SelectRoomsSliderView {
 
       if (!roomsInfo.length) return;
 
-      handlerSubmit(roomsInfo, this._type, this._roomType);
+      handlerSubmit(
+        roomsInfo,
+        this._type,
+        this._roomType,
+        newSelectedGoalsIndex
+      );
     } catch (err) {
       throw err;
     }
@@ -88,10 +93,6 @@ class SelectRoomsSliderView {
     );
 
     return newSelectedGoalsIndex;
-  }
-
-  _goalsSelected(i) {
-    return this._data.goals[i].selected ? true : false;
   }
 
   _generateMarkup() {
@@ -125,11 +126,11 @@ class SelectRoomsSliderView {
            <div class="slide" data-goto="${i}">
             <h2>Goal No.${i + 1}</h2>
             <button class=${
-              this._goalsSelected(i)
+              this._data.goals[i].selected
                 ? "btn--select__active permanent"
                 : "btn--select"
             } data-select="${i}" type="button"> ${
-        this._goalsSelected(i) ? "Already have" : "Create room with this"
+        this._data.goals[i].selected ? "Already have" : "Create room with this"
       }</button>
             <div class="goal_title">
               <p> The name of your goal No.${i + 1}!</p>
