@@ -627,6 +627,8 @@ class UserManageApi {
         remainingDaysNow: newRemainingDaysNow,
         howManyTimesClick: newHowManyTimesClick,
       });
+
+      this._changeOrders("goals");
     } catch (err) {
       throw err;
     }
@@ -665,6 +667,8 @@ class UserManageApi {
         howManyTimesClickRooms: newHowManyTimesClickRooms,
         goals: this._curUser.goals,
       });
+
+      this._changeOrders("rooms");
     } catch (err) {
       throw err;
     }
@@ -798,7 +802,7 @@ class UserManageApi {
     }
   }
 
-  /////Check tomorrow
+  /////OK
   _changeOrderGoals(goalsOrRooms) {
     //Create array with undefined goal dates
     const undefinedDates = goalsOrRooms.filter(
@@ -833,7 +837,7 @@ class UserManageApi {
     return sortedGoalsOrRooms;
   }
 
-  /////Check tomorrow
+  /////Problem here!!
   _changeOrderRemainingDaysHowManyTimesClick(
     originalGoalsOrRooms,
     sortedGoalsOrRooms,

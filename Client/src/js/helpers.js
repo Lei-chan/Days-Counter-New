@@ -60,10 +60,9 @@ class Helpers {
     }, minutes * 60 * 1000);
   }
 
-  //contenteditable/daysCounter OK!
-  ///////////save contenteditable / daysCounter! only in userModel curUser first => When user leaves the site, save curUser to the database
+  ///////////save contenteditable / daysCounter only in userModel _curUser => When user leaves the site, save _curUser to the database
   _saveUserDataWhenUserLeaves(handler) {
-    document.addEventListener("visibilitychange", (e) => {
+    document.addEventListener("visibilitychange", () => {
       if (document.visibilityState === "hidden") handler();
     });
   }
