@@ -134,7 +134,9 @@ class SelectRoomsSliderView {
       }</button>
             <div class="goal_title">
               <p> The name of your goal No.${i + 1}!</p>
-              <p class="set_goal_title">${this._data.goals[i]?.title}</p>
+              <div class="title_outer--slide">
+                <p class="set_goal_title">${this._data.goals[i]?.title}</p>
+              </div>
             </div>
             <div class="goal_date">
              <p>The date of your goal No.${i + 1}!</p>

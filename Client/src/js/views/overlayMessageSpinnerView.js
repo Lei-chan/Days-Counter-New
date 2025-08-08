@@ -24,6 +24,8 @@ class OverlayMessageSpinnerView extends View {
     "Room ID that doesn't exist was entered! Please enter valid IDs";
   _errorMessageLogout =
     "Server error 🙇‍♂️<br>Please try this again later<br>(You will still be automatically logged out in 30 minutes)";
+  _errorMessageSaveDataAsync =
+    "Server error 🙇‍♂️ <br>User data might not have been saved properly!";
   _errorMessage = "Server error 🙇‍♂️ <br>Please try this again later";
 
   _addEvents() {
@@ -128,10 +130,10 @@ class OverlayMessageSpinnerView extends View {
 
       this.open();
 
-      if (messageType !== "message") return;
+      // if (messageType !== "message") return;
 
-      await this._setTimeout();
-      this.close();
+      // await this._setTimeout();
+      // this.close();
     } catch (err) {
       throw err;
     }

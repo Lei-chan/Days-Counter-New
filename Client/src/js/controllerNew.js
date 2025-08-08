@@ -24,7 +24,7 @@ let curUser;
 
 // curUser = {
 //   username: "leichan!",
-//   email: "",
+//   email: "jjjjjjjjjjjjjjjjjjj@jjjjjjjj.gmail.com",
 //   goals: [
 //     {
 //       title: "Springringringringringkkkkkkkkkkkkk",

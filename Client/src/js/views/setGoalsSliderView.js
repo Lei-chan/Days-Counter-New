@@ -83,9 +83,11 @@ class setGoalsSliderView {
               } name of your goal No.${i + 1}!</p>
               ${
                 this._curAccGoalLength > i
-                  ? `<p class="set_goal_title">${
+                  ? `<div class="title_outer--slide">
+                    <p class="set_goal_title">${
                       goalTitle ? goalTitle : "No title yet"
-                    }</p>`
+                    }</p>
+                  </div>`
                   : '<input id="input--goal_title" type="text" placeholder="Goal title"></input>'
               }
             </div>

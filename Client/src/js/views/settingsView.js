@@ -113,16 +113,26 @@ class SettingsView extends View {
     if (section === "password") {
       container = this._parentElement.querySelector(".settings--password");
 
+      const passwordExplanation =
+        window.innerWidth > 480
+          ? `
+        ${PASSWORD_MIN_LENGTH} letters at minimum:  Include more than ${PASSWORD_MIN_UPPERCASE} uppercase, <br>${PASSWORD_MIN_LOWERCASE} lowercase, ${PASSWORD_MIN_DIGIT} digit, and ${PASSWORD_MIN_SPECIAL_CHARACTER} special character!`
+          : `
+        ${PASSWORD_MIN_LENGTH} letters at minimum:<br> Include more than ${PASSWORD_MIN_UPPERCASE} uppercase, ${PASSWORD_MIN_LOWERCASE} lowercase,<br>${PASSWORD_MIN_DIGIT} digit, and ${PASSWORD_MIN_SPECIAL_CHARACTER} special character!`;
+
       return (container.innerHTML = `
-        <p class="password_explanation--tiny settings--explanation_tiny">
-        ${PASSWORD_MIN_LENGTH} letters at minimum:  Include more than ${PASSWORD_MIN_UPPERCASE} uppercase, <br>${PASSWORD_MIN_LOWERCASE} lowercase, ${PASSWORD_MIN_DIGIT} digit, and ${PASSWORD_MIN_SPECIAL_CHARACTER} special character!</p>
+        <p class="password_explanation--tiny settings--explanation_tiny">${passwordExplanation}</p>
         <div>
-        <p>Please enter your current password</p>
-        <input class="input--password" id="input--cur_password" type="password" placeholder="your current password" minLength="${PASSWORD_MIN_LENGTH}">
-        <button class="btn--password_visibility btn_password_visibility--settings_cur_password" type="button"></button>
-        <p>Please enter your new password</p>
-        <input class="input--password" id="input--new_password" type="password" placeholder="your new password" minLength="${PASSWORD_MIN_LENGTH}">
-        <button class="btn--password_visibility btn_password_visibility--settings_new_password" type="button"></button>
+          <p>Please enter your current password</p>
+          <div class="input_password--outer">
+            <input class="input--password" id="input--cur_password" type="password" placeholder="your current password" minLength="${PASSWORD_MIN_LENGTH}">
+            <button class="btn--password_visibility btn_password_visibility--settings_cur_password" type="button"></button>
+          </div>
+          <p>Please enter your new password</p>
+          <div class="input_password--outer">
+            <input class="input--password" id="input--new_password" type="password" placeholder="your new password" minLength="${PASSWORD_MIN_LENGTH}">
+            <button class="btn--password_visibility btn_password_visibility--settings_new_password" type="button"></button>
+          </div>
         </div>
         <button class="btn--finish btn--finish_password">Finish</button>`);
     }

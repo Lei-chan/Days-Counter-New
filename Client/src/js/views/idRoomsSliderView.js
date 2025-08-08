@@ -55,12 +55,17 @@ class IdRoomsSliderView {
     this._roomType = overlaySliderView.roomType;
     this._slideMax = ROOM_LIMIT - this._data.rooms.length;
 
+    const roomExplanation =
+      window.innerWidth > 480
+        ? `You can join up to ${ROOM_LIMIT} rooms! (You can still set ${this._slideMax} more rooms!)`
+        : `You can still set ${this._slideMax} more rooms!`;
+
     return `
             <div class="overlay_in--set_goal">
              <button class="btn--x set_goal--btn_x" type="button">&times;</button>
              <h1>${
                this._curAccRoomLength !== 10
-                 ? `Let's join rooms! </h1> <p>You can join up to ${ROOM_LIMIT} rooms! (You can still set ${this._slideMax} more rooms!)`
+                 ? `Let's join rooms! </h1> <p>${roomExplanation}`
                  : `You have maximum number of rooms!</h1> <p>You already have ${ROOM_LIMIT} rooms!`
              }</p>
              <div class="slider">

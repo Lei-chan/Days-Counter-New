@@ -87,9 +87,11 @@ class CreateRoomsSliderView {
               } name of your room No.${i + 1}!</p>
               ${
                 this._curAccRoomLength > i
-                  ? `<p class="set_goal_title">${
+                  ? `<div class="title_outer--slide">
+                    <p class="set_goal_title">${
                       roomTitle ? roomTitle : "No title yet"
-                    }</p>`
+                    }</p>
+                  </div>`
                   : '<input id="input--goal_title" type="text" placeholder="Room title"></input>'
               }
             </div>

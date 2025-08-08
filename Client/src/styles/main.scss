@@ -7,12 +7,10 @@
   box-sizing: border-box;
 }
 
-////input, border thickness responsive design later!!
-///
 body {
   background-image: url(../imgs/wallpaperDaytime.webp);
   background-size: cover;
-  font-family: $primary-font-family;
+  font-family: $primary-font-family, "cursive";
 }
 
 .page--login {
@@ -26,7 +24,7 @@ body {
 
   h3 {
     margin-top: 8vh;
-    font-size: 2.5vw;
+    font-size: 2.4vw;
     letter-spacing: 0.15vw;
     word-spacing: 0.3vw;
     color: #000000ad;
@@ -34,7 +32,7 @@ body {
 
   h1 {
     margin-top: 2vw;
-    font-size: 2.8vw;
+    font-size: 2.7vw;
     letter-spacing: 0.3vw;
     word-spacing: 0.65vw;
   }
@@ -60,7 +58,7 @@ body {
     z-index: 2;
 
     h2 {
-      font-size: 2.2vw;
+      font-size: 2.1vw;
       letter-spacing: 0.2vw;
       margin-top: 5%;
     }
@@ -68,7 +66,7 @@ body {
 
   #login--input_username,
   #login--input_password {
-    width: 55%;
+    width: 60%;
     aspect-ratio: 1 / 0.11;
     box-sizing: border-box;
     border-radius: 2.8% / 20%;
@@ -77,6 +75,16 @@ body {
     border-color: #bbbbbb;
     font-size: 1vw;
     letter-spacing: 0.1vw;
+  }
+
+  .input_password--outer {
+    position: relative;
+    width: 60%;
+    margin-top: 3%;
+  }
+
+  #login--input_password {
+    width: 100%;
   }
 
   .btn--password_visibility {
@@ -88,9 +96,9 @@ body {
   }
 
   .btn_password_visibility--login_form {
-    width: 4.3%;
-    top: 57.5%;
-    right: 24.5%;
+    width: 9%;
+    right: 2%;
+    top: 47%;
   }
 
   .password--visible {
@@ -151,74 +159,145 @@ body {
     margin-top: calc(1.6vw * 1);
   }
 
-  @media (width <= 320px) {
+  @media (768px < width <= 1024px) {
     h3 {
       margin-top: 10vh;
-      font-size: 4.2vw;
-      letter-spacing: 0.3vw;
-      word-spacing: 0.4vw;
+      font-size: 2.8vw;
+      letter-spacing: 0.2vw;
+      word-spacing: 0.3vw;
     }
 
     h1 {
       margin-top: 3vh;
-      font-size: 6vw;
-      letter-spacing: 0.5vw;
-      word-spacing: 0.9vw;
+      font-size: 3.6vw;
+      letter-spacing: 0.4vw;
+      word-spacing: 0.8vw;
     }
 
     .login--form {
-      top: calc(6vw * 1.5);
-      width: 80vw;
-      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+      top: calc(2.8vw * 1.8);
+      width: 45vw;
+      box-shadow: 3.5px 3.5px 3.5px rgba(0, 0, 0, 0.3);
 
       h2 {
-        font-size: 6vw;
-        letter-spacing: 0.6vw;
+        font-size: 2.8vw;
+        letter-spacing: 0.3vw;
       }
     }
 
     #login--input_username,
     #login--input_password {
-      width: 60%;
-      aspect-ratio: 1 / 0.13;
-      margin-top: 6.5%;
-      font-size: 3vw;
-      letter-spacing: 0.3vw;
+      width: 55%;
+      margin-top: 7.5%;
+      font-size: 1.5vw;
+      letter-spacing: 0.15vw;
     }
 
-    .btn_password_visibility--login_form {
-      width: 6%;
-      top: 59%;
-      right: 22%;
+    .input_password--outer {
+      width: 55%;
+    }
+
+    #login--input_password {
+      width: 100%;
     }
 
     .login--btn {
-      width: 17%;
-      margin-top: 1%;
+      width: 14%;
+      margin-top: 3%;
     }
 
     .login--error {
-      font-size: 3.5vw;
+      font-size: 1.9vw;
     }
 
     .link--forgot_password {
-      border-bottom: none;
-      font-size: 3.5vw;
-      top: calc(3.5vw * 4.3);
-      letter-spacing: 0.4vw;
-      word-spacing: 0.4vw;
+      font-size: 1.6vw;
+      top: calc(1.6vw * 4.9);
+      letter-spacing: 0.16vw;
+      word-spacing: 0.16vw;
     }
 
     .scroll--explanation {
-      font-size: 5vw;
-      margin-top: calc(5vw * 6);
-      letter-spacing: 0.5vw;
+      font-size: 2.1vw;
+      margin-top: calc(2.1vw * 9);
+      letter-spacing: 0.21vw;
     }
 
     .btn_scroll {
-      width: 13.5vw;
-      font-size: 5vw;
-      margin-top: calc(5vw * 1);
+      width: 7vw;
+      font-size: 2.5vw;
+      margin-top: calc(2.5vw * 1);
+    }
+  }
+
+  @media (480px < width <= 768px) {
+    h3 {
+      margin-top: 10vh;
+      font-size: 3.5vw;
+      letter-spacing: 0.25vw;
+      word-spacing: 0.35vw;
+    }
+
+    h1 {
+      margin-top: 3vh;
+      font-size: 4.9vw;
+      letter-spacing: 0.45vw;
+      word-spacing: 0.85vw;
+    }
+
+    .login--form {
+      top: calc(4vw * 2);
+      width: 55vw;
+      box-shadow: 3.3px 3.3px 3.3px rgba(0, 0, 0, 0.3);
+
+      h2 {
+        font-size: 3.5vw;
+        letter-spacing: 0.4vw;
+      }
+    }
+
+    #login--input_username,
+    #login--input_password {
+      width: 55%;
+      margin-top: 7.5%;
+      font-size: 2vw;
+      letter-spacing: 0.2vw;
+    }
+
+    .input_password--outer {
+      width: 55%;
+    }
+
+    #login--input_password {
+      width: 100%;
+    }
+
+    .login--btn {
+      width: 15%;
+      margin-top: 2.5%;
+    }
+
+    .login--error {
+      font-size: 2.5vw;
+    }
+
+    .link--forgot_password {
+      font-size: 2.2vw;
+      top: calc(2.2vw * 5);
+      letter-spacing: 0.22vw;
+      word-spacing: 0.22vw;
+    }
+
+    .scroll--explanation {
+      font-size: 2.8vw;
+      margin-top: calc(2.8vw * 10);
+      letter-spacing: 0.28vw;
+    }
+
+    .btn_scroll {
+      width: 10vw;
+      font-size: 3.5vw;
+      margin-top: calc(3.5vw * 1);
     }
   }
 
@@ -256,10 +335,12 @@ body {
       letter-spacing: 0.25vw;
     }
 
-    .btn_password_visibility--login_form {
-      width: 5.5%;
-      top: 59%;
-      right: 22%;
+    .input_password--outer {
+      width: 60%;
+    }
+
+    #login--input_password {
+      width: 100%;
     }
 
     .login--btn {
@@ -292,141 +373,81 @@ body {
     }
   }
 
-  @media (480px < width <= 768px) {
+  @media (width <= 320px) {
     h3 {
       margin-top: 10vh;
-      font-size: 3.5vw;
-      letter-spacing: 0.25vw;
-      word-spacing: 0.35vw;
+      font-size: 4.2vw;
+      letter-spacing: 0.3vw;
+      word-spacing: 0.4vw;
     }
 
     h1 {
       margin-top: 3vh;
-      font-size: 5vw;
-      letter-spacing: 0.45vw;
-      word-spacing: 0.85vw;
+      font-size: 6vw;
+      letter-spacing: 0.5vw;
+      word-spacing: 0.9vw;
     }
 
     .login--form {
-      top: calc(4vw * 2);
-      width: 55vw;
-      box-shadow: 3.3px 3.3px 3.3px rgba(0, 0, 0, 0.3);
+      top: calc(6vw * 1.5);
+      width: 80vw;
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
 
       h2 {
-        font-size: 3.5vw;
-        letter-spacing: 0.4vw;
+        font-size: 6vw;
+        letter-spacing: 0.6vw;
       }
     }
 
     #login--input_username,
     #login--input_password {
-      width: 55%;
-      margin-top: 7.5%;
-      font-size: 2vw;
-      letter-spacing: 0.2vw;
+      width: 60%;
+      aspect-ratio: 1 / 0.13;
+      margin-top: 6.5%;
+      font-size: 3vw;
+      letter-spacing: 0.3vw;
+    }
+
+    .input_password--outer {
+      width: 60%;
+    }
+
+    #login--input_password {
+      width: 100%;
     }
 
     .btn_password_visibility--login_form {
-      width: 5%;
-      top: 57%;
-      right: 23.5%;
+      width: 10%;
+      top: 40%;
     }
 
     .login--btn {
-      width: 15%;
-      margin-top: 2.5%;
+      width: 17%;
+      margin-top: 1%;
     }
 
     .login--error {
-      font-size: 2.5vw;
+      font-size: 3.5vw;
     }
 
     .link--forgot_password {
-      font-size: 2.2vw;
-      top: calc(2.2vw * 5);
-      letter-spacing: 0.22vw;
-      word-spacing: 0.22vw;
-    }
-
-    .scroll--explanation {
-      font-size: 2.8vw;
-      margin-top: calc(2.8vw * 10);
-      letter-spacing: 0.28vw;
-    }
-
-    .btn_scroll {
-      width: 10vw;
+      border-bottom: none;
       font-size: 3.5vw;
-      margin-top: calc(3.5vw * 1);
-    }
-  }
-
-  @media (768px < width <= 1024px) {
-    h3 {
-      margin-top: 10vh;
-      font-size: 2.8vw;
-      letter-spacing: 0.2vw;
-      word-spacing: 0.3vw;
-    }
-
-    h1 {
-      margin-top: 3vh;
-      font-size: 3.6vw;
+      top: calc(3.5vw * 4.3);
       letter-spacing: 0.4vw;
-      word-spacing: 0.8vw;
-    }
-
-    .login--form {
-      top: calc(2.8vw * 1.8);
-      width: 45vw;
-      box-shadow: 3.5px 3.5px 3.5px rgba(0, 0, 0, 0.3);
-
-      h2 {
-        font-size: 2.8vw;
-        letter-spacing: 0.3vw;
-      }
-    }
-
-    #login--input_username,
-    #login--input_password {
-      width: 54%;
-      margin-top: 7.5%;
-      font-size: 1.5vw;
-      letter-spacing: 0.15vw;
-    }
-
-    .btn_password_visibility--login_form {
-      width: 4.3%;
-      top: 57%;
-      right: 24%;
-    }
-
-    .login--btn {
-      width: 14%;
-      margin-top: 3%;
-    }
-
-    .login--error {
-      font-size: 1.9vw;
-    }
-
-    .link--forgot_password {
-      font-size: 1.6vw;
-      top: calc(1.6vw * 4.9);
-      letter-spacing: 0.16vw;
-      word-spacing: 0.16vw;
+      word-spacing: 0.4vw;
     }
 
     .scroll--explanation {
-      font-size: 2.1vw;
-      margin-top: calc(2.1vw * 9);
-      letter-spacing: 0.21vw;
+      font-size: 5vw;
+      margin-top: calc(5vw * 6);
+      letter-spacing: 0.5vw;
     }
 
     .btn_scroll {
-      width: 7vw;
-      font-size: 2.5vw;
-      margin-top: calc(2.5vw * 1);
+      width: 13.5vw;
+      font-size: 5vw;
+      margin-top: calc(5vw * 1);
     }
   }
 }
@@ -620,7 +641,6 @@ body {
   height: fit-content;
   padding-bottom: 10vh;
   top: 70vh;
-  // z-index: ;
 
   .bottom_half--form {
     position: relative;
@@ -639,7 +659,7 @@ body {
 
     h1 {
       color: #0359b6;
-      font-size: 2.4vw;
+      font-size: 2.3vw;
       letter-spacing: 0.2vw;
       margin-bottom: 3%;
     }
@@ -647,7 +667,7 @@ body {
     .bottom_half--warning {
       @include message-style();
       position: relative;
-      font-size: 1.4vw;
+      font-size: 1.3vw;
       letter-spacing: 0.1vw;
       padding: 1.2%;
       border-radius: 1% / 14%;
@@ -672,7 +692,7 @@ body {
       .bottom_half--email_explanation {
         margin-top: 10%;
         margin-bottom: 4%;
-        font-size: 1.7vw;
+        font-size: 1.6vw;
         letter-spacing: 0.2vw;
       }
 
@@ -703,78 +723,131 @@ body {
         margin-top: 7%;
       }
 
+      .input_password--outer {
+        position: relative;
+        width: fit-content;
+        height: fit-content;
+        margin: 2% auto;
+      }
+
       .btn_password_visibility--login_bottom {
         position: absolute;
-        width: 4%;
-        bottom: 40.1%;
-        right: 21.5%;
+        width: 7%;
+        top: 50.5%;
+        right: 2%;
       }
     }
   }
 }
 
-@media (width <= 320px) {
+@media (768px < width <= 1024px) {
   .bottom_half {
-    padding-bottom: 16vh;
+    padding-bottom: 20vh;
     top: 25vh;
 
     .bottom_half--form {
-      box-shadow: 3px 3px 7px #0d0e4488;
-      width: 86%;
-      padding-bottom: 3%;
-      padding-top: 4%;
-      margin-top: 25%;
+      box-shadow: 3.7px 3.7px 9px #0d0e4488;
+      width: 60%;
+      padding-top: 5%;
+      margin-top: 2%;
 
       h1 {
-        font-size: 4.6vw;
-        letter-spacing: 0.4vw;
+        font-size: 2.9vw;
+        letter-spacing: 0.25vw;
       }
 
       .bottom_half--warning {
-        font-size: 3.3vw;
-        letter-spacing: 0.3vw;
-        padding: 1.5%;
+        font-size: 1.8vw;
+        letter-spacing: 0.19vw;
+        padding: 1%;
       }
 
       .bottom_half--btn_next {
-        margin-top: 0.6%;
+        margin-top: 1%;
       }
 
       .bottom_half--inputs {
-        width: 70vw;
-        padding: 5%;
+        width: 50vw;
         padding-top: 2%;
 
         .bottom_half--username_explanation,
         .bottom_half--password_explanation,
         .bottom_half--email_explanation {
-          font-size: 4vw;
-          letter-spacing: 0.3vw;
+          font-size: 2vw;
+          letter-spacing: 0.21vw;
           margin-top: 7%;
-          margin-bottom: 4%;
         }
 
         .username_explanation--tiny,
         .password_explanation--tiny,
         .email_explanation--tiny {
-          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.521);
-          font-size: 3vw;
-          letter-spacing: 0.3vw;
+          box-shadow: 1.7px 1.7px 3px rgba(0, 0, 0, 0.521);
+          font-size: 1.4vw;
+          letter-spacing: 0.15vw;
         }
 
         input {
-          width: 50vw;
+          width: 30vw;
           aspect-ratio: 1 / 0.11;
-          font-size: 3vw;
-          letter-spacing: 0.3vw;
-          padding-left: 3%;
-          margin-top: 6%;
+          font-size: 1.5vw;
+          letter-spacing: 0.15vw;
+        }
+      }
+    }
+  }
+}
+
+@media (480px < width <= 768px) {
+  .bottom_half {
+    padding-bottom: 20vh;
+    top: 25vh;
+
+    .bottom_half--form {
+      box-shadow: 3.5px 3.5px 8px #0d0e4488;
+      width: 70%;
+      padding-top: 5%;
+      margin-top: 2%;
+
+      h1 {
+        font-size: 3.5vw;
+        letter-spacing: 0.3vw;
+      }
+
+      .bottom_half--warning {
+        font-size: 2.4vw;
+        letter-spacing: 0.24vw;
+        padding: 1.5%;
+      }
+
+      .bottom_half--btn_next {
+        margin-top: 1%;
+      }
+
+      .bottom_half--inputs {
+        width: 60vw;
+        padding-top: 2%;
+
+        .bottom_half--username_explanation,
+        .bottom_half--password_explanation,
+        .bottom_half--email_explanation {
+          font-size: 2.7vw;
+          letter-spacing: 0.25vw;
+          margin-top: 7%;
         }
 
-        .btn_password_visibility--login_bottom {
-          width: 6%;
-          bottom: 34.3%;
-          right: 16.5%;
+        .username_explanation--tiny,
+        .password_explanation--tiny,
+        .email_explanation--tiny {
+          box-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.521);
+          font-size: 1.8vw;
+          letter-spacing: 0.19vw;
+        }
+
+        input {
+          width: 40vw;
+          aspect-ratio: 1 / 0.11;
+          font-size: 2vw;
+          letter-spacing: 0.2vw;
         }
       }
     }
@@ -840,9 +913,8 @@ body {
         }
 
         .btn_password_visibility--login_bottom {
-          width: 6%;
-          bottom: 34.9%;
-          right: 16.5%;
+          width: 8%;
+          top: 45%;
         }
       }
     }
@@ -853,137 +925,74 @@ body {
   }
 }
 
-@media (480px < width <= 768px) {
+@media (width <= 320px) {
   .bottom_half {
-    padding-bottom: 20vh;
+    padding-bottom: 16vh;
     top: 25vh;
 
     .bottom_half--form {
-      box-shadow: 3.5px 3.5px 8px #0d0e4488;
-      width: 70%;
-      // padding-bottom: 5%;
-      padding-top: 5%;
-      margin-top: 2%;
+      box-shadow: 3px 3px 7px #0d0e4488;
+      width: 86%;
+      padding-bottom: 3%;
+      padding-top: 4%;
+      margin-top: 25%;
 
       h1 {
-        font-size: 3.5vw;
-        letter-spacing: 0.3vw;
+        font-size: 4.6vw;
+        letter-spacing: 0.4vw;
       }
 
       .bottom_half--warning {
-        font-size: 2.4vw;
-        letter-spacing: 0.24vw;
+        font-size: 3.3vw;
+        letter-spacing: 0.3vw;
         padding: 1.5%;
       }
 
       .bottom_half--btn_next {
-        margin-top: 1%;
+        margin-top: 0.6%;
       }
 
       .bottom_half--inputs {
-        width: 60vw;
-        // padding: 5%;
+        width: 70vw;
+        padding: 5%;
         padding-top: 2%;
 
         .bottom_half--username_explanation,
         .bottom_half--password_explanation,
         .bottom_half--email_explanation {
-          font-size: 2.7vw;
-          letter-spacing: 0.25vw;
+          font-size: 4vw;
+          letter-spacing: 0.3vw;
           margin-top: 7%;
-          // margin-bottom: 4%;
+          margin-bottom: 4%;
         }
 
         .username_explanation--tiny,
         .password_explanation--tiny,
         .email_explanation--tiny {
-          box-shadow: 1.5px 1.5px 3px rgba(0, 0, 0, 0.521);
-          font-size: 1.9vw;
-          letter-spacing: 0.19vw;
+          box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.521);
+          font-size: 3vw;
+          letter-spacing: 0.3vw;
         }
 
         input {
-          width: 40vw;
+          width: 50vw;
           aspect-ratio: 1 / 0.11;
-          font-size: 2vw;
-          letter-spacing: 0.2vw;
+          font-size: 3vw;
+          letter-spacing: 0.3vw;
+          padding-left: 3%;
+          margin-top: 6%;
         }
 
         .btn_password_visibility--login_bottom {
-          width: 5%;
-          bottom: 38.1%;
-          right: 17.5%;
+          width: 9%;
+          top: 42%;
         }
       }
     }
   }
 }
 
-@media (768px < width <= 1024px) {
-  .bottom_half {
-    padding-bottom: 20vh;
-    top: 25vh;
-
-    .bottom_half--form {
-      box-shadow: 3.7px 3.7px 9px #0d0e4488;
-      width: 60%;
-      // padding-bottom: 5%;
-      padding-top: 5%;
-      margin-top: 2%;
-
-      h1 {
-        font-size: 3vw;
-        letter-spacing: 0.25vw;
-      }
-
-      .bottom_half--warning {
-        font-size: 1.9vw;
-        letter-spacing: 0.19vw;
-        padding: 1%;
-      }
-
-      .bottom_half--btn_next {
-        margin-top: 1%;
-      }
-
-      .bottom_half--inputs {
-        width: 50vw;
-        padding-top: 2%;
-
-        .bottom_half--username_explanation,
-        .bottom_half--password_explanation,
-        .bottom_half--email_explanation {
-          font-size: 2.1vw;
-          letter-spacing: 0.21vw;
-          margin-top: 7%;
-          // margin-bottom: 4%;
-        }
-
-        .username_explanation--tiny,
-        .password_explanation--tiny,
-        .email_explanation--tiny {
-          box-shadow: 1.7px 1.7px 3px rgba(0, 0, 0, 0.521);
-          font-size: 1.5vw;
-          letter-spacing: 0.15vw;
-        }
-
-        input {
-          width: 30vw;
-          aspect-ratio: 1 / 0.11;
-          font-size: 1.5vw;
-          letter-spacing: 0.15vw;
-        }
-
-        .btn_password_visibility--login_bottom {
-          width: 4.5%;
-          bottom: 38.5%;
-          right: 21%;
-        }
-      }
-    }
-  }
-}
-
+////later!
 .forgot_password--form {
   position: absolute;
   background-image: linear-gradient(rgb(255, 255, 255), rgb(240, 226, 209));
@@ -1540,7 +1549,7 @@ body {
   }
 
   .title {
-    font-size: 3.2vw;
+    font-size: 3.1vw;
     letter-spacing: 0.2vw;
     word-spacing: 0.6vw;
     margin-top: 5%;
@@ -1865,7 +1874,6 @@ body {
   }
 }
 
-/* Cards Grid */
 .days_counter--container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -2883,6 +2891,10 @@ body {
 
   .overlay_in--set_goal {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
     background-image: $primary-form-outside-gradient;
     width: 52vw;
     aspect-ratio: 1/0.7;
@@ -2918,7 +2930,6 @@ body {
       width: 85%;
       height: 60%;
       margin-top: 2%;
-      margin-left: 7.5%;
       overflow: hidden;
 
       .slide {
@@ -2945,6 +2956,7 @@ body {
           border-color: #bbbbbb;
           padding-left: 1.3%;
           letter-spacing: 0.1vw;
+          box-sizing: border-box;
         }
 
         h3 {
@@ -2994,10 +3006,21 @@ body {
           margin-top: 3.5%;
         }
 
+        .title_outer--slide {
+          width: 75%;
+          margin-left: 14%;
+        }
+
+        .set_goal_title {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
         #input--goal_title,
         #input--goal_date {
-          height: calc(27vw * 0.06);
-          font-size: 0.9vw;
+          height: calc(27vw * 0.07);
+          font-size: 1vw;
         }
 
         #input--goal_title {
@@ -3124,210 +3147,97 @@ body {
     }
 
     .overlay_in--set_goal {
-      position: relative;
-      background-image: $primary-form-outside-gradient;
-      width: 52vw;
-      aspect-ratio: 1/0.7;
-      border-radius: 2% / 3%;
-      box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
-      top: 9vh;
+      width: 58vw;
+      top: 16vh;
 
       h1 {
-        font-size: 2.2vw;
-        letter-spacing: 0.2vw;
-        padding-top: 3%;
+        font-size: 2.6vw;
       }
 
       p {
-        font-size: 1.2vw;
-        letter-spacing: 0.1vw;
-        margin-top: 1%;
+        font-size: 1.6vw;
       }
 
       .set_goal--btn_x {
-        @include btn-style(transparent, black);
-        font-size: 3vw;
-        width: 5%;
+        font-size: 3.5vw;
+        width: 4.5%;
+        top: -1%;
         right: 2%;
-
-        &:hover {
-          color: #007bff;
-        }
       }
 
       .slider {
-        position: relative;
-        width: 85%;
-        height: 60%;
-        margin-top: 2%;
-        margin-left: 7.5%;
-        overflow: hidden;
-
         .slide {
-          position: absolute;
-          height: 100%;
-          width: 100%;
-          background-image: $primary-form-inside-gradient;
-          border-radius: 1.5% / 2.5%;
-
           h2 {
-            color: rgb(0, 1, 80);
-            font-size: 2.4vw;
-            word-spacing: 1.5vw;
-            letter-spacing: 0.2vw;
-            margin-top: 2%;
+            font-size: 3vw;
           }
 
           p {
-            font-size: 1.6vw;
-            margin-bottom: 1.7%;
-          }
-
-          input {
-            border-color: #bbbbbb;
-            padding-left: 1.3%;
-            letter-spacing: 0.1vw;
+            font-size: 2vw;
+            margin-bottom: 1.3%;
           }
 
           h3 {
-            font-size: 2.2vw;
-            letter-spacing: 0.1vw;
-            margin-top: 10%;
+            font-size: 2.3vw;
+            margin-top: 14%;
           }
 
           .btns_edit_delete--slide {
-            top: 5%;
+            top: 8%;
           }
 
           .btn--select {
-            @include btn-style(yellowgreen);
-            position: absolute;
-            border-radius: 5% / 10%;
-            border: none;
-            width: 7vw;
-            aspect-ratio: 1 / 0.5;
-            top: 7%;
-            right: 4%;
-            font-size: 1vw;
-
-            &:hover {
-              transform: translateY(-1px);
-              background-color: rgb(172, 212, 90);
-            }
+            width: 8.8vw;
+            top: 6%;
+            right: 3%;
+            font-size: 1.3vw;
           }
 
           .btn--select__active {
-            @include btn-style(rgb(255, 60, 0));
-            position: absolute;
-            border-radius: 5% / 10%;
-            border: none;
-            width: 7vw;
-            aspect-ratio: 1 / 0.5;
-            top: 7%;
-            right: 4%;
-            font-size: 1vw;
-            &:hover {
-              background-color: rgb(255, 145, 0);
-            }
-          }
-
-          .goal_title,
-          .goal_date {
-            margin-top: 3.5%;
+            width: 8.5vw;
+            top: 6%;
+            right: 3%;
+            font-size: 1.3vw;
           }
 
           #input--goal_title,
           #input--goal_date {
-            height: calc(27vw * 0.06);
-            font-size: 0.9vw;
+            height: calc(30vw * 0.075);
+            font-size: 1.3vw;
           }
 
           #input--goal_title {
-            width: 27vw;
-            border-radius: 1% / 15%;
+            width: 30vw;
           }
 
           #input--goal_date {
-            border-radius: 2% / 18%;
-            width: 18vw;
-            cursor: pointer;
+            width: 22vw;
           }
 
           #input--id {
             width: 60%;
-            aspect-ratio: 1 / 0.08;
-            font-size: 1vw;
-            margin-top: 10%;
-            border-radius: 2% / 18%;
-          }
-
-          .comments--slide,
-          .to_do_lists--slide {
-            background-color: rgb(255, 252, 252);
-            padding: 3%;
-            width: 80%;
-            height: 70%;
-            margin-left: 10%;
+            // aspect-ratio: 1 / 0.08;
+            font-size: 1.3vw;
+            margin-top: 6%;
+            // border-radius: 2% / 18%;
           }
         }
 
         .slider--btn {
-          @include btn-style(rgba(0, 0, 0, 0.116), black);
-          position: absolute;
-          border-radius: 70%;
-          border: none;
-          width: 3vw;
-          height: 3vw;
-          font-size: 1.6vw;
-
-          &:hover {
-            background-color: #0000004d;
-          }
-        }
-
-        .btn--left {
-          top: 45%;
-          left: 2%;
-        }
-
-        .btn--right {
-          top: 45%;
-          right: 2%;
-        }
-
-        .dots {
-          position: absolute;
-          bottom: 3%;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
+          width: 3.5vw;
+          height: 3.5vw;
+          font-size: 2vw;
+          padding-bottom: 1%;
         }
 
         .dots_dot {
-          @include btn-style(#868585, none);
-          border: none;
-          opacity: 0.7;
-          width: 0.7vw;
-          height: 0.7vw;
-          border-radius: 50%;
-          margin-right: 0.9vw;
-
-          &:last-child {
-            margin: 0;
-          }
-        }
-
-        .dots_dot--active {
-          background-color: #868585;
-          opacity: 1;
+          width: 0.8vw;
+          height: 0.8vw;
         }
       }
 
       .slider--btn_next {
-        width: 15%;
-        height: 10%;
-        margin-top: 2.5%;
-        border-radius: 10% / 19%;
+        margin-top: 2%;
+        padding-bottom: 8%;
       }
     }
   }
@@ -3362,6 +3272,116 @@ body {
           font-size: 2.3vw;
           letter-spacing: 0.05vw;
         }
+      }
+    }
+
+    .overlay_in--set_goal {
+      width: 65vw;
+      top: 20vh;
+
+      h1 {
+        font-size: 3.2vw;
+      }
+
+      p {
+        font-size: 1.9vw;
+      }
+
+      .set_goal--btn_x {
+        font-size: 4.5vw;
+        width: 5%;
+        top: -1%;
+      }
+
+      .slider {
+        .slide {
+          h2 {
+            font-size: 3.5vw;
+          }
+
+          p {
+            font-size: 2.3vw;
+            margin-bottom: 1.2%;
+          }
+
+          h3 {
+            font-size: 2.7vw;
+            margin-top: 13%;
+          }
+
+          .btns_edit_delete--slide {
+            top: 8%;
+            right: -3%;
+          }
+
+          .btn--select {
+            width: 11vw;
+            top: 4%;
+            right: 2%;
+            font-size: 1.75vw;
+          }
+
+          .btn--select__active {
+            width: 11vw;
+            top: 4%;
+            right: 2%;
+            font-size: 1.75vw;
+          }
+
+          #input--goal_title,
+          #input--goal_date {
+            height: calc(33vw * 0.076);
+            font-size: 1.7vw;
+          }
+
+          #input--goal_title {
+            width: 33vw;
+          }
+
+          #input--goal_date {
+            position: absolute;
+            width: 25vw;
+            left: 27%;
+            bottom: 9%;
+          }
+
+          #input--id {
+            width: 70%;
+            font-size: 1.8vw;
+            margin-top: 6%;
+          }
+
+          .comments--slide,
+          .to_do_lists--slide {
+            font-size: 2.2vw;
+          }
+        }
+
+        .slider--btn {
+          width: 4.2vw;
+          height: 4.2vw;
+          font-size: 2.5vw;
+          padding-bottom: 1%;
+        }
+
+        .btn--left {
+          left: 2%;
+        }
+
+        .btn--right {
+          right: 2%;
+        }
+
+        .dots_dot {
+          width: 1vw;
+          height: 1vw;
+          margin-right: 1vw;
+        }
+      }
+
+      .slider--btn_next {
+        margin-top: 2%;
+        padding-bottom: 8%;
       }
     }
   }
@@ -3399,6 +3419,124 @@ body {
           font-size: 2.9vw;
           letter-spacing: 0.05vw;
         }
+      }
+    }
+
+    .overlay_in--set_goal {
+      width: 80vw;
+      aspect-ratio: 1 / 0.75;
+      top: 26vh;
+
+      h1 {
+        font-size: 4.3vw;
+      }
+
+      p {
+        font-size: 2.7vw;
+      }
+
+      .set_goal--btn_x {
+        font-size: 5.5vw;
+        width: 5%;
+        top: -1%;
+      }
+
+      .slider {
+        .slide {
+          h2 {
+            font-size: 4.5vw;
+          }
+
+          p {
+            font-size: 3vw;
+          }
+
+          h3 {
+            font-size: 3.5vw;
+            margin-top: 13%;
+          }
+
+          .btns_edit_delete--slide {
+            top: 5.5%;
+            right: -1%;
+          }
+
+          .btn--select {
+            width: 14.5vw;
+            top: 4%;
+            right: 2%;
+            font-size: 2.3vw;
+          }
+
+          .btn--select__active {
+            width: 14.5vw;
+            top: 4%;
+            right: 2%;
+            font-size: 2.3vw;
+          }
+
+          .goal_title,
+          .goal_date {
+            margin-top: 3%;
+          }
+
+          #input--goal_title,
+          #input--goal_date {
+            height: calc(50vw * 0.076);
+            font-size: 2.5vw;
+            letter-spacing: 0.2vw;
+          }
+
+          #input--goal_title {
+            width: 50vw;
+          }
+
+          #input--goal_date {
+            position: absolute;
+            width: 40vw;
+            bottom: 10%;
+            left: 20%;
+          }
+
+          #input--id {
+            width: 70%;
+            aspect-ratio: 1 / 0.1;
+            margin-top: 8%;
+            font-size: 2.5vw;
+            letter-spacing: 0.2vw;
+          }
+
+          .comments--slide,
+          .to_do_lists--slide {
+            font-size: 3vw;
+          }
+        }
+
+        .slider--btn {
+          width: 4.8vw;
+          height: 4.8vw;
+          font-size: 2.8vw;
+          padding-bottom: 1%;
+        }
+
+        .btn--left {
+          left: 1.5%;
+        }
+
+        .btn--right {
+          right: 1.5%;
+        }
+
+        .dots_dot {
+          width: 1.5vw;
+          height: 1.5vw;
+          margin-right: 1.5vw;
+        }
+      }
+
+      .slider--btn_next {
+        margin-top: 2.5%;
+        padding-bottom: 1%;
       }
     }
   }
@@ -3439,6 +3577,128 @@ body {
         }
       }
     }
+
+    .overlay_in--set_goal {
+      width: 90vw;
+      aspect-ratio: 1 / 0.85;
+      top: 30vh;
+
+      h1 {
+        font-size: 5.2vw;
+      }
+
+      p {
+        font-size: 3.8vw;
+      }
+
+      .set_goal--btn_x {
+        font-size: 7vw;
+        width: 5%;
+        top: -1%;
+      }
+
+      .slider {
+        width: 90%;
+        height: 60%;
+        margin-top: 2%;
+
+        .slide {
+          h2 {
+            font-size: 5.5vw;
+          }
+
+          p {
+            font-size: 4.1vw;
+            margin: 1%;
+          }
+
+          h3 {
+            font-size: 4.6vw;
+            margin-top: 13%;
+          }
+
+          .btns_edit_delete--slide {
+            top: 5.5%;
+            right: -4%;
+          }
+
+          .btn--select {
+            width: 18.5vw;
+            top: 2.5%;
+            right: 1.5%;
+            font-size: 3vw;
+          }
+
+          .btn--select__active {
+            width: 18.5vw;
+            top: 2.5%;
+            right: 1.5%;
+            font-size: 3vw;
+          }
+
+          .goal_title,
+          .goal_date {
+            margin-top: 3%;
+          }
+
+          #input--goal_title,
+          #input--goal_date {
+            height: calc(60vw * 0.085);
+            font-size: 3.5vw;
+            letter-spacing: 0.3vw;
+          }
+
+          #input--goal_title {
+            width: 60vw;
+          }
+
+          #input--goal_date {
+            position: absolute;
+            width: 50vw;
+            bottom: 10%;
+            left: 20%;
+          }
+
+          #input--id {
+            width: 70%;
+            aspect-ratio: 1 / 0.1;
+            margin-top: 8%;
+            font-size: 3.5vw;
+            letter-spacing: 0.2vw;
+          }
+
+          .comments--slide,
+          .to_do_lists--slide {
+            font-size: 3.7vw;
+          }
+        }
+
+        .slider--btn {
+          width: 6vw;
+          height: 6vw;
+          font-size: 3vw;
+        }
+
+        .btn--left {
+          left: 1%;
+        }
+
+        .btn--right {
+          right: 1%;
+        }
+
+        .dots_dot {
+          width: 2vw;
+          height: 2vw;
+          margin-right: 2vw;
+        }
+      }
+
+      .slider--btn_next {
+        margin-top: 2.5%;
+        padding-bottom: 1%;
+      }
+    }
   }
 }
 
@@ -3457,10 +3717,8 @@ body {
 .settings_form {
   position: relative;
   background-image: linear-gradient(rgb(255, 255, 255), rgb(240, 226, 209));
-  // text-align: center;
   width: 40vw;
   height: fit-content;
-  // margin-left: 31vw;
   margin-top: 4vh;
   margin-bottom: 4vh;
   border-radius: 2% / 1.8%;
@@ -3468,13 +3726,25 @@ body {
   padding: 2%;
   z-index: 1;
 
+  .settings--btn_x {
+    @include btn-style(transparent, black);
+    font-size: 2.4vw;
+    width: 5%;
+    top: -1%;
+    right: 2%;
+
+    &:hover {
+      color: #ff7300;
+    }
+  }
+
   h1 {
-    font-size: 2.5vw;
+    font-size: 2.4vw;
     letter-spacing: 0.2vw;
   }
 
   h3 {
-    font-size: 1.6vw;
+    font-size: 1.5vw;
     letter-spacing: 0.2vw;
     margin-top: 3%;
     padding: 3%;
@@ -3491,7 +3761,7 @@ body {
   }
 
   input {
-    width: 20vw;
+    width: 17rem;
     aspect-ratio: 1 / 0.01;
     padding: 1%;
     font-size: 1vw;
@@ -3500,207 +3770,690 @@ body {
     margin-bottom: 3%;
     border-color: #bbbbbb;
   }
-}
 
-.settings_email_p--outer {
-  width: 65%;
-  margin-left: 17%;
-}
+  .input_password--outer {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    margin: 0 auto;
+  }
 
-.settings--btn_x {
-  @include btn-style(transparent, black);
-  font-size: 2.4vw;
-  width: 5%;
-  top: -1%;
-  right: 2%;
+  .settings--error_message {
+    @include message-style();
+    padding: 1%;
+    margin-top: 2%;
+    font-size: 1.2vw !important;
+    letter-spacing: 0.1vw;
+    border-radius: 1.5% / 20%;
+  }
 
-  &:hover {
-    color: #ff7300;
+  .settings--username,
+  .settings--email,
+  .settings--password {
+    margin-top: 3%;
+    gap: 3%;
+  }
+
+  .settings--explanation_tiny {
+    font-size: 1.1vw !important;
+  }
+
+  .settings_email_p--outer {
+    width: 65%;
+    margin-left: 17%;
+    margin-bottom: 3.6%;
+  }
+
+  .btn--change_username,
+  .btn--change_email,
+  .btn--change_password,
+  .btn--finish_username,
+  .btn--finish_email,
+  .btn--finish_password {
+    @include btn-style-gradient(
+      linear-gradient(rgb(255, 213, 27), rgb(255, 102, 0))
+    );
+    border: none;
+    border-radius: 10% / 22%;
+    padding: 1%;
+    font-size: 0.9vw;
+    letter-spacing: 0.1vw;
+
+    &:hover {
+      transform: $btn-transform-hover;
+    }
+  }
+
+  .btn_password_visibility--settings_cur_password,
+  .btn_password_visibility--settings_new_password {
+    width: 8%;
+    right: 2%;
+    top: 8%;
   }
 }
 
-.settings--error_message {
-  @include message-style();
-  padding: 1%;
-  margin-top: 2%;
-  font-size: 1.2vw !important;
-  letter-spacing: 0.1vw;
-  border-radius: 1.5% / 20%;
-}
+@media (768px < width <= 1024px) {
+  .settings_form {
+    width: 48vw;
+    margin-top: 10vh;
 
-.settings--username,
-.settings--email,
-.settings--password {
-  margin-top: 3%;
-  gap: 3%;
-}
+    .settings--btn_x {
+      font-size: 3vw;
+    }
 
-.settings--explanation_tiny {
-  font-size: 1.1vw !important;
-}
+    h1 {
+      font-size: 3vw;
+    }
 
-.btn--change_username,
-.btn--change_email,
-.btn--change_password,
-.btn--finish_username,
-.btn--finish_email,
-.btn--finish_password {
-  @include btn-style-gradient(
-    linear-gradient(rgb(255, 213, 27), rgb(255, 102, 0))
-  );
-  border: none;
-  border-radius: 10% / 22%;
-  padding: 1%;
-  font-size: 0.9vw;
-  letter-spacing: 0.1vw;
+    h3 {
+      font-size: 2vw;
+    }
 
-  &:hover {
-    transform: $btn-transform-hover;
+    p {
+      font-size: 1.8vw;
+    }
+
+    input {
+      width: 17rem;
+      font-size: 1.4vw;
+    }
+
+    @media (768px < width <= 900px) {
+      input {
+        width: 15rem;
+      }
+    }
+
+    .settings--error_message {
+      font-size: 1.5vw !important;
+    }
+
+    .settings--username,
+    .settings--email,
+    .settings--password {
+      margin-top: 3%;
+      gap: 3%;
+    }
+
+    .settings--explanation_tiny {
+      font-size: 1.4vw !important;
+    }
+
+    .btn--change_username,
+    .btn--change_email,
+    .btn--change_password,
+    .btn--finish_username,
+    .btn--finish_email,
+    .btn--finish_password {
+      font-size: 1.2vw;
+      letter-spacing: 0.1vw;
+    }
+
+    .btn_password_visibility--settings_cur_password,
+    .btn_password_visibility--settings_new_password {
+      top: 3px;
+    }
   }
 }
 
-.btn_password_visibility--settings_cur_password,
-.btn_password_visibility--settings_new_password {
-  height: 2.6%;
-  right: 26%;
+@media (480px < width <= 768px) {
+  .settings_form {
+    width: 55vw;
+    margin-top: 12vh;
+
+    .settings--btn_x {
+      font-size: 4vw;
+    }
+
+    h1 {
+      font-size: 3.98vw;
+    }
+
+    h3 {
+      font-size: 2.6vw;
+    }
+
+    p {
+      font-size: 2.4vw;
+    }
+
+    input {
+      width: 14rem;
+      font-size: 1.8vw;
+    }
+
+    .settings--error_message {
+      font-size: 1.9vw !important;
+    }
+
+    .settings--explanation_tiny {
+      font-size: 1.8vw !important;
+    }
+
+    .btn--change_username,
+    .btn--change_email,
+    .btn--change_password,
+    .btn--finish_username,
+    .btn--finish_email,
+    .btn--finish_password {
+      font-size: 1.7vw;
+    }
+
+    .btn_password_visibility--settings_cur_password,
+    .btn_password_visibility--settings_new_password {
+      width: 9%;
+      top: 3px;
+    }
+
+    @media (480px < width <= 600px) {
+      input {
+        width: 12rem;
+      }
+
+      .btn_password_visibility--settings_cur_password,
+      .btn_password_visibility--settings_new_password {
+        top: 6px;
+      }
+    }
+  }
 }
 
-.btn_password_visibility--settings_cur_password {
-  bottom: 20.3%;
+@media (320px < width <= 480px) {
+  .settings_form {
+    width: 75vw;
+    margin-top: 20vh;
+
+    .settings--btn_x {
+      font-size: 6vw;
+      top: -2%;
+    }
+
+    h1 {
+      font-size: 5.1vw;
+    }
+
+    h3 {
+      font-size: 4vw;
+    }
+
+    p {
+      font-size: 3.2vw;
+    }
+
+    input {
+      width: 13rem;
+      font-size: 2.5vw;
+      letter-spacing: 0.2vw;
+      padding-left: 1.5%;
+    }
+
+    .settings--error_message {
+      font-size: 3vw !important;
+    }
+
+    .settings--explanation_tiny {
+      font-size: 2.7vw !important;
+    }
+
+    .btn--change_username,
+    .btn--change_email,
+    .btn--change_password,
+    .btn--finish_username,
+    .btn--finish_email,
+    .btn--finish_password {
+      font-size: 2.5vw;
+    }
+
+    .btn_password_visibility--settings_cur_password,
+    .btn_password_visibility--settings_new_password {
+      width: 10%;
+      top: 4px;
+    }
+
+    @media (320px < width <=400px) {
+      input {
+        width: 12rem;
+      }
+
+      .btn_password_visibility--settings_cur_password,
+      .btn_password_visibility--settings_new_password {
+        width: 9%;
+        top: 7px;
+      }
+    }
+  }
 }
 
-.btn_password_visibility--settings_new_password {
-  bottom: 9.35%;
+@media (width <= 320px) {
+  .settings_form {
+    width: 90vw;
+    margin-top: 20vh;
+
+    .settings--btn_x {
+      font-size: 9vw;
+      top: -2.5%;
+    }
+
+    h1 {
+      font-size: 6vw;
+    }
+
+    h3 {
+      font-size: 5vw;
+    }
+
+    p {
+      font-size: 4.5vw;
+    }
+
+    input {
+      width: 12rem;
+      font-size: 3.5vw;
+      letter-spacing: 0.3vw;
+      padding-left: 1.5%;
+    }
+
+    .settings--error_message {
+      font-size: 4vw !important;
+    }
+
+    .settings--explanation_tiny {
+      font-size: 3.7vw !important;
+    }
+
+    .btn--change_username,
+    .btn--change_email,
+    .btn--change_password,
+    .btn--finish_username,
+    .btn--finish_email,
+    .btn--finish_password {
+      font-size: 3.5vw;
+    }
+
+    .btn_password_visibility--settings_cur_password,
+    .btn_password_visibility--settings_new_password {
+      width: 9%;
+      top: 5px;
+    }
+
+    @media (width <=270) {
+      input {
+        width: 10rem;
+      }
+
+      .btn_password_visibility--settings_cur_password,
+      .btn_password_visibility--settings_new_password {
+        width: 10%;
+        top: 7px;
+      }
+    }
+  }
 }
 
 .overlay--message_spinner {
   @include overlay-style(rgba(255, 255, 255, 0.527));
-  z-index: 10;
-}
-
-.spinner {
-  position: fixed;
-  @include img-background-style();
-  background-image: url("../imgs/sun.svg");
-  width: 8%;
-  aspect-ratio: 1 / 1;
-  animation: spinner 1.8s linear infinite;
-  top: 44vh;
-  left: 47vw;
-}
-
-@keyframes spinner {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.message_container {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: linear-gradient(rgb(255, 209, 149), rgb(255, 172, 103));
-  border-radius: 10% 10%;
-  border-bottom-left-radius: 2% 5%;
-  border-bottom-right-radius: 2% 5%;
-  width: 30vw;
-  aspect-ratio: 1 / 0.48;
-  height: fit-content;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.425);
-  top: 35%;
+  text-align: center;
+  z-index: 10;
 
-  p {
-    font-size: 1.2vw;
-    letter-spacing: 0.1vw;
-    padding: 5%;
-    padding-top: 8%;
+  .spinner {
+    position: fixed;
+    @include img-background-style();
+    background-image: url("../imgs/sun.svg");
+    width: 8%;
+    aspect-ratio: 1 / 1;
+    animation: spinner 1.8s linear infinite;
+    top: 44vh;
   }
-}
 
-.btn_x--message {
-  @include btn-style(transparent, rgb(0, 140, 255));
-  width: 2vw;
-  aspect-ratio: 1 / 1;
-  font-size: 2vw;
-  top: -2%;
-  right: 2%;
-
-  &:hover {
-    color: rgb(155, 210, 255);
+  @keyframes spinner {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-}
 
-.message_header {
-  background-image: linear-gradient(rgb(255, 252, 235), rgb(254, 255, 168));
-  font-size: 1.55vw;
-  letter-spacing: 0.1vw;
-  width: 100%;
-  padding: 2%;
-  border-top-left-radius: 2% 20%;
-  border-top-right-radius: 2% 20%;
-  color: black;
-}
+  .message_container {
+    position: relative;
+    background-image: linear-gradient(rgb(255, 209, 149), rgb(255, 172, 103));
+    border-radius: 10% 10%;
+    border-bottom-left-radius: 2% 5%;
+    border-bottom-right-radius: 2% 5%;
+    width: 30vw;
+    height: fit-content;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.425);
+    top: 33%;
 
-.message_container--message {
-  background-image: linear-gradient(rgb(252, 255, 88), rgb(211, 255, 91));
-}
-.message_header--message {
-  background-image: linear-gradient(rgb(187, 255, 0), rgb(136, 255, 0));
-  color: $primary-font-color-white;
-  letter-spacing: 0.2vw;
-}
+    .message_header {
+      background-image: linear-gradient(rgb(255, 252, 235), rgb(254, 255, 168));
+      font-size: 1.55vw;
+      letter-spacing: 0.1vw;
+      width: 100%;
+      padding: 2%;
+      border-top-left-radius: 2% 20%;
+      border-top-right-radius: 2% 20%;
+      color: black;
+    }
 
-.message_container--error {
-  background-image: linear-gradient(#fdba02, #ff6601);
-}
-.message_header--error {
-  background-image: linear-gradient(#ff812e, #f74701);
-  color: $primary-font-color-white;
-  letter-spacing: 0.2vw;
-}
+    .btn_x--message {
+      @include btn-style(transparent, rgb(0, 140, 255));
+      width: 2vw;
+      aspect-ratio: 1 / 1;
+      font-size: 2vw;
+      top: -2%;
+      right: 2%;
 
-.btn--bottom {
-  // position: absolute;
-  // bottom: 5%;
-  margin-bottom: 5%;
-  border: none;
-  padding: 1.5%;
-  font-size: 0.95vw;
-  letter-spacing: 0.1vw;
+      &:hover {
+        color: rgb(155, 210, 255);
+      }
+    }
 
-  &:hover {
-    transform: translateY(-1px);
+    .btn--bottom {
+      margin-bottom: 5%;
+      border: none;
+      padding: 1.5%;
+      font-size: 0.95vw;
+      letter-spacing: 0.1vw;
+
+      &:hover {
+        transform: translateY(-1px);
+      }
+    }
+
+    .btn--i_am_sure {
+      @include btn-style-gradient(
+        linear-gradient(rgb(255, 115, 0), rgb(255, 81, 0))
+      );
+      border-radius: 5% / 12%;
+
+      &:hover {
+        background-image: linear-gradient(rgb(255, 166, 0), rgb(255, 153, 0));
+      }
+    }
+
+    .btn--ok {
+      @include btn-style-gradient(
+        linear-gradient(rgb(255, 230, 0), rgb(255, 153, 0))
+      );
+      border-radius: 10%;
+      padding-top: 1.2%;
+      padding-bottom: 1.2%;
+
+      &:hover {
+        background-image: linear-gradient(
+          rgb(255, 240, 101),
+          rgb(252, 191, 99)
+        );
+      }
+    }
+
+    p {
+      font-size: 1.2vw;
+      letter-spacing: 0.05vw;
+      padding: 5%;
+      padding-top: 8%;
+    }
   }
-}
 
-.btn--i_am_sure {
-  @include btn-style-gradient(
-    linear-gradient(rgb(255, 115, 0), rgb(255, 81, 0))
-  );
-  border-radius: 5% / 12%;
-  left: 41%;
+  .message_container--message {
+    background-image: linear-gradient(rgb(252, 255, 88), rgb(211, 255, 91));
 
-  &:hover {
-    background-image: linear-gradient(rgb(255, 166, 0), rgb(255, 153, 0));
+    .message_header--message {
+      background-image: linear-gradient(rgb(187, 255, 0), rgb(136, 255, 0));
+      color: $primary-font-color-white;
+      letter-spacing: 0.2vw;
+    }
+
+    p {
+      padding: 7%;
+    }
   }
-}
 
-.btn--ok {
-  @include btn-style-gradient(
-    linear-gradient(rgb(255, 230, 0), rgb(255, 153, 0))
-  );
-  border-radius: 10%;
-  left: 46%;
+  .message_container--error {
+    background-image: linear-gradient(#fdba02, #ff6601);
 
-  &:hover {
-    background-image: linear-gradient(rgb(255, 240, 101), rgb(252, 191, 99));
+    .message_header--error {
+      background-image: linear-gradient(#ff812e, #f74701);
+      color: $primary-font-color-white;
+      letter-spacing: 0.2vw;
+    }
+  }
+
+  @media (768px < width <= 1024px) {
+    .spinner {
+      width: 10%;
+      top: 41vh;
+    }
+
+    .message_container {
+      width: 32vw;
+      top: 35%;
+
+      .btn_x--message {
+        width: 2.8vw;
+        font-size: 2.8vw;
+        top: -5%;
+        right: 1%;
+      }
+
+      .message_header {
+        font-size: 1.7vw;
+        letter-spacing: 0.1vw;
+        width: 100%;
+        padding: 2%;
+      }
+
+      .btn--bottom {
+        font-size: 1.2vw;
+      }
+
+      .btn--ok {
+        @include btn-style-gradient(
+          linear-gradient(rgb(255, 230, 0), rgb(255, 153, 0))
+        );
+        border-radius: 10%;
+        left: 46%;
+
+        &:hover {
+          background-image: linear-gradient(
+            rgb(255, 240, 101),
+            rgb(252, 191, 99)
+          );
+        }
+      }
+
+      p {
+        font-size: 1.5vw;
+        padding: 5%;
+        padding-top: 8%;
+      }
+    }
+
+    .message_container--message {
+      p {
+        padding: 7%;
+      }
+    }
+  }
+
+  @media (480px < width <= 768px) {
+    .spinner {
+      width: 12%;
+      top: 40vh;
+    }
+
+    .message_container {
+      width: 35vw;
+      top: 35%;
+
+      .btn_x--message {
+        width: 3.5vw;
+        font-size: 3.5vw;
+        top: -5%;
+        right: 1%;
+      }
+
+      .message_header {
+        font-size: 2.2vw;
+      }
+
+      .btn--bottom {
+        font-size: 1.5vw;
+      }
+
+      .btn--ok {
+        @include btn-style-gradient(
+          linear-gradient(rgb(255, 230, 0), rgb(255, 153, 0))
+        );
+        border-radius: 10%;
+        left: 46%;
+
+        &:hover {
+          background-image: linear-gradient(
+            rgb(255, 240, 101),
+            rgb(252, 191, 99)
+          );
+        }
+      }
+
+      p {
+        font-size: 1.8vw;
+        padding: 5%;
+        padding-top: 8%;
+      }
+    }
+
+    .message_container--message {
+      p {
+        padding: 7%;
+      }
+    }
+
+    .message_container--error {
+      p {
+        padding-left: 5%;
+        padding-right: 5%;
+      }
+    }
+  }
+
+  @media (320px < width <= 480px) {
+    .spinner {
+      width: 15%;
+      top: 42vh;
+    }
+
+    .message_container {
+      width: 46vw;
+      top: 38%;
+
+      .btn_x--message {
+        width: 4.5vw;
+        font-size: 4.5vw;
+        top: -6%;
+        right: 1%;
+      }
+
+      .message_header {
+        font-size: 2.8vw;
+      }
+
+      .btn--bottom {
+        font-size: 2.1vw;
+        letter-spacing: 0.1vw;
+      }
+
+      .btn--ok {
+        @include btn-style-gradient(
+          linear-gradient(rgb(255, 230, 0), rgb(255, 153, 0))
+        );
+        border-radius: 10%;
+        left: 46%;
+
+        &:hover {
+          background-image: linear-gradient(
+            rgb(255, 240, 101),
+            rgb(252, 191, 99)
+          );
+        }
+      }
+
+      p {
+        font-size: 2.5vw;
+        padding: 4%;
+        padding-top: 8%;
+      }
+    }
+
+    .message_container--message {
+      p {
+        padding: 7%;
+      }
+    }
+  }
+
+  @media (width <= 320px) {
+    .spinner {
+      width: 18%;
+      top: 44vh;
+    }
+
+    .message_container {
+      width: 67vw;
+      top: 38%;
+
+      .btn_x--message {
+        width: 6.5vw;
+        font-size: 6.5vw;
+        top: -5%;
+        right: 0.5%;
+      }
+
+      .message_header {
+        font-size: 4vw;
+      }
+
+      .btn--bottom {
+        font-size: 3vw;
+        letter-spacing: 0.2vw;
+      }
+
+      .btn--ok {
+        @include btn-style-gradient(
+          linear-gradient(rgb(255, 230, 0), rgb(255, 153, 0))
+        );
+        border-radius: 10%;
+        left: 46%;
+
+        &:hover {
+          background-image: linear-gradient(
+            rgb(255, 240, 101),
+            rgb(252, 191, 99)
+          );
+        }
+      }
+
+      p {
+        font-size: 3.5vw;
+        padding: 4%;
+        padding-top: 8%;
+      }
+    }
+
+    .message_container--message {
+      p {
+        padding: 7%;
+      }
+    }
   }
 }
 
 .hidden {
   display: none !important;
 }
+
+/////add justify-content later!

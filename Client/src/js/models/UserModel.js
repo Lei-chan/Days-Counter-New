@@ -1,18 +1,19 @@
 import { BASE_URL } from "../config.js";
+import overlayMessageSpinnerView from "../views/overlayMessageSpinnerView.js";
 
-const health = async function () {
-  try {
-    const res = await fetch(`${BASE_URL}/user/health`);
+// const health = async function () {
+//   try {
+//     const res = await fetch(`${BASE_URL}/user/health`);
 
-    if (!res.ok) return { success: false };
+//     if (!res.ok) return { success: false };
 
-    const data = await res.json();
+//     const data = await res.json();
 
-    return data;
-  } catch (err) {
-    console.error("Server not connected");
-  }
-};
+//     return data;
+//   } catch (err) {
+//     console.error("Server not connected");
+//   }
+// };
 
 class UserManageApi {
   _accessToken;
@@ -63,6 +64,23 @@ class UserManageApi {
     }
   }
 
+  async _saveUserDataAsync(updatedUserInfo) {
+    try {
+      await this.updateUser(updatedUserInfo);
+    } catch (err) {
+      overlayMessageSpinnerView._asyncInit(
+        "message",
+        "error",
+        overlayMessageSpinnerView._errorMessageSaveDataAsync
+      );
+      console.error(
+        "User changed data might not have been saved in the database! 🙇‍♂️",
+        err
+      );
+    }
+  }
+
+  ////For backup to save user data when user leaves the website
   async _saveUserData() {
     try {
       if (!this._curUser) return;
@@ -78,7 +96,8 @@ class UserManageApi {
     }
   }
 
-  /////OK!
+  ////OK!
+  /////update user data locally and save the data using saveUserDataAsync without awaiting for login
   async login(username, password) {
     try {
       const data = await this._apiCall("/user/login", {
@@ -91,42 +110,33 @@ class UserManageApi {
       this._accessToken = data.accessToken;
       this._curUser = data.user;
 
-      let newRemainingDaysNow;
-      let newRemainingDaysNowRooms;
-      let newHowManyTimesClick;
-      let newHowManyTimesClickRooms;
-      let updatedRooms;
-
       if (this._curUser.goals.length) {
-        newRemainingDaysNow = this._calcRemainingDays("goals");
-        newHowManyTimesClick = this._calcHowManyTimesClick(
+        this._curUser.remainingDaysNow = this._calcRemainingDays("goals");
+        this._curUser.howManyTimesClick = this._calcHowManyTimesClick(
           this._curUser.remainingDaysPrev,
-          newRemainingDaysNow
+          this._curUser.remainingDaysNow
         );
       }
 
       if (this._curUser.rooms.length) {
-        newRemainingDaysNowRooms = this._calcRemainingDays("rooms");
-        newHowManyTimesClickRooms = this._calcHowManyTimesClick(
+        this._curUser.remainingDaysNowRooms = this._calcRemainingDays("rooms");
+        this._curUser.howManyTimesClickRooms = this._calcHowManyTimesClick(
           this._curUser.remainingDaysPrevRooms,
-          newRemainingDaysNowRooms
+          this._curUser.remainingDaysNowRooms
         );
 
+        //////Update rooms
         const roomIds = this._curUser.rooms.map((room) => room.roomId);
-
-        updatedRooms = await this._getRooms(roomIds);
+        this._curUser.rooms = await this._getRooms(roomIds);
       }
 
-      await this.updateUser({
-        remainingDaysNow: newRemainingDaysNow || [],
-        remainingDaysNowRooms: newRemainingDaysNowRooms || [],
-        howManyTimesClick: newHowManyTimesClick || [],
-        howManyTimesClickRooms: newHowManyTimesClickRooms || [],
-        rooms: updatedRooms || [],
+      this._saveUserDataAsync({
+        remainingDaysNow: this._curUser.remainingDaysNow || [],
+        howManyTimesClick: this._curUser.howManyTimesClick || [],
+        remainingDaysNowRooms: this._curUser.remainingDaysNowRooms || [],
+        howManyTimesClickRooms: this._curUser.howManyTimesClickRooms || [],
+        rooms: this._curUser.rooms || [],
       });
-
-      this._changeOrders("goals");
-      this._changeOrders("rooms");
 
       console.log(this._curUser);
     } catch (err) {
@@ -246,7 +256,9 @@ class UserManageApi {
   //   }
   // }
 
-  /////OK
+  ////OK
+  ///save the result every time without receiving the updated data from the server side using a different function with await and catch the error
+  ///Added the function to save asyncronously
   _updateForDaysCounter(type) {
     const updatedRemainingDaysPrev = this._calcUpdatedRemainingDaysPrev(type);
     const updatedHowManyTimesClick = this._calcHowManyTimesClick(
@@ -259,15 +271,26 @@ class UserManageApi {
     if (type === "goals") {
       this._curUser.remainingDaysPrev = updatedRemainingDaysPrev;
       this._curUser.howManyTimesClick = updatedHowManyTimesClick;
+
+      this._saveUserDataAsync({
+        remainingDaysPrev: updatedRemainingDaysPrev,
+        howManyTimesClick: updatedHowManyTimesClick,
+      });
     }
 
     if (type === "rooms") {
       this._curUser.remainingDaysPrevRooms = updatedRemainingDaysPrev;
       this._curUser.howManyTimesClickRooms = updatedHowManyTimesClick;
+
+      this._saveUserDataAsync({
+        remainingDaysPrevRooms: updatedRemainingDaysPrev,
+        howManyTimesClickRooms: updatedHowManyTimesClick,
+      });
     }
   }
 
-  /////OK
+  ////OK!
+  ///Added the function to save asyncronously
   saveToDoListsComments(
     type,
     modifiedCard,
@@ -284,6 +307,8 @@ class UserManageApi {
 
       if (newComments || newComments === "")
         this._curUser.goals[modifiedCard].comments = newComments;
+
+      return this._saveUserDataAsync({ goals: this._curUser.goals });
     }
 
     if (type === "rooms") {
@@ -295,39 +320,35 @@ class UserManageApi {
 
       if (newComments || newComments === "")
         this._curUser.rooms[modifiedCard].comments = newComments;
+
+      return this._saveUserDataAsync({ rooms: this._curUser.rooms });
     }
   }
 
-  /////OK!
+  /////OK
   async saveGoalsInfo(goalsInfo) {
     try {
       const type = "goals";
 
-      const newRemainingDaysPrev = [
-        ...this._curUser.remainingDaysPrev,
-        ...this._calcRemainingDays(type, goalsInfo),
-      ];
-
-      const newRemainingDaysNow = [
-        ...this._curUser.remainingDaysNow,
-        ...this._calcRemainingDays(type, goalsInfo),
-      ];
-
-      const newHowManyTimesClick = this._calcHowManyTimesClick(
-        newRemainingDaysPrev,
-        newRemainingDaysNow
+      this._curUser.goals.push(...goalsInfo);
+      this._curUser.remainingDaysPrev.push(
+        ...this._calcRemainingDays(type, goalsInfo)
       );
-      console.log("howManyTimesClick:", this._curUser.howManyTimesClick);
-      console.log("newHowManyTimesClick:", newHowManyTimesClick);
+      this._curUser.remainingDaysNow.push(
+        ...this._calcRemainingDays(type, goalsInfo)
+      );
+      this._curUser.howManyTimesClick = this._calcHowManyTimesClick(
+        this._curUser.remainingDaysPrev,
+        this._curUser.remainingDaysNow
+      );
 
-      await this.updateUser({
-        goals: [...this._curUser.goals, ...goalsInfo],
-        remainingDaysPrev: newRemainingDaysPrev,
-        remainingDaysNow: newRemainingDaysNow,
-        howManyTimesClick: newHowManyTimesClick,
-      });
+      console.log(this._curUser);
 
       this._changeOrders(type);
+
+      console.log(this._curUser);
+
+      await this.updateUser(this._curUser);
 
       return {
         message: `${
@@ -339,7 +360,7 @@ class UserManageApi {
     }
   }
 
-  /////OK!
+  /////OK
   async saveRoomsInfo(roomsInfo, roomType) {
     try {
       const type = "rooms";
@@ -376,8 +397,6 @@ class UserManageApi {
         this._curUser.username,
       ]);
 
-      console.log(sharingUsernames);
-
       return sharingUsernames;
     } catch (err) {
       console.error("Error while finding users for room", err);
@@ -385,7 +404,7 @@ class UserManageApi {
     }
   }
 
-  /////OK!
+  /////OK
   async _roomsCreateSelect(type, roomsInfo) {
     try {
       const newRoomsWithUsernames = roomsInfo.map((room) => {
@@ -395,27 +414,30 @@ class UserManageApi {
       await this.createRooms(newRoomsWithUsernames);
 
       ///Update userInfo
-      const newRemainingDaysPrevRooms = [
-        ...this._curUser.remainingDaysPrevRooms,
-        ...this._calcRemainingDays(type, roomsInfo),
-      ];
-
-      const newRemainingDaysNowRooms = [
-        ...this._curUser.remainingDaysNowRooms,
-        ...this._calcRemainingDays(type, roomsInfo),
-      ];
-
-      const newHowManyTimesClickRooms = this._calcHowManyTimesClick(
-        newRemainingDaysPrevRooms,
-        newRemainingDaysNowRooms
+      this._curUser.rooms.push(...newRoomsWithUsernames);
+      this._curUser.remainingDaysPrevRooms.push(
+        ...this._calcRemainingDays(type, roomsInfo)
       );
+      this._curUser.remainingDaysNowRooms.push(
+        ...this._calcRemainingDays(type, roomsInfo)
+      );
+      this._curUser.howManyTimesClickRooms = this._calcHowManyTimesClick(
+        this._curUser.remainingDaysPrevRooms,
+        this._curUser.remainingDaysNowRooms
+      );
+
+      console.log(this._curUser);
+
+      this._changeOrders(type);
+
+      console.log(this._curUserl);
 
       //////also save goals to save selected goals
       await this.updateUser({
-        rooms: [...this._curUser.rooms, ...newRoomsWithUsernames],
-        remainingDaysPrevRooms: newRemainingDaysPrevRooms,
-        remainingDaysNowRooms: newRemainingDaysNowRooms,
-        howManyTimesClickRooms: newHowManyTimesClickRooms,
+        rooms: this._curUser.rooms,
+        remainingDaysPrevRooms: this._curUser.remainingDaysPrevRooms,
+        remainingDaysNowRooms: this._curUser.remainingDaysNowRooms,
+        howManyTimesClickRooms: this._curUser.howManyTimesClickRooms,
         goals: this._curUser.goals,
       });
     } catch (err) {
@@ -423,7 +445,7 @@ class UserManageApi {
     }
   }
 
-  /////OK!
+  /////OK
   async _roomsJoinId(type, roomIds, sharingUsernames) {
     try {
       await Promise.all(
@@ -435,26 +457,29 @@ class UserManageApi {
       const rooms = await this._getRooms(roomIds);
 
       ///Update userInfo
-      const newRemainingDaysPrevRooms = [
-        ...this._curUser.remainingDaysPrevRooms,
-        ...this._calcRemainingDays(type, rooms),
-      ];
-
-      const newRemainingDaysNowRooms = [
-        ...this._curUser.remainingDaysNowRooms,
-        ...this._calcRemainingDays(type, rooms),
-      ];
-
-      const newHowManyTimesClickRooms = this._calcHowManyTimesClick(
-        newRemainingDaysPrevRooms,
-        newRemainingDaysNowRooms
+      this._curUser.rooms.push(...rooms);
+      this._curUser.remainingDaysPrevRooms.push(
+        ...this._calcRemainingDays(type, rooms)
+      );
+      this._curUser.remainingDaysNowRooms.push(
+        ...this._calcRemainingDays(type, rooms)
+      );
+      this._curUser.howManyTimesClickRooms = this._calcHowManyTimesClick(
+        this._curUser.remainingDaysPrevRooms,
+        this._curUser.remainingDaysNowRooms
       );
 
+      console.log(this._curUser);
+
+      this._changeOrders(type);
+
+      console.log(this._curUserl);
+
       await this.updateUser({
-        rooms: [...this._curUser.rooms, ...rooms],
-        remainingDaysPrevRooms: newRemainingDaysPrevRooms,
-        remainingDaysNowRooms: newRemainingDaysNowRooms,
-        howManyTimesClickRooms: newHowManyTimesClickRooms,
+        rooms: this._curUser.rooms,
+        remainingDaysPrevRooms: this._curUser.remainingDaysPrevRooms,
+        remainingDaysNowRooms: this._curUser.remainingDaysNowRooms,
+        howManyTimesClickRooms: this._curUser.howManyTimesClickRooms,
       });
     } catch (err) {
       throw err;
@@ -531,74 +556,74 @@ class UserManageApi {
   async editGoalRoom(editGoalRoomIndex, editedGoalRoomInfo, type) {
     try {
       if (type === "goals") {
-        const newGoals = this._curUser.goals.fill(
+        this._curUser.goals.fill(
           editedGoalRoomInfo,
           editGoalRoomIndex,
           editGoalRoomIndex + 1
         );
 
-        const newRemainingDaysPrev = this._curUser.remainingDaysPrev.fill(
+        this._curUser.remainingDaysPrev.fill(
           ...this._calcRemainingDays(type, editedGoalRoomInfo),
           editGoalRoomIndex,
           editGoalRoomIndex + 1
         );
 
-        const newRemainingDaysNow = this._curUser.remainingDaysNow.fill(
+        this._curUser.remainingDaysNow.fill(
           ...this._calcRemainingDays(type, editedGoalRoomInfo),
           editGoalRoomIndex,
           editGoalRoomIndex + 1
         );
 
-        const newHowManyTimesClick = this._calcHowManyTimesClick(
-          newRemainingDaysPrev,
-          newRemainingDaysNow
+        this._curUser.howManyTimesClick = this._calcHowManyTimesClick(
+          this._curUser.remainingDaysPrev,
+          this._curUser.remainingDaysNow
         );
+
+        this._changeOrders(type);
 
         await this.updateUser({
-          goals: newGoals,
-          remainingDaysPrev: newRemainingDaysPrev,
-          remainingDaysNow: newRemainingDaysNow,
-          howManyTimesClick: newHowManyTimesClick,
+          goals: this._curUser.goals,
+          remainingDaysPrev: this._curUser.remainingDaysPrev,
+          remainingDaysNow: this._curUser.remainingDaysNow,
+          howManyTimesClick: this._curUser.howManyTimesClick,
         });
       }
 
       if (type === "rooms") {
-        const newRooms = this._curUser.rooms.fill(
+        this._curUser.rooms.fill(
           editedGoalRoomInfo,
           editGoalRoomIndex,
           editGoalRoomIndex + 1
         );
 
-        const newRemainingDaysPrevRooms =
-          this._curUser.remainingDaysPrevRooms.fill(
-            ...this._calcRemainingDays(type, editedGoalRoomInfo),
-            editGoalRoomIndex,
-            editGoalRoomIndex + 1
-          );
-
-        const newRemainingDaysNowRooms =
-          this._curUser.remainingDaysNowRooms.fill(
-            ...this._calcRemainingDays(type, editedGoalRoomInfo),
-            editGoalRoomIndex,
-            editGoalRoomIndex + 1
-          );
-
-        const newHowManyTimesClickRooms = this._calcHowManyTimesClick(
-          newRemainingDaysPrevRooms,
-          newRemainingDaysNowRooms
+        this._curUser.remainingDaysPrevRooms.fill(
+          ...this._calcRemainingDays(type, editedGoalRoomInfo),
+          editGoalRoomIndex,
+          editGoalRoomIndex + 1
         );
 
+        this._curUser.remainingDaysNowRooms.fill(
+          ...this._calcRemainingDays(type, editedGoalRoomInfo),
+          editGoalRoomIndex,
+          editGoalRoomIndex + 1
+        );
+
+        this._curUser.howManyTimesClickRooms = this._calcHowManyTimesClick(
+          this._curUser.remainingDaysPrevRooms,
+          this._curUser.remainingDaysNowRooms
+        );
+
+        this._changeOrders(type);
+
         await this.updateUser({
-          rooms: newRooms,
-          remainingDaysPrevRooms: newRemainingDaysPrevRooms,
-          remainingDaysNowRooms: newRemainingDaysNowRooms,
-          howManyTimesClickRooms: newHowManyTimesClickRooms,
+          rooms: this._curUser.rooms,
+          remainingDaysPrevRooms: this._curUser.remainingDaysPrevRooms,
+          remainingDaysNowRooms: this._curUser.remainingDaysNowRooms,
+          howManyTimesClickRooms: this._curUser.howManyTimesClickRooms,
         });
 
         await this.updateRoom(editedGoalRoomInfo.roomId, editedGoalRoomInfo);
       }
-
-      this._changeOrders(type);
     } catch (err) {
       throw err;
     }
@@ -628,7 +653,7 @@ class UserManageApi {
         howManyTimesClick: newHowManyTimesClick,
       });
 
-      this._changeOrders("goals");
+      // this._changeOrders("goals");
     } catch (err) {
       throw err;
     }
@@ -767,7 +792,7 @@ class UserManageApi {
     return howManyTimesClick;
   }
 
-  /////Check tomorrow
+  /////OK
   _changeOrders(type = "goals") {
     try {
       const goalsOrRooms =
@@ -837,7 +862,7 @@ class UserManageApi {
     return sortedGoalsOrRooms;
   }
 
-  /////Problem here!!
+  /////OK
   _changeOrderRemainingDaysHowManyTimesClick(
     originalGoalsOrRooms,
     sortedGoalsOrRooms,
@@ -883,6 +908,16 @@ class UserManageApi {
       );
     });
 
+    // console.log(
+    //   originalGoalsOrRooms,
+    //   remainingDaysPrev,
+    //   remainingDaysNow,
+    //   sortedGoalsOrRooms,
+    //   sortedRemainingDaysPrev,
+    //   sortedRemainingDaysNow,
+    //   sortedHowManyTimesClick
+    // );
+
     return [
       sortedRemainingDaysPrev,
       sortedRemainingDaysNow,
@@ -906,7 +941,7 @@ class UserManageApi {
       const sharingUsernamesWithourCurUser = this._curUser.rooms.map((room) =>
         room.usernames.filter((username) => username !== this._curUser.username)
       );
-      console.log(sharingUsernamesWithourCurUser);
+      // console.log(sharingUsernamesWithourCurUser);
 
       const data = await Promise.all(
         roomIds.map((roomId, i) =>
@@ -934,8 +969,6 @@ class UserManageApi {
         credentials: "include",
         body: JSON.stringify({ curPassword, newPassword }),
       });
-
-      // return data.message;
     } catch (err) {
       throw err;
     }
@@ -993,6 +1026,6 @@ class UserManageApi {
 
 export default new UserManageApi();
 
-(async function () {
-  console.log(await health());
-})();
+// (async function () {
+//   console.log(await health());
+// })();
