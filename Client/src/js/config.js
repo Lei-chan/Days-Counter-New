@@ -1,5 +1,5 @@
-// export const BASE_URL =
-// "https://days-counter-api-production.up.railway.app/api";
+export const BASE_URL =
+  "https://days-counter-api-production.up.railway.app/api";
 export const USERNAME_MAX_LENGTH = 12;
 export const PASSWORD_MIN_LENGTH = 8;
 export const PASSWORD_MIN_UPPERCASE = 1;
@@ -14,6 +14,6 @@ export const MESSAGE_TIMEOUT = 3; //seconds
 export const LOGOUNT_TIMEOUT = 30; //minites
 
 ///For dev
-export const BASE_URL = "http://localhost:3000/api";
+// export const BASE_URL = "http://localhost:3000/api";
 //For dev
 // export const LOGOUNT_TIMEOUT = 10; //sec

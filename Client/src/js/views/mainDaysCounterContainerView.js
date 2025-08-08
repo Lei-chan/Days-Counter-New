@@ -316,11 +316,11 @@ class MainDaysCounterContainerView extends View {
     contenteditableView._commentsContainers =
       this._parentElement.querySelectorAll(".comments");
 
-    //////there is a bug after creating a goal or a room, some card's checkbox event wasn't attached
-    console.log(
-      contenteditableView._toDoListsContainers,
-      contenteditableView._commentsContainers
-    );
+    //////there is a bug after creating a goal or a room, some card's checkbox event wasn't attached???
+    // console.log(
+    //   contenteditableView._toDoListsContainers,
+    //   contenteditableView._commentsContainers
+    // );
 
     contenteditableView._renderContenteditable();
     contenteditableView._addEventCheckbox();

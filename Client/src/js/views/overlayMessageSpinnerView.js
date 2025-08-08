@@ -120,20 +120,12 @@ class OverlayMessageSpinnerView extends View {
 
       this.renderToParentEle();
 
-      // if (
-      //   message === this._errorMessageLogout ||
-      //   this._errorMessageUnableToCopy
-      // )
-      //   this._parentElement.querySelector(
-      //     ".message_container"
-      //   ).style.aspectRatio = "1 / 0.57";
-
       this.open();
 
-      // if (messageType !== "message") return;
+      if (messageType !== "message") return;
 
-      // await this._setTimeout();
-      // this.close();
+      await this._setTimeout();
+      this.close();
     } catch (err) {
       throw err;
     }

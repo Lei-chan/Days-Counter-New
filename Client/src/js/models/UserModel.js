@@ -138,7 +138,7 @@ class UserManageApi {
         rooms: this._curUser.rooms || [],
       });
 
-      console.log(this._curUser);
+      // console.log(this._curUser);
     } catch (err) {
       throw err;
     }
@@ -342,11 +342,7 @@ class UserManageApi {
         this._curUser.remainingDaysNow
       );
 
-      console.log(this._curUser);
-
       this._changeOrders(type);
-
-      console.log(this._curUser);
 
       await this.updateUser(this._curUser);
 
@@ -426,11 +422,7 @@ class UserManageApi {
         this._curUser.remainingDaysNowRooms
       );
 
-      console.log(this._curUser);
-
       this._changeOrders(type);
-
-      console.log(this._curUserl);
 
       //////also save goals to save selected goals
       await this.updateUser({
@@ -469,11 +461,7 @@ class UserManageApi {
         this._curUser.remainingDaysNowRooms
       );
 
-      console.log(this._curUser);
-
       this._changeOrders(type);
-
-      console.log(this._curUserl);
 
       await this.updateUser({
         rooms: this._curUser.rooms,
@@ -545,7 +533,7 @@ class UserManageApi {
         body: JSON.stringify(updateInfo),
       });
 
-      console.log(data.room);
+      // console.log(data.room);
       return data.room;
     } catch (err) {
       throw err;
@@ -712,7 +700,7 @@ class UserManageApi {
         credentials: "include",
       });
 
-      console.log(data);
+      // console.log(data);
       return data;
     } catch (err) {
       throw err;
