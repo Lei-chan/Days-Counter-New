@@ -218,6 +218,8 @@ class UserManageApi {
   //////OK
   async logout() {
     try {
+      if (!this._accessToken) await this._refreshAccessToken();
+
       await this._apiCall("/user/logout", {
         method: "POST",
         headers: {
