@@ -13,6 +13,7 @@ class LoginBottomHalfView extends View {
   _renderInitContainer = document.querySelector(".bottom_half--inputs");
   _messageContainer = document.querySelector(".bottom_half--warning");
   _errorMessage = "Username and password are required!";
+  _errorMessagePasswordRequirements = `Password needs to include more than ${PASSWORD_MIN_LENGTH} characters, at least ${PASSWORD_MIN_UPPERCASE} uppercase, ${PASSWORD_MIN_LOWERCASE} lowercase, ${PASSWORD_MIN_DIGIT} digit, and ${PASSWORD_MIN_SPECIAL_CHARACTER} special character`;
 
   addHandlerSubmit(handler) {
     this._parentElement.addEventListener("submit", (e) => {
@@ -29,11 +30,14 @@ class LoginBottomHalfView extends View {
       const emailInput = emailField.value?.trim();
 
       if (!usernameInput) this.renderErrorInputField(usernameField);
-      if (!passwordInput) this.renderErrorInputField(passwordField);
+      if (!passwordInput || !this._validatePassword(passwordInput))
+        this.renderErrorInputField(passwordField);
 
       this.addEventRemoveErrorInputField();
 
       if (!usernameInput || !passwordInput) return this.renderError();
+      if (!this._validatePassword(passwordInput))
+        return this.renderError(this._errorMessagePasswordRequirements);
 
       handler(usernameInput, passwordInput, emailInput);
 

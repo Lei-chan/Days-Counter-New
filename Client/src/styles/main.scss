@@ -10,7 +10,7 @@
 body {
   background-image: url(../imgs/wallpaperDaytime.webp);
   background-size: cover;
-  font-family: $primary-font-family, "cursive";
+  font-family: $primary-font-family;
 }
 
 .page--login {
@@ -458,6 +458,18 @@ body {
   letter-spacing: 0.1vw;
   left: 2%;
   top: 2%;
+}
+
+////later!
+.btn--release_info {
+  position: absolute;
+  @include img-btn-style();
+  background-image: url("../imgs/bell.svg");
+  width: 2.5vw;
+  aspect-ratio: 1;
+  top: 1%;
+  left: 9%;
+  display: none;
 }
 
 .attribution_line {
@@ -2144,7 +2156,6 @@ body {
     row-gap: 3vh;
     margin-top: 4vh;
 
-    ////later
     .start_explanation {
       font-size: 3.2vw;
       letter-spacing: 0.2vw;
@@ -2209,6 +2220,11 @@ body {
         }
       }
 
+      .comments--days_counter,
+      .to_do_lists--days_counter {
+        top: -13%;
+      }
+
       .details--outer {
         height: 85%;
         width: 57%;
@@ -2253,9 +2269,7 @@ body {
       width: 63vw;
 
       .title--outer {
-        // top: -20%;
         left: 14%;
-        // margin-bottom: 3%;
         width: 60%;
 
         h2 {
@@ -2266,9 +2280,6 @@ body {
 
       .room_id_container {
         height: 9%;
-        // top: 2%;
-        // left: 3%;
-        // gap: 4.5%;
 
         .room_id {
           font-size: 2.5vw;
@@ -2312,13 +2323,9 @@ body {
         }
       }
 
-      ///later
       .comments--days_counter,
       .to_do_lists--days_counter {
-        height: 60%;
-        width: 90%;
-        top: -18%;
-        margin-left: 5%;
+        top: -13%;
       }
 
       .details--outer {
@@ -2358,10 +2365,7 @@ body {
       width: 67vw;
 
       .title--outer {
-        // top: -20%;
-
         width: 54%;
-        // left: 17%;
 
         h2 {
           font-size: 4vw;
@@ -2410,17 +2414,12 @@ body {
       }
 
       .btns_edit_delete--days_counter {
-        top: 25%;
+        top: 20%;
       }
 
       .bottom_content--days_counter {
-        // position: relative;
-        // display: flex;
-        // flex-direction: row;
         top: -10%;
         left: 2%;
-        // height: 55%;
-        // width: 100%;
 
         p {
           font-size: 3.5vw;
@@ -2428,6 +2427,11 @@ body {
           letter-spacing: 0.15vw;
           margin-left: 2%;
         }
+      }
+
+      .comments--days_counter,
+      .to_do_lists--days_counter {
+        top: -13%;
       }
 
       .details--outer {
@@ -2786,12 +2790,12 @@ body {
 
 .overlay {
   @include overlay-style();
+  justify-content: center;
 
   .overlay_in--how_to_create {
     color: $primary-font-color-white;
 
     h1 {
-      margin-top: 14vh;
       font-size: 2.9vw;
       letter-spacing: 0.3vw;
       word-spacing: 0.5vw;
@@ -2841,6 +2845,7 @@ body {
         font-size: 1.4vw;
         letter-spacing: 0.1vw;
         border-radius: 5%;
+        border-color: #026b79;
       }
 
       .btn--from_scratch {
@@ -2900,7 +2905,6 @@ body {
     aspect-ratio: 1/0.7;
     border-radius: 2% / 3%;
     box-shadow: 0 4rem 6rem rgba(0, 0, 0, 0.3);
-    top: 9vh;
 
     h1 {
       font-size: 2.2vw;
@@ -2934,8 +2938,8 @@ body {
 
       .slide {
         position: absolute;
-        height: 100%;
         width: 100%;
+        height: 100%;
         background-image: $primary-form-inside-gradient;
         border-radius: 1.5% / 2.5%;
 
@@ -3003,7 +3007,7 @@ body {
 
         .goal_title,
         .goal_date {
-          margin-top: 3.5%;
+          margin-top: 4%;
         }
 
         .title_outer--slide {
@@ -3029,8 +3033,8 @@ body {
         }
 
         #input--goal_date {
-          border-radius: 2% / 18%;
           width: 18vw;
+          border-radius: 2% / 18%;
           cursor: pointer;
         }
 
@@ -3115,7 +3119,6 @@ body {
   @media (768px < width <= 1024px) {
     .overlay_in--how_to_create {
       h1 {
-        margin-top: 18vh;
         font-size: 3.4vw;
       }
 
@@ -3148,7 +3151,6 @@ body {
 
     .overlay_in--set_goal {
       width: 58vw;
-      top: 16vh;
 
       h1 {
         font-size: 2.6vw;
@@ -3215,10 +3217,8 @@ body {
 
           #input--id {
             width: 60%;
-            // aspect-ratio: 1 / 0.08;
             font-size: 1.3vw;
             margin-top: 6%;
-            // border-radius: 2% / 18%;
           }
         }
 
@@ -3245,7 +3245,6 @@ body {
   @media (480px < width <= 768px) {
     .overlay_in--how_to_create {
       h1 {
-        margin-top: 22vh;
         font-size: 3.8vw;
       }
 
@@ -3277,7 +3276,6 @@ body {
 
     .overlay_in--set_goal {
       width: 65vw;
-      top: 20vh;
 
       h1 {
         font-size: 3.2vw;
@@ -3328,6 +3326,18 @@ body {
             font-size: 1.75vw;
           }
 
+          .goal_title,
+          .goal_date {
+            margin-top: 3%;
+          }
+
+          @media (480px < width <= 620px) {
+            .goal_title,
+            .goal_date {
+              margin-top: 2%;
+            }
+          }
+
           #input--goal_title,
           #input--goal_date {
             height: calc(33vw * 0.076);
@@ -3339,10 +3349,7 @@ body {
           }
 
           #input--goal_date {
-            position: absolute;
             width: 25vw;
-            left: 27%;
-            bottom: 9%;
           }
 
           #input--id {
@@ -3389,7 +3396,6 @@ body {
   @media (320px < width <= 480px) {
     .overlay_in--how_to_create {
       h1 {
-        margin-top: 22vh;
         font-size: 5.2vw;
       }
 
@@ -3425,7 +3431,6 @@ body {
     .overlay_in--set_goal {
       width: 80vw;
       aspect-ratio: 1 / 0.75;
-      top: 26vh;
 
       h1 {
         font-size: 4.3vw;
@@ -3475,9 +3480,21 @@ body {
             font-size: 2.3vw;
           }
 
-          .goal_title,
-          .goal_date {
+          .goal_title {
             margin-top: 3%;
+          }
+
+          .goal_date {
+            margin-top: 2%;
+          }
+
+          @media (320px < width <= 430px) {
+            .goal_title {
+              margin-top: 2.5%;
+            }
+            .goal_date {
+              margin-top: 1.5%;
+            }
           }
 
           #input--goal_title,
@@ -3492,10 +3509,10 @@ body {
           }
 
           #input--goal_date {
-            position: absolute;
+            // position: absolute;
             width: 40vw;
-            bottom: 10%;
-            left: 20%;
+            // bottom: 10%;
+            // left: 20%;
           }
 
           #input--id {
@@ -3544,7 +3561,6 @@ body {
   @media (width <= 320px) {
     .overlay_in--how_to_create {
       h1 {
-        margin-top: 24vh;
         font-size: 6vw;
       }
 
@@ -3581,7 +3597,6 @@ body {
     .overlay_in--set_goal {
       width: 90vw;
       aspect-ratio: 1 / 0.85;
-      top: 30vh;
 
       h1 {
         font-size: 5.2vw;
@@ -3636,9 +3651,25 @@ body {
             font-size: 3vw;
           }
 
-          .goal_title,
+          // .goal_title,
+          // .goal_date {
+          //   margin-top: 3%;
+          // }
+
+          .goal_title {
+            margin-top: 2.5%;
+          }
           .goal_date {
-            margin-top: 3%;
+            margin-top: 1.5%;
+          }
+
+          @media (width <= 260px) {
+            .goal_title {
+              margin-top: 2%;
+            }
+            .goal_date {
+              margin-top: 1%;
+            }
           }
 
           #input--goal_title,
@@ -3653,10 +3684,7 @@ body {
           }
 
           #input--goal_date {
-            position: absolute;
             width: 50vw;
-            bottom: 10%;
-            left: 20%;
           }
 
           #input--id {
@@ -3785,6 +3813,8 @@ body {
     font-size: 1.2vw !important;
     letter-spacing: 0.1vw;
     border-radius: 1.5% / 20%;
+    white-space: normal;
+    text-overflow: clip;
   }
 
   .settings--username,
@@ -4096,6 +4126,7 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  justify-content: center;
   z-index: 10;
 
   .spinner {
@@ -4105,7 +4136,6 @@ body {
     width: 8%;
     aspect-ratio: 1 / 1;
     animation: spinner 1.8s linear infinite;
-    top: 44vh;
   }
 
   @keyframes spinner {
@@ -4126,7 +4156,6 @@ body {
     width: 30vw;
     height: fit-content;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.425);
-    top: 33%;
 
     .message_header {
       background-image: linear-gradient(rgb(255, 252, 235), rgb(254, 255, 168));
@@ -4226,12 +4255,10 @@ body {
   @media (768px < width <= 1024px) {
     .spinner {
       width: 10%;
-      top: 41vh;
     }
 
     .message_container {
       width: 32vw;
-      top: 35%;
 
       .btn_x--message {
         width: 2.8vw;
@@ -4283,12 +4310,10 @@ body {
   @media (480px < width <= 768px) {
     .spinner {
       width: 12%;
-      top: 40vh;
     }
 
     .message_container {
       width: 35vw;
-      top: 35%;
 
       .btn_x--message {
         width: 3.5vw;
@@ -4344,12 +4369,10 @@ body {
   @media (320px < width <= 480px) {
     .spinner {
       width: 15%;
-      top: 42vh;
     }
 
     .message_container {
       width: 46vw;
-      top: 38%;
 
       .btn_x--message {
         width: 4.5vw;
@@ -4399,12 +4422,10 @@ body {
   @media (width <= 320px) {
     .spinner {
       width: 18%;
-      top: 44vh;
     }
 
     .message_container {
       width: 67vw;
-      top: 38%;
 
       .btn_x--message {
         width: 6.5vw;

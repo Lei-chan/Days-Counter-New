@@ -14,6 +14,7 @@ class SettingsView extends View {
   _messageContainer;
   _message;
   _errorMessage = "Please fill the field below";
+  _errorMessagePasswordRequirements = `Password needs to include more than ${PASSWORD_MIN_LENGTH} characters, at least ${PASSWORD_MIN_UPPERCASE} uppercase, ${PASSWORD_MIN_LOWERCASE} lowercase, ${PASSWORD_MIN_DIGIT} digit, and ${PASSWORD_MIN_SPECIAL_CHARACTER} special character`;
   _data;
 
   addHandlerClickX(handler) {
@@ -61,9 +62,12 @@ class SettingsView extends View {
 
         if (!curPasswordInput) this.renderErrorInputField(curPasswordField);
 
-        if (!newPasswordInput) this.renderErrorInputField(newPasswordField);
+        if (!newPasswordInput || !this._validatePassword(newPasswordInput))
+          this.renderErrorInputField(newPasswordField);
 
         if (!curPasswordInput || !newPasswordInput) return this.renderError();
+        if (!this._validatePassword(newPasswordInput))
+          return this.renderError(this._errorMessagePasswordRequirements);
 
         return handlerUpdatePassword(
           curPasswordInput,

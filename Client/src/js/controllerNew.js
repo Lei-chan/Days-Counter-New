@@ -22,6 +22,7 @@ import overlayMessageSpinnerView from "./views/overlayMessageSpinnerView.js";
 
 let curUser;
 
+///For dev
 // curUser = {
 //   username: "leichan!",
 //   email: "jjjjjjjjjjjjjjjjjjj@jjjjjjjj.gmail.com",
@@ -66,15 +67,15 @@ let curUser;
 //   remainingDaysNow: [300],
 //   howManyTimesClick: [65],
 //   rooms: [
-//     // {
-//     //   roomId: "hkskjjkdjksjksk",
-//     //   usernames: ["leichan", "haha"],
-//     //   title: "Summer",
-//     //   date: "08/21/2025",
-//     //   comments: "",
-//     //   toDoLists: "",
-//     //   toDoListsCheckbox: [],
-//     // },
+//     {
+//       roomId: "hkskjjkdjksjksk",
+//       usernames: ["leichan", "haha"],
+//       title: "Summer",
+//       date: "08/21/2025",
+//       comments: "",
+//       toDoLists: "",
+//       toDoListsCheckbox: [],
+//     },
 //   ],
 //   remainingDaysPrevRooms: [22],
 //   remainingDaysNowRooms: [20],

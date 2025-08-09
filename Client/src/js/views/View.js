@@ -95,4 +95,11 @@ export default class View {
       handler();
     });
   }
+
+  _validatePassword(passwordInput) {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s]).{8,}$/;
+
+    return passwordRegex.test(passwordInput.trim());
+  }
 }
