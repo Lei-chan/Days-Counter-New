@@ -68,7 +68,16 @@ let curUser;
 //   howManyTimesClick: [65],
 //   rooms: [
 //     {
-//       roomId: "hkskjjkdjksjksk",
+//       roomId: "hkskjjkdjksjkskkHHJI9",
+//       usernames: ["leichan", "haha"],
+//       title: "Summer",
+//       date: "08/21/2025",
+//       comments: "",
+//       toDoLists: "",
+//       toDoListsCheckbox: [],
+//     },
+//     {
+//       roomId: "hkskjjkdjksjkskkHHJI9",
 //       usernames: ["leichan", "haha"],
 //       title: "Summer",
 //       date: "08/21/2025",
@@ -102,7 +111,7 @@ export const setCurUserToNull = function () {
 const controlSaveUserData = function () {
   try {
     UserManageApi._saveUserData();
-    setCurUserToNull();
+    // setCurUserToNull();
   } catch (err) {
     console.error(
       "Server error! Something went wrong 🙇‍♂️ User updated data wasn't saved properly.",

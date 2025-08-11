@@ -1,20 +1,6 @@
 import { BASE_URL } from "../config.js";
 import overlayMessageSpinnerView from "../views/overlayMessageSpinnerView.js";
 
-// const health = async function () {
-//   try {
-//     const res = await fetch(`${BASE_URL}/user/health`);
-
-//     if (!res.ok) return { success: false };
-
-//     const data = await res.json();
-
-//     return data;
-//   } catch (err) {
-//     console.error("Server not connected");
-//   }
-// };
-
 class UserManageApi {
   _accessToken;
   _curUser;
@@ -29,9 +15,14 @@ class UserManageApi {
       let res;
       res = await fetch(`${BASE_URL}${url}`, options);
 
+      ///OK
       //If token expired, try to refresh once
       if (res.status === 403 || res.status === 401) {
         await this._refreshAccessToken();
+
+        ///Use new Updated accessToken!
+        options.headers.Authorization = `Bearer ${this._accessToken}`;
+
         res = await fetch(`${BASE_URL}${url}`, options);
       }
 
@@ -90,7 +81,7 @@ class UserManageApi {
         JSON.stringify(this._curUser)
       );
 
-      this._removeCurUserInfo();
+      // this._removeCurUserInfo();
     } catch (err) {
       throw err;
     }
@@ -137,8 +128,6 @@ class UserManageApi {
         howManyTimesClickRooms: this._curUser.howManyTimesClickRooms || [],
         rooms: this._curUser.rooms || [],
       });
-
-      // console.log(this._curUser);
     } catch (err) {
       throw err;
     }
@@ -535,7 +524,6 @@ class UserManageApi {
         body: JSON.stringify(updateInfo),
       });
 
-      // console.log(data.room);
       return data.room;
     } catch (err) {
       throw err;
@@ -702,7 +690,6 @@ class UserManageApi {
         credentials: "include",
       });
 
-      // console.log(data);
       return data;
     } catch (err) {
       throw err;
@@ -898,16 +885,6 @@ class UserManageApi {
       );
     });
 
-    // console.log(
-    //   originalGoalsOrRooms,
-    //   remainingDaysPrev,
-    //   remainingDaysNow,
-    //   sortedGoalsOrRooms,
-    //   sortedRemainingDaysPrev,
-    //   sortedRemainingDaysNow,
-    //   sortedHowManyTimesClick
-    // );
-
     return [
       sortedRemainingDaysPrev,
       sortedRemainingDaysNow,
@@ -931,7 +908,6 @@ class UserManageApi {
       const sharingUsernamesWithourCurUser = this._curUser.rooms.map((room) =>
         room.usernames.filter((username) => username !== this._curUser.username)
       );
-      // console.log(sharingUsernamesWithourCurUser);
 
       const data = await Promise.all(
         roomIds.map((roomId, i) =>
@@ -963,59 +939,25 @@ class UserManageApi {
       throw err;
     }
   }
-
-  //For dev
-  // async deleteAll() {
-  //   try {
-  //     const deletedUsers = await this._deleteAllUsers();
-  //     const deletedTokens = await this._deleteAllTokens();
-  //     const deletedRooms = await this._deleteAllRooms();
-
-  //     console.log("deletedUsers", deletedUsers);
-  //     console.log("deletedTokens", deletedTokens);
-  //     console.log("deletedRooms", deletedRooms);
-  //   } catch (err) {
-  //     console.error("Error while deleting Users, tokens, and Rooms", err);
-  //   }
-  // }
-
-  // async _deleteAllUsers() {
-  //   try {
-  //     const data = await this._apiCall("/user/deleteAll", {
-  //       method: "DELETE",
-  //     });
-
-  //     return data;
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
-
-  // async _deleteAllTokens() {
-  //   try {
-  //     const data = await this._apiCall("/user/deleteTokens", {
-  //       method: "DELETE",
-  //     });
-
-  //     return data;
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
-
-  // async _deleteAllRooms() {
-  //   try {
-  //     const data = await this._apiCall("/room/deleteAll", { method: "DELETE" });
-
-  //     return data;
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
 }
 
 export default new UserManageApi();
 
+//For dev
+//for dev
+// const health = async function () {
+//   try {
+//     const res = await fetch(`${BASE_URL}/user/health`);
+
+//     if (!res.ok) return { success: false };
+
+//     const data = await res.json();
+
+//     return data;
+//   } catch (err) {
+//     console.error("Server not connected");
+//   }
+// };
 // (async function () {
 //   console.log(await health());
 // })();

@@ -2113,7 +2113,6 @@ body {
 
         .copied_explanation {
           top: 2%;
-          right: -33%;
           font-size: 1.2vw;
         }
       }
@@ -2133,7 +2132,6 @@ body {
         }
       }
 
-      //later
       .comments--days_counter,
       .to_do_lists--days_counter {
         height: 60%;
@@ -2176,7 +2174,7 @@ body {
         height: 9%;
         top: 2%;
         left: 3%;
-        gap: 5%;
+        gap: 0%;
 
         .room_id {
           font-size: 1.65vw;
@@ -2184,11 +2182,14 @@ body {
         }
 
         .btn--room_id_copy {
-          width: 2.9vw;
+          position: relative;
+          width: 2vw;
+          top: -10%;
+          left: 5%;
         }
 
         .copied_explanation {
-          right: -40%;
+          top: -135%;
           font-size: 1.8vw;
         }
       }
@@ -2280,17 +2281,21 @@ body {
 
       .room_id_container {
         height: 9%;
+        gap: 0%;
 
         .room_id {
           font-size: 2.5vw;
         }
 
         .btn--room_id_copy {
-          width: 3.8vw;
+          position: relative;
+          width: 2.5vw;
+          left: 5%;
+          top: -10%;
         }
 
         .copied_explanation {
-          right: -30%;
+          top: -135%;
           font-size: 2.4vw;
         }
       }
@@ -2377,19 +2382,22 @@ body {
         height: 10%;
         top: 2%;
         left: 3%;
-        gap: 5%;
+        gap: 0%;
 
         .room_id {
           font-size: 3vw;
         }
 
         .btn--room_id_copy {
-          width: 5.5vw;
+          position: relative;
+          width: 3vw;
+          top: -10%;
+          left: 2.5%;
         }
 
         .copied_explanation {
-          top: 3%;
-          right: -30%;
+          top: -135%;
+          right: -16%;
           font-size: 3vw;
         }
       }
@@ -2410,7 +2418,7 @@ body {
         letter-spacing: 0.15vw;
         padding: 1.3%;
         top: 3%;
-        right: 3%;
+        right: 1.5%;
       }
 
       .btns_edit_delete--days_counter {
