@@ -2185,11 +2185,12 @@ body {
           position: relative;
           width: 2vw;
           top: -10%;
-          left: 5%;
+          left: 2.5%;
         }
 
         .copied_explanation {
           top: -135%;
+          right: -15%;
           font-size: 1.8vw;
         }
       }
@@ -2290,12 +2291,13 @@ body {
         .btn--room_id_copy {
           position: relative;
           width: 2.5vw;
-          left: 5%;
+          left: 2%;
           top: -10%;
         }
 
         .copied_explanation {
           top: -135%;
+          right: -15%;
           font-size: 2.4vw;
         }
       }
@@ -2311,7 +2313,7 @@ body {
 
       .btn--usernames {
         top: 4%;
-
+        right: 2%;
         font-size: 2.3vw;
         letter-spacing: 0.2vw;
       }
@@ -2385,7 +2387,7 @@ body {
         gap: 0%;
 
         .room_id {
-          font-size: 3vw;
+          font-size: 2.5vw;
         }
 
         .btn--room_id_copy {

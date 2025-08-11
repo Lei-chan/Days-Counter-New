@@ -23,86 +23,90 @@ import overlayMessageSpinnerView from "./views/overlayMessageSpinnerView.js";
 let curUser;
 
 ///For dev
-// curUser = {
-//   username: "leichan!",
-//   email: "jjjjjjjjjjjjjjjjjjj@jjjjjjjj.gmail.com",
-//   goals: [
-//     {
-//       title: "Springringringringringkkkkkkkkkkkkk",
-//       date: "04/30/2026",
-//       comments: "",
-//       toDoLists: "",
-//       toDoListsCheckbox: [],
-//     },
-//     {
-//       title: "Spring",
-//       date: "04/30/2026",
-//       comments: "",
-//       toDoLists: "",
-//       toDoListsCheckbox: [],
-//     },
-//     {
-//       title: "Spring",
-//       date: "04/30/2026",
-//       comments: "",
-//       toDoLists: "",
-//       toDoListsCheckbox: [],
-//     },
-//     {
-//       title: "Spring",
-//       date: "04/30/2026",
-//       comments: "",
-//       toDoLists: "",
-//       toDoListsCheckbox: [],
-//     },
-//     {
-//       title: "Spring",
-//       date: "04/30/2026",
-//       comments: "",
-//       toDoLists: "",
-//       toDoListsCheckbox: [],
-//     },
-//   ],
-//   remainingDaysPrev: [3650],
-//   remainingDaysNow: [300],
-//   howManyTimesClick: [65],
-//   rooms: [
-//     {
-//       roomId: "hkskjjkdjksjkskkHHJI9",
-//       usernames: ["leichan", "haha"],
-//       title: "Summer",
-//       date: "08/21/2025",
-//       comments: "",
-//       toDoLists: "",
-//       toDoListsCheckbox: [],
-//     },
-//     {
-//       roomId: "hkskjjkdjksjkskkHHJI9",
-//       usernames: ["leichan", "haha"],
-//       title: "Summer",
-//       date: "08/21/2025",
-//       comments: "",
-//       toDoLists: "",
-//       toDoListsCheckbox: [],
-//     },
-//   ],
-//   remainingDaysPrevRooms: [22],
-//   remainingDaysNowRooms: [20],
-//   howManyTimesClickRooms: [2],
-// };
+const setCurUserAndInitDev = function () {
+  curUser = {
+    username: "leichan!",
+    email: "jjjjjjjjjjjjjjjjjjj@jjjjjjjj.gmail.com",
+    goals: [
+      {
+        title: "Springringringringringkkkkkkkkkkkkk",
+        date: "04/30/2026",
+        comments: "",
+        toDoLists: "",
+        toDoListsCheckbox: [],
+      },
+      {
+        title: "Spring",
+        date: "04/30/2026",
+        comments: "",
+        toDoLists: "",
+        toDoListsCheckbox: [],
+      },
+      {
+        title: "Spring",
+        date: "04/30/2026",
+        comments: "",
+        toDoLists: "",
+        toDoListsCheckbox: [],
+      },
+      {
+        title: "Spring",
+        date: "04/30/2026",
+        comments: "",
+        toDoLists: "",
+        toDoListsCheckbox: [],
+      },
+      {
+        title: "Spring",
+        date: "04/30/2026",
+        comments: "",
+        toDoLists: "",
+        toDoListsCheckbox: [],
+      },
+    ],
+    remainingDaysPrev: [3650],
+    remainingDaysNow: [300],
+    howManyTimesClick: [65],
+    rooms: [
+      {
+        roomId: "hkskjjkdjksjkskkHHJI9",
+        usernames: ["leichan", "haha"],
+        title: "Summer",
+        date: "08/21/2025",
+        comments: "",
+        toDoLists: "",
+        toDoListsCheckbox: [],
+      },
+      {
+        roomId: "ABCDEFGHIJKLMNOPQRSTU",
+        usernames: ["leichan", "haha"],
+        title: "Summer",
+        date: "08/21/2025",
+        comments: "",
+        toDoLists: "",
+        toDoListsCheckbox: [],
+      },
+    ],
+    remainingDaysPrevRooms: [22],
+    remainingDaysNowRooms: [20],
+    howManyTimesClickRooms: [2],
+  };
 
-// mainTopSectionView.type =
-//   mainDaysCounterContainerView.type =
-//   mainWholeView.type =
-//     "goals";
+  mainTopSectionView.type =
+    mainDaysCounterContainerView.type =
+    mainWholeView.type =
+      "goals";
 
-// mainTopSectionView.renderToParentEle(curUser);
-// mainTopSectionView._changeSwitch();
-// mainDaysCounterContainerView.renderToParentEle(curUser);
-// mainDaysCounterContainerView.init();
-// mainWholeView.init(curUser);
-// loginWholeView.close();
-// mainWholeView.open();
+  mainTopSectionView.renderToParentEle(curUser);
+  mainTopSectionView._changeSwitch();
+  mainDaysCounterContainerView.renderToParentEle(curUser);
+  mainDaysCounterContainerView.init();
+  mainWholeView.init(curUser);
+  loginWholeView.close();
+  mainWholeView.open();
+  console.log("Dev");
+};
+setCurUserAndInitDev();
 
 export const setCurUserToNull = function () {
   curUser = null;
