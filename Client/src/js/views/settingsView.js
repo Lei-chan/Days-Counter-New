@@ -131,11 +131,15 @@ class SettingsView extends View {
           <div class="input_password--outer">
             <input class="input--password" id="input--cur_password" type="password" placeholder="your current password" minLength="${PASSWORD_MIN_LENGTH}">
             <button class="btn--password_visibility btn_password_visibility--settings_cur_password" type="button"></button>
+            <button class="btn--password_visibility btn_password_visibility--settings_cur_password
+            btn_password_visibility--eye_off hidden" type="button"></button>
           </div>
           <p>Please enter your new password</p>
           <div class="input_password--outer">
             <input class="input--password" id="input--new_password" type="password" placeholder="your new password" minLength="${PASSWORD_MIN_LENGTH}">
             <button class="btn--password_visibility btn_password_visibility--settings_new_password" type="button"></button>
+            <button class="btn--password_visibility btn_password_visibility--settings_new_password
+            btn_password_visibility--eye_off hidden" type="button"></button>
           </div>
         </div>
         <button class="btn--finish btn--finish_password">Finish</button>`);

@@ -1,9 +1,10 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import UserManageApi from "./models/UserModel.js";
+import UserModel from "./models/UserModel.js";
+import manageData from "./models/manageModel.js";
 import helpers from "./helpers.js";
 import entireAppView from "./views/entireAppView";
-import loginFormView from "./views/loginFormView.js";
+import loginTopHalfView from "./views/loginTopHalfView.js";
 import loginForgotPasswordView from "./views/loginForgotPasswordView.js";
 import loginScrollView from "./views/loginScrollView.js";
 import loginBottomHalfView from "./views/loginBottomHalfView.js";
@@ -106,7 +107,7 @@ const setCurUserAndInitDev = function () {
   mainWholeView.open();
   console.log("Dev");
 };
-setCurUserAndInitDev();
+// setCurUserAndInitDev();
 
 export const setCurUserToNull = function () {
   curUser = null;
@@ -114,14 +115,17 @@ export const setCurUserToNull = function () {
 
 const controlSaveUserData = function () {
   try {
-    UserManageApi._saveUserData();
-    // setCurUserToNull();
+    UserModel._saveUserData();
   } catch (err) {
     console.error(
       "Server error! Something went wrong 🙇‍♂️ User updated data wasn't saved properly.",
       err.message
     );
   }
+};
+
+const initLogin = function () {
+  loginTopHalfView.renderInit(manageData);
 };
 
 const pageMainInit = function (type) {
@@ -151,10 +155,10 @@ const controlHowToUse = function () {
 const controlLogin = async function (username, password) {
   try {
     overlayMessageSpinnerView._asyncInit("spinner");
-    await UserManageApi.login(username, password);
-    curUser = UserManageApi._curUser;
+    await UserModel.login(username, password);
+    curUser = UserModel._curUser;
 
-    loginFormView._resetLogingForm();
+    loginTopHalfView._resetLogingForm();
     loginWholeView.close();
 
     pageMainInit("goals");
@@ -166,7 +170,7 @@ const controlLogin = async function (username, password) {
   } catch (err) {
     overlayMessageSpinnerView.close();
     if (err.statusCode === 404)
-      return loginFormView.renderError(loginFormView._errorMessageWrong);
+      return loginTopHalfView.renderError(loginTopHalfView._errorMessageWrong);
 
     if (err.statusCode === 429)
       return overlayMessageSpinnerView._asyncInit(
@@ -184,19 +188,20 @@ const controlLogin = async function (username, password) {
   }
 };
 
-const controlForgotPasswordOpen = function () {
-  loginWholeView.close();
-  loginForgotPasswordView.openSlow();
-};
+///soon!
+// const controlForgotPasswordOpen = function () {
+//   loginWholeView.close();
+//   loginForgotPasswordView.openSlow();
+// };
 
-const controlForgotPasswordClose = function () {
-  loginForgotPasswordView.closeSlow();
-  loginWholeView.open();
-};
+// const controlForgotPasswordClose = function () {
+//   loginForgotPasswordView.closeSlow();
+//   loginWholeView.open();
+// };
 
-const controlForgotPasswordSubmit = function (emailInput) {
-  console.log("email input sent", emailInput);
-};
+// const controlForgotPasswordSubmit = function (emailInput) {
+//   console.log("email input sent", emailInput);
+// };
 
 const controlScroll = function () {
   loginBottomHalfView.open();
@@ -207,13 +212,13 @@ const controlCreateAcc = async function (username, password, email) {
   try {
     overlayMessageSpinnerView._asyncInit("spinner");
 
-    await UserManageApi.createUser({
+    await UserModel.createUser({
       username,
       password,
       email,
     });
 
-    curUser = UserManageApi._curUser;
+    curUser = UserModel._curUser;
 
     mainTopSectionView.type =
       mainDaysCounterContainerView.type =
@@ -268,7 +273,7 @@ const controlLogout = async function () {
   try {
     helpers._resetSetTimeoutLogout();
 
-    await UserManageApi.logout();
+    await UserModel.logout();
 
     setCurUserToNull();
 
@@ -316,9 +321,9 @@ const controlEditGoalRoom = async function (
 
     overlayMessageSpinnerView._asyncInit("spinner");
 
-    await UserManageApi.editGoalRoom(goalRoomIndex, editedGoalRoomInfo, type);
+    await UserModel.editGoalRoom(goalRoomIndex, editedGoalRoomInfo, type);
 
-    curUser = UserManageApi._curUser;
+    curUser = UserModel._curUser;
 
     pageMainInit(type);
 
@@ -354,13 +359,13 @@ const controlDeleteGoalRoom = async function (
 
     //remove selected from selected goal
     if (type === "rooms" && selectedGoal)
-      UserManageApi._removeSelected(selectedGoal);
+      UserModel._removeSelected(selectedGoal);
 
     type === "goals"
-      ? await UserManageApi.deleteGoal(deleteGoalRoomIndex)
-      : await UserManageApi.deleteRoom(deleteGoalRoomIndex);
+      ? await UserModel.deleteGoal(deleteGoalRoomIndex)
+      : await UserModel.deleteRoom(deleteGoalRoomIndex);
 
-    curUser = UserManageApi._curUser;
+    curUser = UserModel._curUser;
 
     if (daysCounterOrSlide === "daysCounter") pageMainInit(type);
 
@@ -393,7 +398,7 @@ const controlSaveContenteditable = function (
 ) {
   helpers._resetSetTimeoutLogout();
 
-  UserManageApi.saveToDoListsComments(
+  UserModel.saveToDoListsComments(
     type,
     modifiedCard,
     toDoLists,
@@ -401,15 +406,15 @@ const controlSaveContenteditable = function (
     comments
   );
 
-  curUser = UserManageApi._curUser;
+  curUser = UserModel._curUser;
 };
 
 const controlDaysCounter = function (type) {
   helpers._resetSetTimeoutLogout();
 
-  UserManageApi._updateForDaysCounter(type);
+  UserModel._updateForDaysCounter(type);
 
-  curUser = UserManageApi._curUser;
+  curUser = UserModel._curUser;
 
   mainTopSectionView.renderToParentEle(curUser);
   mainDaysCounterContainerView.renderToParentEle(curUser);
@@ -476,9 +481,9 @@ const controlRoomsId = function () {
 
 //   // overlayMessageSpinnerView._asyncInit("spinner");
 
-//   UserManageApi._saveSelectedGoals(selectedGoalsIndex);
+//   UserModel._saveSelectedGoals(selectedGoalsIndex);
 
-//   curUser = UserManageApi._curUser;
+//   curUser = UserModel._curUser;
 //   console.log(curUser);
 //   // } catch (err) {
 //   //   helpers._resetSetTimeoutLogout();
@@ -505,14 +510,13 @@ const controlGoalsRoomsSubmit = async function (
     helpers._resetSetTimeoutLogout();
     overlayMessageSpinnerView._asyncInit("spinner");
 
-    if (selectedGoalsIndex)
-      UserManageApi._saveSelectedGoals(selectedGoalsIndex);
+    if (selectedGoalsIndex) UserModel._saveSelectedGoals(selectedGoalsIndex);
 
     type === "goals"
-      ? await UserManageApi.saveGoalsInfo(goalsOrRoomsInfo)
-      : await UserManageApi.saveRoomsInfo(goalsOrRoomsInfo, roomType);
+      ? await UserModel.saveGoalsInfo(goalsOrRoomsInfo)
+      : await UserModel.saveRoomsInfo(goalsOrRoomsInfo, roomType);
 
-    curUser = UserManageApi._curUser;
+    curUser = UserModel._curUser;
     console.log(curUser);
 
     pageMainInit(type);
@@ -576,7 +580,7 @@ const controlUpdatePassword = async function (
 
     overlayMessageSpinnerView._asyncInit("spinner");
 
-    await UserManageApi._updatePassword(curPassword, newPassword);
+    await UserModel._updatePassword(curPassword, newPassword);
 
     settingsView.renderInit(curUser);
     await overlayMessageSpinnerView._asyncInit(
@@ -617,8 +621,8 @@ const controlUpdateUsernameEmail = async function (
 
     overlayMessageSpinnerView._asyncInit("spinner");
 
-    await UserManageApi._updateUsernameEmail(updateInput, section);
-    curUser = UserManageApi._curUser;
+    await UserModel._updateUsernameEmail(updateInput, section);
+    curUser = UserModel._curUser;
 
     settingsView.renderInit(curUser);
     settingsView.renderMessage();
@@ -660,13 +664,16 @@ const init = function () {
 
   entireAppView._addEventClickPasswordVisibility();
 
+  initLogin();
+
   loginWholeView._addHandlerClickAppExplanation(controlAboutThisWeb);
 
-  loginFormView.addHandlerSubmit(controlLogin);
-  loginFormView.addHandlerClickForgotPassword(controlForgotPasswordOpen);
+  loginTopHalfView._addEvents();
+  loginTopHalfView.addHandlerSubmit(controlLogin);
+  // loginTopHalfView.addHandlerClickForgotPassword(controlForgotPasswordOpen);
 
-  loginForgotPasswordView.addHandlerClickClose(controlForgotPasswordClose);
-  loginForgotPasswordView.addHandlerSubmit(controlForgotPasswordSubmit);
+  // loginForgotPasswordView.addHandlerClickClose(controlForgotPasswordClose);
+  // loginForgotPasswordView.addHandlerSubmit(controlForgotPasswordSubmit);
 
   loginScrollView.addHandlerClick(controlScroll);
 
@@ -699,10 +706,6 @@ const init = function () {
     controlSaveContenteditable
   );
   overlaySliderView.addHandlerSubmit(controlGoalsRoomsSubmit);
-  // overlaySliderView.addHandlerSubmit(
-  //   controlGoalsRoomsSubmit,
-  //   controlRoomsSaveSelected
-  // );
 
   overlayCreateRoomsView.addHandlerClick(
     controlRoomsScratch,

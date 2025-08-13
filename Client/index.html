@@ -11,9 +11,31 @@
    <!--login-->
     <div class="page--login">
       <div class="login">
-        <p class="version_line">Ver. 1.1.1</p>
-        <button class="btn--release_info"></button>
-        <p class="attribution_line attribution_line--login">Designed by Freepik and pixabay</p>
+        <div class="version_attribution_container">
+          <p class="version_line">Ver. 1.1.1</p>
+          <div class="news_container">
+            <button class="btn--news">News</button>
+            <div class="news_lists_container">
+              <ul class="lists--news">
+                <!-- <>
+                  <div class="lists_date_container">
+                    <div class="date_title--lists"> 
+                    <div class="new--lists">New</div>
+                    <span class="date--lists"></span>
+                  </div>
+                  <div class="lists_title_container">
+                    <p class="title--lists"></p>
+                  </div> 
+                  </div> 
+                  <div class="lists_content_container hidden">
+                    <p class="content--lists"></p>
+                  </div>
+                </li> -->
+              </ul>
+            </div>
+          </div>
+          <p class="attribution_line attribution_line--login">Designed by Freepik and pixabay</p>
+        </div>
         <button class="btn--app_explanation btn_app_explanation--about_this_web">About this website</button>
         <h3>Let's make your days more exciting!</h3>
         <h1>Days Counter</h1>
@@ -24,7 +46,10 @@
           </span>
           <input id="login--input_username" type="text" placeholder="username"></input>
           <div class="input_password--outer">
-            <input class="input--password" id="login--input_password" type="password" placeholder="password"><button class="btn--password_visibility btn_password_visibility--login_form" type="button"></button></input>
+            <input class="input--password" id="login--input_password" type="password" placeholder="password">
+            <button class="btn--password_visibility btn_password_visibility--login_form" type="button"></button>
+            <button class="btn--password_visibility btn_password_visibility--login_form
+            btn_password_visibility--eye_off hidden" type="button"></button></input>
           </div>
           <button class="login--btn" type="submit"></button>
         </form>

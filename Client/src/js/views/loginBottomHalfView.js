@@ -61,6 +61,8 @@ class LoginBottomHalfView extends View {
         ${PASSWORD_MIN_LENGTH} letters at minimum:  Include more than ${PASSWORD_MIN_UPPERCASE} uppercase, <br>${PASSWORD_MIN_LOWERCASE} lowercase, ${PASSWORD_MIN_DIGIT} digit, and ${PASSWORD_MIN_SPECIAL_CHARACTER} special character!</p>
         <div class="input_password--outer">
           <input class="input--password" id="bottom_half--input_password" type="password" placeholder="password" minlength="${PASSWORD_MIN_LENGTH}"><button class="btn--password_visibility btn_password_visibility--login_bottom" type="button"></button>
+          <button class="btn--password_visibility btn_password_visibility--login_bottom
+          btn_password_visibility--eye_off hidden" type="button"></button>
         </div>
         <h2 class="bottom_half--email_explanation">email address (optional)</h2>
         <p class="email_explanation--tiny">
