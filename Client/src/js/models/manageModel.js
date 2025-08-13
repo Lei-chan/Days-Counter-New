@@ -14,6 +14,13 @@ const manageData = {
         "You had to use a laptop to access this website before. Now I updated the website design and you can access here from any devices! I hope this update will make the website easier to use 😊",
       type: "update",
     },
+    {
+      date: "08/13/2025",
+      title: "Now you can check news for this website from here!",
+      content:
+        "The news feature is now introduced! You can check news for the website such as release info and bug info from here! I'll work hard so I don't need to post a lot of bug info here 🫢",
+      type: "update",
+    },
   ],
 };
 
