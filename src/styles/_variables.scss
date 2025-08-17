@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css?family=Comic Relief");
+
+$primary-font-family: "Comic Relief", cursive;
+$primary-font-color-white: aliceblue;
+$primary-form-outside-gradient: linear-gradient(
+  rgb(253, 255, 117),
+  rgb(255, 172, 95)
+);
+$primary-form-inside-gradient: linear-gradient(
+  rgb(255, 255, 255),
+  rgb(245, 236, 236)
+);
+$btn-transform-hover: translateY(-0.3vh);
