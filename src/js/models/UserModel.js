@@ -942,20 +942,19 @@ class UserManageApi {
 export default new UserManageApi();
 
 //For dev
-//for dev
-const health = async function () {
-  try {
-    const res = await fetch(`${BASE_URL}/user/health`);
+// const health = async function () {
+//   try {
+//     const res = await fetch(`${BASE_URL}/user/health`);
 
-    if (!res.ok) return { success: false };
+//     if (!res.ok) return { success: false };
 
-    const data = await res.json();
+//     const data = await res.json();
 
-    return data;
-  } catch (err) {
-    console.error("Server not connected");
-  }
-};
-(async function () {
-  console.log(await health());
-})();
+//     return data;
+//   } catch (err) {
+//     console.error("Server not connected");
+//   }
+// };
+// (async function () {
+//   console.log(await health());
+// })();
