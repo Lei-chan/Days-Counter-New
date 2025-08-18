@@ -21,6 +21,13 @@ const manageData = {
         "The news feature is now introduced! You can check news for the website such as release info and bug info from here! I'll work hard so I don't need to post a lot of bug info here 🫢",
       type: "update",
     },
+    {
+      date: "08/18/2025",
+      title: "Added the feature to close an account!",
+      content:
+        "I added the feature to close an account! You can close your account from 'settings' whenever you want to. Although it's a little sad to say goodbye 🥲",
+      type: "update",
+    },
   ],
 };
 
