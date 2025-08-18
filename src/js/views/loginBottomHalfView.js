@@ -36,7 +36,7 @@ class LoginBottomHalfView extends View {
       this.addEventRemoveErrorInputField();
 
       if (!usernameInput || !passwordInput) return this.renderError();
-      if (!this._validatePassword(passwordInput))
+      if (!this.validatePassword(passwordInput))
         return this.renderError(this._errorMessagePasswordRequirements);
 
       handler(usernameInput, passwordInput, emailInput);

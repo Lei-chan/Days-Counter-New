@@ -96,7 +96,7 @@ export default class View {
     });
   }
 
-  _validatePassword(passwordInput) {
+  validatePassword(passwordInput) {
     const passwordRegex =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d\s]).{8,}$/;
 

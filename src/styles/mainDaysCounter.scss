@@ -1,0 +1,584 @@
+.days_counter--container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1vw;
+  row-gap: 5vh;
+  margin-top: 3vh;
+  justify-items: center;
+
+  .start_explanation {
+    font-size: 2.5vw;
+    letter-spacing: 0.2vw;
+    color: $primary-font-color-white;
+    margin-top: 5%;
+  }
+
+  .card {
+    position: relative;
+    width: 45vw;
+    aspect-ratio: 1 / 0.6;
+    background-color: #fffd78;
+    border-radius: 2.5% / 3.5%;
+    z-index: 2;
+
+    .title--outer {
+      position: relative;
+      width: 64%;
+      top: -20%;
+      left: 13%;
+      margin-bottom: 3%;
+      h2 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 2vw;
+        letter-spacing: 0.2vw;
+      }
+    }
+
+    .room_id_container {
+      position: absolute;
+      display: flex;
+      flex-direction: row;
+      height: 7%;
+      width: fit-content;
+      top: 2%;
+      left: 3%;
+      gap: 4.5%;
+      white-space: nowrap;
+
+      .room_id {
+        font-size: 1.2vw;
+      }
+
+      .btn--room_id_copy {
+        @include img-btn-style();
+        background-image: url("../imgs/copy.svg");
+        background-position: center;
+        background-size: 115%;
+        width: 2.4vw;
+        margin-top: 0.7%;
+      }
+
+      .room_id--copied {
+        background-image: url("../imgs/check.svg");
+        background-size: contain;
+      }
+
+      .copied_explanation {
+        position: absolute;
+        top: 3%;
+        right: -21%;
+        font-size: 1.1vw;
+        letter-spacing: 0.03vw;
+        padding: 1%;
+        background-color: #83ffe0a1;
+        border-radius: 10% / 25%;
+      }
+    }
+
+    .usernames_container {
+      position: relative;
+      @include img-background-style();
+      background: url("../imgs/fukidashiYellow.svg");
+      background-size: cover;
+      width: 80%;
+      height: 35%;
+      top: -33%;
+      left: 15%;
+      padding: 4%;
+      padding-left: 8%;
+      font-size: 1.3vw;
+      letter-spacing: 0.1vw;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      opacity: 0;
+      transition: all 0.5s;
+      pointer-events: none;
+
+      p {
+        margin-bottom: 1%;
+      }
+
+      .usernames {
+        color: #009baf;
+      }
+    }
+
+    .btn--usernames {
+      position: absolute;
+      @include btn-style-gradient(linear-gradient(rgb(204, 204, 204), grey));
+      border-radius: 100%;
+      border: none;
+      font-size: 1.2vw;
+      letter-spacing: 0.1vw;
+      padding: 1.2%;
+      top: 3%;
+      right: 3%;
+    }
+
+    .btns_edit_delete--days_counter {
+      top: 19%;
+    }
+
+    .bottom_content--days_counter {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      top: -7%;
+      left: 5%;
+      height: 55%;
+      width: 100%;
+
+      p {
+        font-size: 1.5vw;
+        margin-top: 13%;
+        letter-spacing: 0.1vw;
+        margin-left: 4%;
+      }
+    }
+
+    .comments--days_counter,
+    .to_do_lists--days_counter {
+      position: relative;
+      background-image: linear-gradient(white, rgb(253, 246, 246));
+      height: 60%;
+      width: 90%;
+      top: -18%;
+      margin-left: 5%;
+    }
+
+    .details--outer {
+      height: 80%;
+      width: 55%;
+      border-radius: 3.3% / 6%;
+      margin-left: 5%;
+      background-color: #fac104;
+      overflow: hidden;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+      padding: 8%;
+      line-height: 175%;
+      font-size: 1.5vw;
+      letter-spacing: 0.2vw;
+      text-align: left;
+      white-space: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-color: rgb(255, 238, 0) orange;
+      scroll-behavior: smooth;
+    }
+
+    .remaining_days--outer {
+      text-align: center;
+      width: 20%;
+      height: 55%;
+      background-color: #fff5c7;
+      border-radius: 7%;
+      overflow: hidden;
+    }
+
+    .remaining_days {
+      width: 100%;
+      height: 100%;
+      padding-top: 23%;
+      font-size: 3vw;
+      letter-spacing: 0.3vw;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgb(255, 250, 237) rgb(255, 234, 44);
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@media (768px < width <= 1024px) {
+  .days_counter--container {
+    column-gap: 0vw;
+    row-gap: 4.5vh;
+
+    .start_explanation {
+      font-size: 3vw;
+      margin-top: 7%;
+    }
+
+    .card {
+      h2 {
+        font-size: 2.3vw;
+      }
+
+      .room_id_container {
+        .room_id {
+          font-size: 1.4vw;
+        }
+
+        .btn--room_id_copy {
+          width: 2.5vw;
+        }
+
+        .copied_explanation {
+          top: 2%;
+          font-size: 1.2vw;
+        }
+      }
+
+      .usernames_container {
+        font-size: 1.45vw;
+      }
+
+      .btn--usernames {
+        font-size: 1.3vw;
+        padding: 1.5%;
+      }
+
+      .bottom_content--days_counter {
+        p {
+          font-size: 1.7vw;
+        }
+      }
+
+      .comments--days_counter,
+      .to_do_lists--days_counter {
+        height: 60%;
+        width: 90%;
+        top: -18%;
+        margin-left: 5%;
+      }
+
+      .details {
+        padding: 7%;
+        font-size: 1.55vw;
+      }
+    }
+  }
+}
+
+@media (480px < width <= 768px) {
+  .days_counter--container {
+    column-gap: 0vw;
+    row-gap: 3vh;
+    margin-top: 4vh;
+
+    .start_explanation {
+      font-size: 3.2vw;
+      letter-spacing: 0.2vw;
+      margin-top: 9%;
+    }
+
+    .card {
+      .title--outer {
+        left: 14%;
+        width: 60%;
+        h2 {
+          font-size: 2.5vw;
+          letter-spacing: 0.25vw;
+        }
+      }
+
+      .room_id_container {
+        height: 9%;
+        top: 2%;
+        left: 3%;
+        gap: 0%;
+
+        .room_id {
+          font-size: 1.65vw;
+          letter-spacing: 0.05vw;
+        }
+
+        .btn--room_id_copy {
+          position: relative;
+          width: 2vw;
+          top: -10%;
+          left: 2.5%;
+        }
+
+        .copied_explanation {
+          top: -135%;
+          right: -15%;
+          font-size: 1.8vw;
+        }
+      }
+
+      .usernames_container {
+        width: 87%;
+        height: 38%;
+        top: -37%;
+        left: 10%;
+        font-size: 1.8vw;
+        letter-spacing: 0.1vw;
+      }
+
+      .btn--usernames {
+        font-size: 1.6vw;
+        padding: 1.5%;
+      }
+
+      .btns_edit_delete--days_counter {
+        top: 20%;
+      }
+
+      .bottom_content--days_counter {
+        height: 60%;
+        p {
+          font-size: 1.9vw;
+          margin-top: 12%;
+          margin-left: 3%;
+        }
+      }
+
+      .comments--days_counter,
+      .to_do_lists--days_counter {
+        top: -13%;
+      }
+
+      .details--outer {
+        height: 85%;
+        width: 57%;
+        border-radius: 3.3% / 6%;
+        margin-left: 3%;
+      }
+
+      .details {
+        padding: 5%;
+        line-height: 175%;
+        font-size: 2vw;
+        letter-spacing: 0.15vw;
+      }
+
+      .remaining_days--outer {
+        text-align: center;
+        width: 20%;
+        height: 55%;
+      }
+
+      .remaining_days {
+        padding-top: 27%;
+        letter-spacing: 0.25vw;
+      }
+    }
+  }
+}
+
+@media (320px < width <= 480px) {
+  .days_counter--container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 3vh;
+    margin-top: 10vh;
+
+    .start_explanation {
+      font-size: 4vw;
+      margin-top: 14%;
+    }
+
+    .card {
+      width: 63vw;
+
+      .title--outer {
+        left: 14%;
+        width: 60%;
+
+        h2 {
+          font-size: 3.8vw;
+          letter-spacing: 0.3vw;
+        }
+      }
+
+      .room_id_container {
+        height: 9%;
+        gap: 0%;
+
+        .room_id {
+          font-size: 2.5vw;
+        }
+
+        .btn--room_id_copy {
+          position: relative;
+          width: 2.5vw;
+          left: 2%;
+          top: -10%;
+        }
+
+        .copied_explanation {
+          top: -135%;
+          right: -15%;
+          font-size: 2.4vw;
+        }
+      }
+
+      .usernames_container {
+        width: 88%;
+        height: 38%;
+        top: -37%;
+        left: 10%;
+        font-size: 2.5vw;
+        letter-spacing: 0.15vw;
+      }
+
+      .btn--usernames {
+        top: 4%;
+        right: 2%;
+        font-size: 2.3vw;
+        letter-spacing: 0.2vw;
+      }
+
+      .btns_edit_delete--days_counter {
+        top: 22%;
+      }
+
+      .bottom_content--days_counter {
+        p {
+          font-size: 2.4vw;
+          letter-spacing: 0.2vw;
+          margin-left: 3.5%;
+        }
+      }
+
+      .comments--days_counter,
+      .to_do_lists--days_counter {
+        top: -13%;
+      }
+
+      .details--outer {
+        height: 90%;
+      }
+
+      .details {
+        padding: 5%;
+        padding-top: 8%;
+        font-size: 2.5vw;
+        scrollbar-width: thin;
+      }
+
+      .remaining_days {
+        padding-top: 29%;
+        font-size: 3.8vw;
+        letter-spacing: 0.3vw;
+      }
+    }
+  }
+}
+
+@media (width <= 320px) {
+  .days_counter--container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 3vh;
+    margin-top: 7vh;
+
+    .start_explanation {
+      font-size: 6vw;
+      letter-spacing: 0.3vw;
+      margin-top: 13%;
+    }
+
+    .card {
+      width: 67vw;
+
+      .title--outer {
+        width: 54%;
+
+        h2 {
+          font-size: 4vw;
+          letter-spacing: 0.3vw;
+        }
+      }
+
+      .room_id_container {
+        height: 10%;
+        top: 2%;
+        left: 3%;
+        gap: 0%;
+
+        .room_id {
+          font-size: 2.5vw;
+        }
+
+        .btn--room_id_copy {
+          position: relative;
+          width: 3vw;
+          top: -10%;
+          left: 2.5%;
+        }
+
+        .copied_explanation {
+          top: -135%;
+          right: -16%;
+          font-size: 3vw;
+        }
+      }
+
+      .usernames_container {
+        width: 95%;
+        height: 40%;
+        top: -40%;
+        left: 7%;
+        padding: 3%;
+        padding-left: 4%;
+        font-size: 3.2vw;
+        letter-spacing: 0.2vw;
+      }
+
+      .btn--usernames {
+        font-size: 3.5vw;
+        letter-spacing: 0.15vw;
+        padding: 1.3%;
+        top: 3%;
+        right: 1.5%;
+      }
+
+      .btns_edit_delete--days_counter {
+        top: 20%;
+      }
+
+      .bottom_content--days_counter {
+        top: -10%;
+        left: 2%;
+
+        p {
+          font-size: 3.5vw;
+          margin-top: 13%;
+          letter-spacing: 0.15vw;
+          margin-left: 2%;
+        }
+      }
+
+      .comments--days_counter,
+      .to_do_lists--days_counter {
+        top: -13%;
+      }
+
+      .details--outer {
+        height: 100%;
+        width: 56%;
+        margin-left: 3%;
+      }
+
+      .details {
+        padding: 5%;
+        line-height: 170%;
+        font-size: 3.5vw;
+        letter-spacing: 0.2vw;
+        scrollbar-width: thin;
+      }
+
+      .remaining_days--outer {
+        width: 22%;
+        height: 57%;
+      }
+
+      .remaining_days {
+        padding-top: 25%;
+        font-size: 4.5vw;
+      }
+    }
+  }
+}

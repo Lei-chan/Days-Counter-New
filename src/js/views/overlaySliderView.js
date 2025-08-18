@@ -29,7 +29,8 @@ class OverlaySliderView extends View {
   type; //'goals' or 'rooms'
   roomType; //'create', 'select', or 'id'
 
-  _addEvents() {
+  constructor() {
+    super();
     this._addEventClickSlide();
     this._addEventClickRight();
     this._addEventClickLeft();
@@ -168,7 +169,7 @@ class OverlaySliderView extends View {
       .classList.add("hidden");
   }
 
-  _addHandlerClickFinishEditing(handler) {
+  addHandlerClickFinishEditing(handler) {
     this._parentElement.addEventListener("click", (e) => {
       const btn = e.target.closest(".btn--finish");
       if (!btn) return;
@@ -251,7 +252,7 @@ class OverlaySliderView extends View {
     });
   }
 
-  _addHandlerClickEscapeClose(handler) {
+  addHandlerClickEscapeClose(handler) {
     this._addEventClickEscapeClose(this._keyEventRemoveFocus, handler);
   }
 
@@ -263,11 +264,11 @@ class OverlaySliderView extends View {
     btns.forEach((btn) => btn.blur());
   }
 
-  _addHandlerIAmSure(handler) {
+  addHandlerIAmSure(handler) {
     overlayMessageSpinnerView._addHandlerClickIAmSure(() => {
       if (!this._deleteGoalRoomIndex && this._deleteGoalRoomIndex !== 0) return;
-      //check if delete room was selected by existing goal
 
+      //check if delete room was selected by existing goal
       let selectedGoal;
       if (this.type === "rooms") {
         const deleteRoom = this._data.rooms[this._deleteGoalRoomIndex];
@@ -441,7 +442,6 @@ class OverlaySliderView extends View {
 
     contenteditableView._renderContenteditable();
 
-    ////////Fixed bug?? Chack if inputs in the slider can be clickable!
     this._addEventStopPropagationCheckbox();
     contenteditableView._addEventCheckbox();
 

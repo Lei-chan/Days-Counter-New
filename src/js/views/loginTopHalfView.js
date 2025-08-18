@@ -11,10 +11,28 @@ class LoginTopHalfView extends View {
   _errorMessageWrong = "This account doesn't exist! Please try again!";
   _data; //manageData
 
-  _addEvents() {
+  constructor() {
+    super();
     this._addEventClickOutsideLists();
     this._addEventClickBtnNews();
     this._addEventClickList();
+  }
+
+  _addEventClickOutsideLists() {
+    this._parentElement.addEventListener("click", (e) => {
+      /////lists are invisible or clicked place was lists or btn--news => return
+      if (
+        !this._newsListsContainer.style.opacity ||
+        this._newsListsContainer.style.opacity === "0" ||
+        e.target.closest(".news_lists_container") ||
+        e.target.closest(".btn--news")
+      )
+        return;
+
+      this.closeSlow(this._newsListsContainer);
+      this._newsListsContainer.style.zIndex = 1;
+      this._newsListsContainer.style.cursor = "default";
+    });
   }
 
   _addEventClickBtnNews() {
@@ -35,23 +53,6 @@ class LoginTopHalfView extends View {
         this._newsListsContainer.style.zIndex = 1;
         this._newsListsContainer.style.cursor = "default";
       }
-    });
-  }
-
-  _addEventClickOutsideLists() {
-    this._parentElement.addEventListener("click", (e) => {
-      /////lists are invisible or clicked place was lists or btn--news => return
-      if (
-        !this._newsListsContainer.style.opacity ||
-        this._newsListsContainer.style.opacity === "0" ||
-        e.target.closest(".news_lists_container") ||
-        e.target.closest(".btn--news")
-      )
-        return;
-
-      this.closeSlow(this._newsListsContainer);
-      this._newsListsContainer.style.zIndex = 1;
-      this._newsListsContainer.style.cursor = "default";
     });
   }
 

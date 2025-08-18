@@ -444,7 +444,6 @@ const controlCloseOverlay = function () {
 
   overlaySliderView.close();
 
-  // mainDaysCounterContainerView._data = curUser;
   mainDaysCounterContainerView.init(curUser);
   contenteditableView._resetAllToFirst(
     mainDaysCounterContainerView._parentElement
@@ -475,31 +474,6 @@ const controlRoomsId = function () {
   overlaySliderView.open();
 };
 
-// const controlRoomsSaveSelected = function (selectedGoalsIndex) {
-//   // try {
-//   helpers._resetSetTimeoutLogout();
-
-//   // overlayMessageSpinnerView._asyncInit("spinner");
-
-//   UserModel._saveSelectedGoals(selectedGoalsIndex);
-
-//   curUser = UserModel._curUser;
-//   console.log(curUser);
-//   // } catch (err) {
-//   //   helpers._resetSetTimeoutLogout();
-
-//   //   console.error(err);
-
-//   //   overlayMessageSpinnerView._asyncInit(
-//   //     "message",
-//   //     "error",
-//   //     `Server error while creating room${
-//   //       goalsOrRoomsInfo.length >= 2 ? "s" : ""
-//   //     } 🙇‍♂️ <br> Please try again this later!`
-//   //   );
-//   // }
-// };
-
 const controlGoalsRoomsSubmit = async function (
   goalsOrRoomsInfo,
   type,
@@ -517,7 +491,6 @@ const controlGoalsRoomsSubmit = async function (
       : await UserModel.saveRoomsInfo(goalsOrRoomsInfo, roomType);
 
     curUser = UserModel._curUser;
-    console.log(curUser);
 
     pageMainInit(type);
 
@@ -635,8 +608,6 @@ const controlUpdateUsernameEmail = async function (
     if (section !== "username") return;
 
     pageMainInit("rooms");
-    // mainTopSectionView.renderToParentEle(curUser);
-    // mainDaysCounterContainerView.renderToParentEle(curUser);
   } catch (err) {
     helpers._resetSetTimeoutLogout();
 
@@ -659,67 +630,104 @@ const controlUpdateUsernameEmail = async function (
   }
 };
 
+const controlCloseAccount = async function (passwordInput) {
+  try {
+    helpers._resetSetTimeoutLogout();
+
+    overlayMessageSpinnerView._asyncInit("spinner");
+
+    await UserModel.closeAccount(passwordInput);
+
+    setCurUserToNull();
+
+    settingsView.close();
+    mainWholeView.close();
+
+    await overlayMessageSpinnerView._asyncInit(
+      "message",
+      "message",
+      overlayMessageSpinnerView._messageCloseAccount
+    );
+
+    loginWholeView.open();
+  } catch (err) {
+    console.error(err);
+    overlayMessageSpinnerView._asyncInit(
+      "message",
+      "error",
+      err.name === "validationFailed"
+        ? `${err.message}!<br>Please try again :)`
+        : overlayMessageSpinnerView._errorMessage
+    );
+  }
+};
+
 const init = function () {
-  helpers._saveUserDataWhenUserLeaves(controlSaveUserData);
+  /// Add event for saving user data when user leaves the site
+  helpers.saveUserDataWhenUserLeaves(controlSaveUserData);
 
-  entireAppView._addEventClickPasswordVisibility();
-
+  /// render news lists
   initLogin();
 
-  loginWholeView._addHandlerClickAppExplanation(controlAboutThisWeb);
+  /// loginWhole
+  loginWholeView.addHandlerClickAppExplanation(controlAboutThisWeb);
 
-  loginTopHalfView._addEvents();
+  /// loginTopHalf
   loginTopHalfView.addHandlerSubmit(controlLogin);
   // loginTopHalfView.addHandlerClickForgotPassword(controlForgotPasswordOpen);
 
+  ///loginForgotPassword later!!
   // loginForgotPasswordView.addHandlerClickClose(controlForgotPasswordClose);
   // loginForgotPasswordView.addHandlerSubmit(controlForgotPasswordSubmit);
 
+  /// loginScroll
   loginScrollView.addHandlerClick(controlScroll);
 
+  /// loginBottomHalf
   loginBottomHalfView.addHandlerSubmit(controlCreateAcc);
 
+  /// mainWhole
   mainWholeView.addHandlerClickCounter(controlDaysCounter);
   mainWholeView._addHandlerClickHowToUse(controlHowToUse);
   mainWholeView.addHandlerClickSetting(controlSettings);
 
+  /// mainTopSection
   mainTopSectionView.addHandlerClickSwitch(controlSwitch);
   mainTopSectionView.addHandlerClickGoals(controlSetGoals);
   mainTopSectionView.addHandlerClickRooms(controlCreateRooms);
-  mainTopSectionView._addEventClickLogout();
-  mainTopSectionView._addHandlerClickIAmSure(controlLogout);
+  mainTopSectionView.addHandlerClickIAmSure(controlLogout);
 
-  mainDaysCounterContainerView._addEvents();
-  mainDaysCounterContainerView._addHandlerClickEdit(controlEditDaysCounter);
-  mainDaysCounterContainerView._addHandlerIAmSure(controlDeleteGoalRoom);
+  /// mainDaysCounterContainer
+  mainDaysCounterContainerView.addHandlerClickEdit(controlEditDaysCounter);
+  mainDaysCounterContainerView.addHandlerIAmSure(controlDeleteGoalRoom);
   mainDaysCounterContainerView.addHandlerClickOutside(
     controlSaveContenteditable
   );
 
-  overlaySliderView._addEvents();
+  /// overlaySliderView
   overlaySliderView.addHandlerClickX(controlCloseOverlay);
   overlaySliderView.addHandlerClickOutside(controlCloseOverlay);
-  overlaySliderView._addHandlerClickEscapeClose(controlCloseOverlay);
-  overlaySliderView._addHandlerClickFinishEditing(controlEditGoalRoom);
-  overlaySliderView._addHandlerIAmSure(controlDeleteGoalRoom);
+  overlaySliderView.addHandlerClickEscapeClose(controlCloseOverlay);
+  overlaySliderView.addHandlerClickFinishEditing(controlEditGoalRoom);
+  overlaySliderView.addHandlerIAmSure(controlDeleteGoalRoom);
   overlaySliderView.addHandlerClickOutsideContenteditable(
     controlSaveContenteditable
   );
   overlaySliderView.addHandlerSubmit(controlGoalsRoomsSubmit);
 
+  /// overlayCreateRooms
   overlayCreateRoomsView.addHandlerClick(
     controlRoomsScratch,
     controlRoomsSelect,
     controlRoomsId
   );
 
+  /// settings
   settingsView.addHandlerClickX(controlCloseSettings);
-  settingsView.addEventClickChange();
   settingsView.addHandlerClickFinish(
     controlUpdatePassword,
     controlUpdateUsernameEmail
   );
-
-  overlayMessageSpinnerView._addEvents();
+  settingsView.addHandlerClickIAmSure(controlCloseAccount);
 };
 init();

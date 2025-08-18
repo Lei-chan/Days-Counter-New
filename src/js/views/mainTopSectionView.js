@@ -7,6 +7,11 @@ class MainTopSectionView extends View {
   _data; //currentAccount
   type;
 
+  constructor() {
+    super();
+    this._addEventClickLogout();
+  }
+
   addHandlerClickSwitch(handler) {
     this._parentElement.addEventListener("click", (e) => {
       const btn = e.target.closest(".btn--switch");
@@ -59,7 +64,7 @@ class MainTopSectionView extends View {
     });
   }
 
-  _addHandlerClickIAmSure(handler) {
+  addHandlerClickIAmSure(handler) {
     overlayMessageSpinnerView._addHandlerClickIAmSure(
       null,
       () => {

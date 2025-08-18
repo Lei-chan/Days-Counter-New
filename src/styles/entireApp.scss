@@ -1,0 +1,323 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(../imgs/wallpaperDaytime.webp);
+  background-size: cover;
+  font-family: $primary-font-family;
+}
+
+.btn--password_visibility {
+  position: absolute;
+  @include img-btn-style();
+  background-image: url("../imgs/eye.svg");
+  background-size: 98%;
+  aspect-ratio: 1 / 1;
+}
+
+.btn_password_visibility--eye_off {
+  background-image: url("../imgs/eyeOff.svg");
+  background-size: 90%;
+}
+
+.attribution_line {
+  color: #0359b6;
+  font-size: 1.05vw;
+}
+
+///Next
+.copyright_line {
+  // position: absolute;
+  color: #0359b6;
+  font-size: 1.05vw;
+  // bottom: 0%;
+  // left: 40vw;
+}
+
+.btn--app_explanation {
+  @include img-btn-style(black);
+  background-image: url("../imgs/cloudSun.svg");
+  background-size: cover;
+  background-position: center;
+  position: fixed;
+  bottom: 4vh;
+  left: 2vw;
+  width: 16vw;
+  aspect-ratio: 1 / 0.5;
+  padding-top: calc(14vw * 0.5 * 0.2);
+  padding-right: 1.5vw;
+  font-size: 1.4vw;
+  letter-spacing: 0.1vw;
+  z-index: 1;
+  white-space: nowrap;
+
+  &:hover {
+    transform: $btn-transform-hover;
+  }
+}
+
+.btn--next {
+  @include btn-style(#00a9dd);
+  width: 9.3vw;
+  aspect-ratio: 1 / 0.4;
+  border-radius: 10% / 25%;
+  border: none;
+  font-size: 2.2vw;
+  padding-bottom: calc(10vw * 0.4 * 0.1);
+  transform: rotate(180deg);
+
+  &:hover {
+    background-color: #33ffcc;
+  }
+}
+
+.btns--edit_delete {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  width: 23%;
+  gap: 10%;
+  right: 0%;
+  cursor: auto;
+}
+
+.btn--edit,
+.btn--finish,
+.btn--delete {
+  border-radius: 8% / 14%;
+  border: none;
+  padding: 4%;
+  font-size: 1vw;
+  letter-spacing: 0.1vw;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.btn--edit,
+.btn--finish {
+  @include btn-style-gradient(linear-gradient(orange, rgb(255, 102, 0)));
+}
+
+.btn--delete {
+  @include btn-style-gradient(
+    linear-gradient(rgb(0, 195, 255), rgb(0, 153, 255))
+  );
+}
+
+.comments,
+.to_do_lists {
+  padding: 4%;
+  text-align: left;
+  overflow-y: scroll;
+  cursor: auto;
+  font-size: 1.5vw;
+  letter-spacing: 0.1vw;
+}
+
+.checkbox_container {
+  input {
+    width: 1.3vw;
+    height: 1.3vw;
+  }
+}
+
+.btn--x {
+  position: absolute;
+  border: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (768px < width <= 1024px) {
+  .version_line {
+    font-size: 1.5vw;
+    letter-spacing: 0.15vw;
+  }
+
+  .attribution_line {
+    font-size: 1.5vw;
+  }
+
+  .btn--app_explanation {
+    width: 22vw;
+    font-size: 1.5vw;
+    letter-spacing: 0.15vw;
+    padding-top: calc(20vw * 0.5 * 0.2);
+  }
+
+  .btn--next {
+    width: 12vw;
+    font-size: 3vw;
+  }
+
+  .btns--edit_delete {
+    width: 25%;
+  }
+
+  .btn--edit,
+  .btn--finish,
+  .btn--delete {
+    font-size: 1.15vw;
+  }
+
+  .comments,
+  .to_do_lists {
+    font-size: 1.6vw;
+  }
+
+  .checkbox_container {
+    input {
+      width: 1.4vw;
+      height: 1.4vw;
+    }
+  }
+}
+
+@media (480px < width <= 768px) {
+  .version_line {
+    font-size: 2vw;
+    letter-spacing: 0.2vw;
+  }
+
+  .attribution_line {
+    font-size: 2vw;
+  }
+
+  .btn--app_explanation {
+    width: 23vw;
+    font-size: 2vw;
+    letter-spacing: 0.2vw;
+    padding-top: calc(23vw * 0.5 * 0.2);
+  }
+
+  .btn--next {
+    width: 15vw;
+    font-size: 3.5vw;
+  }
+
+  .btns--edit_delete {
+    width: 28%;
+  }
+
+  .btn--edit,
+  .btn--finish,
+  .btn--delete {
+    font-size: 1.4vw;
+  }
+
+  .comments,
+  .to_do_lists {
+    font-size: 1.8vw;
+  }
+
+  .checkbox_container {
+    input {
+      width: 1.6vw;
+      height: 1.6vw;
+    }
+  }
+}
+
+@media (320px < width <= 480px) {
+  .version_line {
+    font-size: 2.6vw;
+    letter-spacing: 0.26vw;
+  }
+
+  .attribution_line {
+    font-size: 2.6vw;
+  }
+
+  .btn--app_explanation {
+    width: 28vw;
+    font-size: 2.5vw;
+    letter-spacing: 0.25vw;
+    padding-top: calc(28vw * 0.5 * 0.2);
+  }
+
+  .btn--next {
+    width: 15vw;
+    font-size: 3.5vw;
+  }
+
+  .btns--edit_delete {
+    width: 29%;
+  }
+
+  .btn--edit,
+  .btn--finish,
+  .btn--delete {
+    padding: 4%;
+    font-size: 2.2vw;
+    letter-spacing: 0.15vw;
+  }
+
+  .comments,
+  .to_do_lists {
+    padding: 4%;
+    font-size: 2.55vw;
+    letter-spacing: 0.2vw;
+  }
+
+  .checkbox_container {
+    input {
+      width: 2.5vw;
+      height: 2.5vw;
+    }
+  }
+}
+
+@media (width <= 320px) {
+  .version_line {
+    font-size: 2.6vw;
+    letter-spacing: 0.26vw;
+  }
+
+  .attribution_line {
+    font-size: 2.6vw;
+  }
+
+  .btn--app_explanation {
+    width: 35vw;
+    font-size: 3vw;
+    letter-spacing: 0.3vw;
+    padding-top: calc(35vw * 0.5 * 0.2);
+  }
+
+  .btn--next {
+    width: 17vw;
+    font-size: 4vw;
+  }
+
+  .btns--edit_delete {
+    width: 32%;
+  }
+
+  .btn--edit,
+  .btn--finish,
+  .btn--delete {
+    padding: 4%;
+    font-size: 2.7vw;
+  }
+
+  .comments,
+  .to_do_lists {
+    padding: 4%;
+    font-size: 3.2vw;
+    letter-spacing: 0.2vw;
+  }
+
+  .checkbox_container {
+    input {
+      width: 3.1vw;
+      height: 3.1vw;
+    }
+  }
+}

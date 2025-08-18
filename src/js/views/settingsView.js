@@ -7,15 +7,25 @@ import {
   PASSWORD_MIN_DIGIT,
   PASSWORD_MIN_SPECIAL_CHARACTER,
 } from "../config.js";
+import overlayMessageSpinnerView from "./overlayMessageSpinnerView.js";
 
 class SettingsView extends View {
   _parentElement = document.querySelector(".page--settings");
   _renderInitContainer = document.querySelector(".settings_form");
   _messageContainer;
+  _passwordInput;
   _message;
   _errorMessage = "Please fill the field below";
   _errorMessagePasswordRequirements = `Password needs to include more than ${PASSWORD_MIN_LENGTH} characters, at least ${PASSWORD_MIN_UPPERCASE} uppercase, ${PASSWORD_MIN_LOWERCASE} lowercase, ${PASSWORD_MIN_DIGIT} digit, and ${PASSWORD_MIN_SPECIAL_CHARACTER} special character`;
+  _errorMessageInvalidPassword = "Please enter a valid password!";
   _data;
+
+  constructor() {
+    super();
+    this._addEventClickChange();
+    this._addEventClickCloseAccount();
+    this._addEventClickOK();
+  }
 
   addHandlerClickX(handler) {
     this._parentElement.addEventListener("click", function (e) {
@@ -26,7 +36,7 @@ class SettingsView extends View {
     });
   }
 
-  addEventClickChange() {
+  _addEventClickChange() {
     this._parentElement.addEventListener("click", (e) => {
       if (e.target.closest(".btn--change_username"))
         this._renderInputField("username");
@@ -106,13 +116,86 @@ class SettingsView extends View {
     });
   }
 
-  //username, email, or password
+  _addEventClickCloseAccount() {
+    this._parentElement.addEventListener("click", (e) => {
+      const btn = e.target.closest(".btn--close_account");
+
+      if (!btn || btn.innerHTML !== "Close<br>account") return;
+
+      this._renderInputField("closeAccount");
+      this.addEventRemoveErrorInputField();
+      // overlayMessageSpinnerView._asyncInit(
+      //   "message",
+      //   "question",
+      //   overlayMessageSpinnerView._questionCloseAccount,
+      //   "closeAccount"
+      // );
+    });
+  }
+
+  _addEventClickOK() {
+    this._parentElement.addEventListener("click", (e) => {
+      const btn = e.target.closest(".btn--close_account");
+
+      if (!btn || btn.innerHTML !== "OK") return;
+
+      const inputField = this._parentElement.querySelector(
+        "#input--password_close_account"
+      );
+
+      this._passwordInput = inputField.value;
+
+      if (!this._passwordInput) {
+        this.renderError();
+        return this.renderErrorInputField(inputField);
+      }
+
+      if (!this.validatePassword(this._passwordInput)) {
+        this.renderError(this._errorMessageInvalidPassword);
+        return this.renderErrorInputField(inputField);
+      }
+
+      overlayMessageSpinnerView._asyncInit(
+        "message",
+        "question",
+        overlayMessageSpinnerView._questionCloseAccount,
+        "closeAccount"
+      );
+    });
+  }
+
+  addHandlerClickIAmSure(handler) {
+    overlayMessageSpinnerView._addHandlerClickIAmSure(null, null, () => {
+      if (overlayMessageSpinnerView._lastClickedForIAmSure !== "closeAccount")
+        return;
+      handler(this._passwordInput);
+
+      this._passwordInput = null;
+    });
+  }
+
+  //username, email, password, or closeAccount
   _renderInputField(section) {
     this._messageContainer = this._parentElement.querySelector(
       ".settings--error_message"
     );
 
     let container;
+
+    if (section === "closeAccount") {
+      container = this._parentElement.querySelector(".settings--close_account");
+
+      return (container.innerHTML = `
+          <p>Please enter your current password</p>
+          <div class="input_password--outer">
+            <input class="input--password" id="input--password_close_account" type="password" placeholder="your current password" minLength="${PASSWORD_MIN_LENGTH}">
+            <button class="btn--password_visibility btn_password_visibility--settings_password_close_account" type="button"></button>
+            <button class="btn--password_visibility btn_password_visibility--settings_password_close_account
+            btn_password_visibility--eye_off hidden" type="button"></button>
+            </div>
+            <button class="btn--close_account">OK</button>
+            `);
+    }
 
     if (section === "password") {
       container = this._parentElement.querySelector(".settings--password");
@@ -200,6 +283,10 @@ class SettingsView extends View {
         <h3>Password</h3>
         <div class="settings--password">
           <button class="btn--change_password">change</button>
+        </div>
+        <h4>Close your account</h4>
+        <div class="settings--close_account">
+          <button class="btn--close_account">Close<br>account</button>
         </div>
     `;
   }

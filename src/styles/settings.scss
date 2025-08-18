@@ -1,0 +1,447 @@
+.page--settings {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+.settings_form {
+  position: relative;
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(240, 226, 209));
+  width: 40vw;
+  height: fit-content;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+  border-radius: 2% / 1.8%;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.514);
+  padding: 2%;
+  z-index: 1;
+
+  .settings--btn_x {
+    @include btn-style(transparent, black);
+    font-size: 2.4vw;
+    width: 5%;
+    top: -1%;
+    right: 2%;
+
+    &:hover {
+      color: #ff7300;
+    }
+  }
+
+  h1 {
+    font-size: 2.4vw;
+    letter-spacing: 0.2vw;
+  }
+
+  h3 {
+    font-size: 1.5vw;
+    letter-spacing: 0.2vw;
+    margin-top: 3%;
+    padding: 3%;
+    border-bottom: 2px solid rgb(255, 187, 0);
+  }
+
+  h4 {
+    font-size: 1.4vw;
+    letter-spacing: 0.1vw;
+    margin-top: 8%;
+    padding: 2%;
+    border-bottom: 2px solid rgb(187, 0, 0);
+  }
+
+  p {
+    font-size: 1.4vw;
+    letter-spacing: 0.1vw;
+    margin-bottom: 3%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  input {
+    width: 17rem;
+    aspect-ratio: 1 / 0.01;
+    padding: 1%;
+    font-size: 1vw;
+    letter-spacing: 0.1vw;
+    border-radius: 2% / 15%;
+    margin-bottom: 3%;
+    border-color: #bbbbbb;
+  }
+
+  .input_password--outer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 17rem;
+    aspect-ratio: 1 / 0.01;
+    margin: 0 auto 3%;
+    justify-content: center;
+
+    input {
+      width: 100%;
+      margin: 0%;
+      padding-left: 2%;
+    }
+  }
+
+  .settings--error_message {
+    @include message-style();
+    padding: 1%;
+    margin-top: 2%;
+    font-size: 1.2vw !important;
+    letter-spacing: 0.1vw;
+    border-radius: 1.5% / 20%;
+    white-space: normal;
+    text-overflow: clip;
+  }
+
+  .settings--username,
+  .settings--email,
+  .settings--password,
+  .settings--close_account {
+    margin-top: 3%;
+    gap: 3%;
+  }
+
+  .settings--explanation_tiny {
+    font-size: 1.1vw !important;
+  }
+
+  .settings_email_p--outer {
+    width: 65%;
+    margin-left: 17%;
+    margin-bottom: 3.6%;
+  }
+
+  .btn--change_username,
+  .btn--change_email,
+  .btn--change_password,
+  .btn--finish_username,
+  .btn--finish_email,
+  .btn--finish_password,
+  .btn--close_account {
+    @include btn-style-gradient(
+      linear-gradient(rgb(255, 213, 27), rgb(255, 102, 0))
+    );
+    border: none;
+    border-radius: 10% / 22%;
+    padding: 1%;
+    font-size: 0.9vw;
+    letter-spacing: 0.1vw;
+
+    &:hover {
+      transform: $btn-transform-hover;
+    }
+  }
+
+  .btn--close_account {
+    @include btn-style-gradient(
+      linear-gradient(rgb(255, 130, 130), rgb(228, 0, 0))
+    );
+    padding: 1% 2% 1% 2%;
+    border-radius: 10% / 16%;
+    margin-top: 1%;
+    line-height: 112%;
+  }
+
+  .btn_password_visibility--settings_cur_password,
+  .btn_password_visibility--settings_new_password,
+  .btn_password_visibility--settings_password_close_account {
+    width: 8%;
+    margin-left: 90%;
+  }
+}
+
+@media (768px < width <= 1024px) {
+  .settings_form {
+    width: 48vw;
+    margin-top: 10vh;
+
+    .settings--btn_x {
+      font-size: 3vw;
+    }
+
+    h1 {
+      font-size: 3vw;
+    }
+
+    h3 {
+      font-size: 2vw;
+    }
+
+    h4 {
+      font-size: 1.8vw;
+    }
+
+    p {
+      font-size: 1.8vw;
+    }
+
+    input {
+      font-size: 1.4vw;
+    }
+
+    @media (768px < width <= 900px) {
+      input,
+      .input_password--outer {
+        width: 15rem;
+      }
+    }
+
+    .settings--error_message {
+      font-size: 1.5vw !important;
+    }
+
+    .settings--username,
+    .settings--email,
+    .settings--password {
+      margin-top: 3%;
+      gap: 3%;
+    }
+
+    .settings--explanation_tiny {
+      font-size: 1.4vw !important;
+    }
+
+    .btn--change_username,
+    .btn--change_email,
+    .btn--change_password,
+    .btn--finish_username,
+    .btn--finish_email,
+    .btn--finish_password,
+    .btn--close_account {
+      font-size: 1.2vw;
+      letter-spacing: 0.1vw;
+    }
+  }
+}
+
+@media (480px < width <= 768px) {
+  .settings_form {
+    width: 55vw;
+    margin-top: 12vh;
+
+    .settings--btn_x {
+      font-size: 4vw;
+    }
+
+    h1 {
+      font-size: 3.98vw;
+    }
+
+    h3 {
+      font-size: 2.6vw;
+    }
+
+    h4 {
+      font-size: 2.3vw;
+    }
+
+    p {
+      font-size: 2.4vw;
+    }
+
+    input {
+      width: 14rem;
+      font-size: 1.8vw;
+    }
+
+    .input_password--outer {
+      width: 14rem;
+    }
+
+    .settings--error_message {
+      font-size: 1.9vw !important;
+    }
+
+    .settings--explanation_tiny {
+      font-size: 1.8vw !important;
+    }
+
+    .btn--change_username,
+    .btn--change_email,
+    .btn--change_password,
+    .btn--finish_username,
+    .btn--finish_email,
+    .btn--finish_password {
+      font-size: 1.7vw;
+    }
+
+    .btn--close_account {
+      font-size: 1.5vw;
+    }
+
+    @media (480px < width <= 600px) {
+      input,
+      .input_password--outer {
+        width: 12rem;
+      }
+
+      .btn--close_account {
+        font-size: 1.7vw;
+      }
+    }
+  }
+}
+
+@media (320px < width <= 480px) {
+  .settings_form {
+    width: 75vw;
+    margin-top: 20vh;
+
+    .settings--btn_x {
+      font-size: 6vw;
+      top: -1%;
+    }
+
+    h1 {
+      font-size: 5.1vw;
+    }
+
+    h3 {
+      font-size: 4vw;
+    }
+
+    h4 {
+      font-size: 3.6vw;
+    }
+
+    p {
+      font-size: 3.2vw;
+    }
+
+    input {
+      width: 13rem;
+      font-size: 2.5vw;
+      letter-spacing: 0.2vw;
+      padding-left: 1.5%;
+    }
+
+    .input_password--outer {
+      width: 13rem;
+    }
+
+    .settings--error_message {
+      font-size: 3vw !important;
+    }
+
+    .settings--explanation_tiny {
+      font-size: 2.7vw !important;
+    }
+
+    .btn--change_username,
+    .btn--change_email,
+    .btn--change_password,
+    .btn--finish_username,
+    .btn--finish_email,
+    .btn--finish_password {
+      font-size: 2.5vw;
+    }
+
+    .btn--close_account {
+      font-size: 2.4vw;
+    }
+
+    .btn_password_visibility--settings_cur_password,
+    .btn_password_visibility--settings_new_password,
+    .btn_password_visibility--settings_password_close_account {
+      width: 10%;
+      margin-left: 89%;
+    }
+
+    @media (320px < width <=400px) {
+      input,
+      .input_password--outer {
+        width: 12rem;
+      }
+
+      .btn_password_visibility--settings_cur_password,
+      .btn_password_visibility--settings_new_password,
+      .btn_password_visibility--settings_password_close_account {
+        width: 9%;
+      }
+    }
+  }
+}
+
+@media (width <= 320px) {
+  .settings_form {
+    width: 90vw;
+    margin-top: 20vh;
+
+    .settings--btn_x {
+      font-size: 9vw;
+      top: -1.2%;
+    }
+
+    h1 {
+      font-size: 6vw;
+    }
+
+    h3 {
+      font-size: 5vw;
+    }
+
+    h4 {
+      font-size: 4.5vw;
+    }
+
+    p {
+      font-size: 4.5vw;
+    }
+
+    input {
+      width: 12rem;
+      font-size: 3.5vw;
+      letter-spacing: 0.3vw;
+      padding-left: 1.5%;
+    }
+
+    .input_password--outer {
+      width: 12rem;
+    }
+
+    .settings--error_message {
+      font-size: 4vw !important;
+    }
+
+    .settings--explanation_tiny {
+      font-size: 3.7vw !important;
+    }
+
+    .btn--change_username,
+    .btn--change_email,
+    .btn--change_password,
+    .btn--finish_username,
+    .btn--finish_email,
+    .btn--finish_password {
+      font-size: 3.5vw;
+    }
+
+    .btn--close_account {
+      font-size: 3.3vw;
+    }
+
+    .btn_password_visibility--settings_cur_password,
+    .btn_password_visibility--settings_new_password,
+    .btn_password_visibility--settings_password_close_account {
+      width: 9%;
+      margin-left: 88%;
+    }
+
+    @media (width <=270) {
+      input,
+      .input_password--outer {
+        width: 10rem;
+      }
+
+      .btn_password_visibility--settings_cur_password,
+      .btn_password_visibility--settings_new_password,
+      .btn_password_visibility--settings_password_close_account {
+        width: 10%;
+      }
+    }
+  }
+}

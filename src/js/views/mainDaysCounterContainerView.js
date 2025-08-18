@@ -10,7 +10,8 @@ class MainDaysCounterContainerView extends View {
   _data; //currentAccount
   type;
 
-  _addEvents() {
+  constructor() {
+    super();
     this._addEventClickCopy();
     this._addEventMouseoverUsers();
     this._addEventMouseoutUsers();
@@ -78,7 +79,7 @@ class MainDaysCounterContainerView extends View {
     });
   }
 
-  _addHandlerClickEdit(handler) {
+  addHandlerClickEdit(handler) {
     this._parentElement.addEventListener("click", (e) => {
       const btn = e.target.closest(".btn--edit");
       if (!btn) return;
@@ -109,7 +110,7 @@ class MainDaysCounterContainerView extends View {
     });
   }
 
-  _addHandlerIAmSure(handler) {
+  addHandlerIAmSure(handler) {
     overlayMessageSpinnerView._addHandlerClickIAmSure(() => {
       if (overlayMessageSpinnerView._lastClickedForIAmSure !== "delete") return;
       if (!this._deleteGoalRoomIndex && this._deleteGoalRoomIndex !== 0) return;
@@ -296,9 +297,6 @@ class MainDaysCounterContainerView extends View {
     if (length)
       this._parentElement.style.gridTemplateColumns =
         window.innerWidth <= 480 ? "repeat(1, 1fr)" : "repeat(2, 1fr)";
-    // !length
-    //   ? this._parentElement.classList.add("no_card_style")
-    //   : this._parentElement.classList.remove("no_card_style");
   }
 
   //after render
@@ -315,12 +313,6 @@ class MainDaysCounterContainerView extends View {
 
     contenteditableView._commentsContainers =
       this._parentElement.querySelectorAll(".comments");
-
-    //////there is a bug after creating a goal or a room, some card's checkbox event wasn't attached???
-    // console.log(
-    //   contenteditableView._toDoListsContainers,
-    //   contenteditableView._commentsContainers
-    // );
 
     contenteditableView._renderContenteditable();
     contenteditableView._addEventCheckbox();

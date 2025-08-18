@@ -1,6 +1,10 @@
 class EntireAppView {
   _parentElement = document.querySelector("body");
 
+  constructor() {
+    this._addEventClickPasswordVisibility();
+  }
+
   _addEventClickPasswordVisibility() {
     this._parentElement.addEventListener("click", (e) => {
       const btn = e.target.closest(".btn--password_visibility");
@@ -17,6 +21,15 @@ class EntireAppView {
         btn.classList.contains("btn_password_visibility--settings_new_password")
       ) {
         closestInput = btn.closest("div").querySelector("#input--new_password");
+        btns = btn.closest("div").querySelectorAll(".btn--password_visibility");
+      } else if (
+        btn.classList.contains(
+          "btn_password_visibility--settings_password_close_account"
+        )
+      ) {
+        closestInput = btn
+          .closest("div")
+          .querySelector("#input--password_close_account");
         btns = btn.closest("div").querySelectorAll(".btn--password_visibility");
       } else {
         closestInput = btn.closest("form").querySelector(".input--password");

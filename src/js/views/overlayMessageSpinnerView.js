@@ -8,13 +8,15 @@ class OverlayMessageSpinnerView extends View {
   _message;
   _questionLogout = "Are you sure you want to log out?";
   _questionCloseAccount =
-    "Are you sure you want to close your account?<br>(⚠️ Once you close your account, you can not recover it!)";
+    "Are you sure you want to close your account?<br>(Once you close your account, you can not recover it!)";
   _messageCreateAcc =
     "Welcome to Days counter 😁 <br>Your account created successfully!";
   _messageLogout =
     "Logged out successfully!<br>See you again soon 😊<br>Have a wonderful day!";
   _messageSessionTimeout =
     "Session Timeout!<br>There were no actions for while.<br>Redirecting to the login page...";
+  _messageCloseAccount =
+    "I am sorry to say goodbye! <br>I hope you enjoyed this website 😊 <br>Have an amazing day 😁";
   _errorMessageUnableToCopy =
     "Something went wrong 🙇‍♂️<br>Unabled to copy the room ID!<br>Please manually copy it";
   _errorMessageInvalidId = "Please enter valid Room IDs!";
@@ -28,7 +30,8 @@ class OverlayMessageSpinnerView extends View {
     "Server error 🙇‍♂️ <br>User data might not have been saved properly!";
   _errorMessage = "Server error 🙇‍♂️ <br>Please try this again later";
 
-  _addEvents() {
+  constructor() {
+    super();
     this._addEventClickX();
     this._addEventClickOk();
   }

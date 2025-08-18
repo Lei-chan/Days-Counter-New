@@ -224,28 +224,26 @@ class UserManageApi {
     }
   }
 
-  /////Soon!!!
-  // async deleteUser(password) {
-  //   try {
-  //     if (!this._accessToken) await this._refreshAccessToken();
+  //OK
+  async closeAccount(passwordInput) {
+    try {
+      if (!this._accessToken) await this._refreshAccessToken();
 
-  //     const data = await this._apiCall("/user/delete", {
-  //       method: "DELETE",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${this._accessToken}`,
-  //       },
-  //       credentials: "include",
-  //       body: JSON.stringify({ password }),
-  //     });
+      await this._apiCall("/user/delete", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this._accessToken}`,
+        },
+        credentials: "include",
+        body: JSON.stringify({ password: passwordInput }),
+      });
 
-  //     this._removeCurUserInfo();
-
-  //     console.log(data.message);
-  //   } catch (err) {
-  //     throw err;
-  //   }
-  // }
+      this._removeCurUserInfo();
+    } catch (err) {
+      throw err;
+    }
+  }
 
   ////OK
   ///save the result every time without receiving the updated data from the server side using a different function with await and catch the error
@@ -945,19 +943,19 @@ export default new UserManageApi();
 
 //For dev
 //for dev
-// const health = async function () {
-//   try {
-//     const res = await fetch(`${BASE_URL}/user/health`);
+const health = async function () {
+  try {
+    const res = await fetch(`${BASE_URL}/user/health`);
 
-//     if (!res.ok) return { success: false };
+    if (!res.ok) return { success: false };
 
-//     const data = await res.json();
+    const data = await res.json();
 
-//     return data;
-//   } catch (err) {
-//     console.error("Server not connected");
-//   }
-// };
-// (async function () {
-//   console.log(await health());
-// })();
+    return data;
+  } catch (err) {
+    console.error("Server not connected");
+  }
+};
+(async function () {
+  console.log(await health());
+})();
