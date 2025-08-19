@@ -13,21 +13,24 @@ class UserManageApi {
   async _apiCall(url, options) {
     try {
       let res;
+      let data;
       res = await fetch(`${BASE_URL}${url}`, options);
+      data = await res.json();
 
-      ///OK
       //If token expired, try to refresh once
-      if (res.status === 403 || res.status === 401) {
+      if (
+        (res.status === 403 || res.status === 401) &&
+        data.name !== "validationFailed"
+      ) {
         await this._refreshAccessToken();
 
         ///Use new Updated accessToken!
         options.headers.Authorization = `Bearer ${this._accessToken}`;
 
         res = await fetch(`${BASE_URL}${url}`, options);
+        data = await res.json();
       }
 
-      // return res;
-      const data = await res.json();
       if (!res.ok) {
         const err = new Error(data.message);
         err.statusCode = res.status;
@@ -80,14 +83,11 @@ class UserManageApi {
         `${BASE_URL}/user/saveUserData`,
         JSON.stringify(this._curUser)
       );
-
-      // this._removeCurUserInfo();
     } catch (err) {
       throw err;
     }
   }
 
-  ////OK!
   /////update user data locally and save the data using saveUserDataAsync without awaiting for login
   async login(username, password) {
     try {
@@ -133,7 +133,6 @@ class UserManageApi {
     }
   }
 
-  ////OK
   //UserInfo = { username, password, email=''}
   async createUser({ email = undefined, ...others }) {
     try {
@@ -184,8 +183,6 @@ class UserManageApi {
   //updateInfo = { updateField: updateValue }
   async updateUser(updateInfo) {
     try {
-      if (!this._accessToken) await this._refreshAccessToken();
-
       const data = await this._apiCall("/user/update/general", {
         method: "PATCH",
         headers: {
@@ -204,11 +201,8 @@ class UserManageApi {
     }
   }
 
-  //////OK
   async logout() {
     try {
-      if (!this._accessToken) await this._refreshAccessToken();
-
       await this._apiCall("/user/logout", {
         method: "POST",
         headers: {
@@ -224,11 +218,8 @@ class UserManageApi {
     }
   }
 
-  //OK
   async closeAccount(passwordInput) {
     try {
-      if (!this._accessToken) await this._refreshAccessToken();
-
       await this._apiCall("/user/delete", {
         method: "DELETE",
         headers: {
@@ -245,7 +236,6 @@ class UserManageApi {
     }
   }
 
-  ////OK
   ///save the result every time without receiving the updated data from the server side using a different function with await and catch the error
   ///Added the function to save asyncronously
   _updateForDaysCounter(type) {
@@ -278,7 +268,6 @@ class UserManageApi {
     }
   }
 
-  ////OK!
   ///Added the function to save asyncronously
   saveToDoListsComments(
     type,
@@ -314,7 +303,6 @@ class UserManageApi {
     }
   }
 
-  /////OK
   async saveGoalsInfo(goalsInfo) {
     try {
       const type = "goals";
@@ -345,7 +333,6 @@ class UserManageApi {
     }
   }
 
-  /////OK
   async saveRoomsInfo(roomsInfo, roomType) {
     try {
       const type = "rooms";
@@ -363,7 +350,6 @@ class UserManageApi {
     }
   }
 
-  /////OK!
   async _findUserRooms(roomsInfo) {
     try {
       const data = await Promise.all(
@@ -389,7 +375,6 @@ class UserManageApi {
     }
   }
 
-  /////OK
   async _roomsCreateSelect(type, roomsInfo) {
     try {
       const newRoomsWithUsernames = roomsInfo.map((room) => {
@@ -426,7 +411,6 @@ class UserManageApi {
     }
   }
 
-  /////OK
   async _roomsJoinId(type, roomIds, sharingUsernames) {
     try {
       await Promise.all(
@@ -463,7 +447,6 @@ class UserManageApi {
     }
   }
 
-  /////OK!
   async createRooms(newRoomsWithUsernames) {
     try {
       const data = await Promise.all(
@@ -482,7 +465,6 @@ class UserManageApi {
     }
   }
 
-  /////OK!
   async _getRooms(roomIds) {
     try {
       if (!this._accessToken) await this._refreshAccessToken();
@@ -507,7 +489,6 @@ class UserManageApi {
     }
   }
 
-  //////OK
   async updateRoom(roomId, updateInfo) {
     try {
       if (!this._accessToken) await this._refreshAccessToken();
@@ -528,7 +509,6 @@ class UserManageApi {
     }
   }
 
-  ////////OK
   async editGoalRoom(editGoalRoomIndex, editedGoalRoomInfo, type) {
     try {
       if (type === "goals") {
@@ -605,7 +585,6 @@ class UserManageApi {
     }
   }
 
-  ////OK
   async deleteGoal(deleteGoalIndex) {
     try {
       const newGoals = this._curUser.goals.toSpliced(deleteGoalIndex, 1);
@@ -628,14 +607,11 @@ class UserManageApi {
         remainingDaysNow: newRemainingDaysNow,
         howManyTimesClick: newHowManyTimesClick,
       });
-
-      // this._changeOrders("goals");
     } catch (err) {
       throw err;
     }
   }
 
-  ////OK
   async deleteRoom(deleteRoomIndex) {
     try {
       const deleteRoom = this._curUser.rooms[deleteRoomIndex];
@@ -675,7 +651,6 @@ class UserManageApi {
     }
   }
 
-  /////OK
   async deleteRoomDatabase(roomId) {
     try {
       if (!this._accessToken) await this._refreshAccessToken();
@@ -729,7 +704,6 @@ class UserManageApi {
     return remainingDays;
   }
 
-  ////OK
   _calcUpdatedRemainingDaysPrev(type) {
     const remainingDaysNow =
       type === "goals"
@@ -754,7 +728,6 @@ class UserManageApi {
     return updatedRemainingDaysPrev;
   }
 
-  //////OK
   _calcHowManyTimesClick(remainingDaysPrev, remainingDaysNow) {
     const howManyTimesClick = remainingDaysPrev.map((daysPrev, i) => {
       const daysNow = remainingDaysNow[i];
@@ -767,7 +740,6 @@ class UserManageApi {
     return howManyTimesClick;
   }
 
-  /////OK
   _changeOrders(type = "goals") {
     try {
       const goalsOrRooms =
@@ -802,7 +774,6 @@ class UserManageApi {
     }
   }
 
-  /////OK
   _changeOrderGoals(goalsOrRooms) {
     //Create array with undefined goal dates
     const undefinedDates = goalsOrRooms.filter(
@@ -837,7 +808,6 @@ class UserManageApi {
     return sortedGoalsOrRooms;
   }
 
-  /////OK
   _changeOrderRemainingDaysHowManyTimesClick(
     originalGoalsOrRooms,
     sortedGoalsOrRooms,
@@ -890,7 +860,6 @@ class UserManageApi {
     ];
   }
 
-  /////OK
   async _updateUsernameEmail(updateInput, section) {
     try {
       const updateInfo =
@@ -921,7 +890,6 @@ class UserManageApi {
     }
   }
 
-  //////OK
   async _updatePassword(curPassword, newPassword) {
     try {
       await this._apiCall("/user/update/password", {

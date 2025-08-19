@@ -578,7 +578,9 @@ const controlUpdatePassword = async function (
     overlayMessageSpinnerView._asyncInit(
       "message",
       "error",
-      overlayMessageSpinnerView._errorMessage
+      err.name === "validationFailed"
+        ? `${err.message}!<br>Please try again :)`
+        : overlayMessageSpinnerView._errorMessage
     );
   }
 };

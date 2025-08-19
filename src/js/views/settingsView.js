@@ -72,11 +72,11 @@ class SettingsView extends View {
 
         if (!curPasswordInput) this.renderErrorInputField(curPasswordField);
 
-        if (!newPasswordInput || !this._validatePassword(newPasswordInput))
+        if (!newPasswordInput || !this.validatePassword(newPasswordInput))
           this.renderErrorInputField(newPasswordField);
 
         if (!curPasswordInput || !newPasswordInput) return this.renderError();
-        if (!this._validatePassword(newPasswordInput))
+        if (!this.validatePassword(newPasswordInput))
           return this.renderError(this._errorMessagePasswordRequirements);
 
         return handlerUpdatePassword(
