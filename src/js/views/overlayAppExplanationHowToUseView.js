@@ -6,7 +6,8 @@ class OverlayAppExplanationHowToUseView extends View {
     ".overlay_app_explanation--how_to_use"
   );
 
-  _addEvents() {
+  constructor() {
+    super();
     this._addEventClickX();
     this._addEventClickOutside();
     this._addEventClickEscapeClose(this._keyEventRemoveFocus);

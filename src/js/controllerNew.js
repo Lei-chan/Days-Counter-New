@@ -24,6 +24,9 @@ import overlayMessageSpinnerView from "./views/overlayMessageSpinnerView.js";
 let curUser;
 
 ///For dev
+/**
+ * Go to the main page by using the default curUser info
+ */
 const setCurUserAndInitDev = function () {
   curUser = {
     username: "leichan!",
@@ -143,13 +146,11 @@ const pageMainInit = function (type) {
 
 const controlAboutThisWeb = function () {
   overlayAppExplanationAboutThisWebView.open();
-  overlayAppExplanationAboutThisWebView._addEvents();
 };
 
 const controlHowToUse = function () {
   helpers._resetSetTimeoutLogout();
   overlayAppExplanationHowToUseView.open();
-  overlayAppExplanationHowToUseView._addEvents();
 };
 
 const controlLogin = async function (username, password) {
@@ -255,7 +256,6 @@ const controlCreateAcc = async function (username, password, email) {
       );
 
     console.error(err);
-
     overlayMessageSpinnerView._asyncInit(
       "message",
       "error",
@@ -290,7 +290,6 @@ const controlLogout = async function () {
     loginWholeView.open();
   } catch (err) {
     console.error(err);
-
     overlayMessageSpinnerView._asyncInit(
       "message",
       "error",
@@ -335,9 +334,7 @@ const controlEditGoalRoom = async function (
       `${type.at(0).toUpperCase() + type.slice(1, 4)} updated successfully!`
     );
   } catch (err) {
-    helpers._resetSetTimeoutLogout();
     console.error(err);
-
     overlayMessageSpinnerView._asyncInit(
       "message",
       "error",
@@ -377,10 +374,7 @@ const controlDeleteGoalRoom = async function (
       `${type.at(0).toUpperCase() + type.slice(1, 4)} deleted successfully!`
     );
   } catch (err) {
-    helpers._resetSetTimeoutLogout();
-
     console.error(err);
-
     overlayMessageSpinnerView._asyncInit(
       "message",
       "error",
@@ -507,8 +501,6 @@ const controlGoalsRoomsSubmit = async function (
       } created successfully!`
     );
   } catch (err) {
-    helpers._resetSetTimeoutLogout();
-
     if (err.statusCode === 404)
       return overlayMessageSpinnerView._asyncInit(
         "message",
@@ -562,8 +554,6 @@ const controlUpdatePassword = async function (
       settingsView._message
     );
   } catch (err) {
-    helpers._resetSetTimeoutLogout();
-
     if (
       err.name === "ValidationError" ||
       err.name === "ExpressValidatorError"
@@ -611,8 +601,6 @@ const controlUpdateUsernameEmail = async function (
 
     pageMainInit("rooms");
   } catch (err) {
-    helpers._resetSetTimeoutLogout();
-
     if (
       err.name === "ValidationError" ||
       err.name === "ExpressValidatorError" ||

@@ -6,7 +6,8 @@ class OverlayAppExplanationAboutThisWebView extends View {
     ".overlay_app_explanation--about_this_web"
   );
 
-  _addEvents() {
+  constructor() {
+    super();
     this._addEventClickX();
     this._addEventClickOutside();
     this._addEventClickEscapeClose(this._keyEventRemoveFocus);
