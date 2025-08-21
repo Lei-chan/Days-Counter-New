@@ -190,19 +190,23 @@ const controlLogin = async function (username, password) {
 };
 
 ///soon!
-// const controlForgotPasswordOpen = function () {
-//   loginWholeView.close();
-//   loginForgotPasswordView.openSlow();
-// };
+const controlForgotPasswordOpen = function () {
+  loginWholeView.close();
+  loginForgotPasswordView.openSlow();
+};
 
-// const controlForgotPasswordClose = function () {
-//   loginForgotPasswordView.closeSlow();
-//   loginWholeView.open();
-// };
+const controlForgotPasswordClose = function () {
+  loginForgotPasswordView.closeSlow();
+  loginWholeView.open();
+};
 
-// const controlForgotPasswordSubmit = function (emailInput) {
-//   console.log("email input sent", emailInput);
-// };
+const controlForgotPasswordSubmit = async function (emailInput) {
+  try {
+    await UserModel.resetPasswordFromEmail(emailInput);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 const controlScroll = function () {
   loginBottomHalfView.open();
@@ -664,11 +668,11 @@ const init = function () {
 
   /// loginTopHalf
   loginTopHalfView.addHandlerSubmit(controlLogin);
-  // loginTopHalfView.addHandlerClickForgotPassword(controlForgotPasswordOpen);
+  loginTopHalfView.addHandlerClickForgotPassword(controlForgotPasswordOpen);
 
-  ///loginForgotPassword later!!
-  // loginForgotPasswordView.addHandlerClickClose(controlForgotPasswordClose);
-  // loginForgotPasswordView.addHandlerSubmit(controlForgotPasswordSubmit);
+  ///loginForgotPassword
+  loginForgotPasswordView.addHandlerClickClose(controlForgotPasswordClose);
+  loginForgotPasswordView.addHandlerSubmit(controlForgotPasswordSubmit);
 
   /// loginScroll
   loginScrollView.addHandlerClick(controlScroll);

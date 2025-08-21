@@ -31,10 +31,4 @@ const manageData = {
   ],
 };
 
-// const calcNew = function(){
-//     console.log(Math.ceil(new Date() - (new Date(this.news.date) / 1000) * 60 * 60 * 24));
-
-//     return Math.ceil(new Date() - (new Date(manageData.news.date) / 1000) * 60 * 60 * 24) <= 7 ? 'new' : 'old';
-// }
-
 export default manageData;

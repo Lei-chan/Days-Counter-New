@@ -1067,24 +1067,42 @@ class UserManageApi {
       throw err;
     }
   }
+
+  async resetPasswordFromEmail(emailInput) {
+    try {
+      const data = await this._apiCall("/user/password/reset", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ email: emailInput }),
+      });
+      console.log(data);
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  //For dev
+  health = async function () {
+    try {
+      const res = await fetch(`${BASE_URL}/user/health`);
+
+      if (!res.ok) return { success: false };
+
+      const data = await res.json();
+
+      return data;
+    } catch (err) {
+      console.error("Server not connected");
+    }
+  };
 }
 
 export default new UserManageApi();
 
 //For dev
-// const health = async function () {
-//   try {
-//     const res = await fetch(`${BASE_URL}/user/health`);
-
-//     if (!res.ok) return { success: false };
-
-//     const data = await res.json();
-
-//     return data;
-//   } catch (err) {
-//     console.error("Server not connected");
-//   }
-// };
 // (async function () {
-//   console.log(await health());
+//   console.log(await new UserManageApi().health());
 // })();
