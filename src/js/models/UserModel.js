@@ -1070,7 +1070,7 @@ class UserManageApi {
 
   async resetPasswordFromEmail(emailInput) {
     try {
-      const data = await this._apiCall("/user/password/reset", {
+      const data = await this._apiCall("/user/reset/password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
