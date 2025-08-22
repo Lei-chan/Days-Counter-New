@@ -28,6 +28,13 @@ const manageData = {
         "I added the feature to close an account! You can close your account from 'settings' whenever you want to. Although it's a little sad to say goodbye 🥲",
       type: "update",
     },
+    {
+      date: "08/22/2025",
+      title: "Added the feature to reset a password from an email address!",
+      content:
+        'I added the feature to reset a password from your email address you register on this website! You can use the new feature when you forgot your password! You can reset it from "Forgot your password?" on this login page 😊 Please register your email address from "settings" if you think you are not good at remembering things like the website host 😶',
+      type: "update",
+    },
   ],
 };
 
