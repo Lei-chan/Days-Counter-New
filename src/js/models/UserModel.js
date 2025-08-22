@@ -1078,7 +1078,6 @@ class UserManageApi {
         credentials: "include",
         body: JSON.stringify({ email: emailInput }),
       });
-      console.log(data);
     } catch (err) {
       throw err;
     }

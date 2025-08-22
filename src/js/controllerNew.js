@@ -189,7 +189,6 @@ const controlLogin = async function (username, password) {
   }
 };
 
-///soon!
 const controlForgotPasswordOpen = function () {
   loginWholeView.close();
   loginForgotPasswordView.openSlow();
