@@ -83,16 +83,19 @@
       <!-- <p class="copyright_line">© 2025 Lei-chan</p> -->
     </div>
 
-    <form class="forgot_password--form">
+    <div class="page--forgot_password">
       <button class="forgot_password--btn_x" type="button">&times;</button>
-      <h2>~ Reset your password ~</h2>
       <span class="forgot_password--warning hidden">Email address is required</span>
-      <p class="forgot_password--explanation">Please enter your email address</p>
-      <input id="forgot_password--input_email" 
-      type="email" placeholder="email address">
-      <button class="btn--send" type="submit">send</button>
-      <p class="forgot_password--disclaimer">※If you didn't set your email address,<br>please create your account again!</p>
-    </form>
+      <form class="forgot_password--form">
+        <h2>~ Reset your password ~</h2>
+        <p class="forgot_password--explanation">Please enter your email address</p>
+        <input id="forgot_password--input_email" 
+        type="email" placeholder="email address">
+        <button class="btn--send" type="submit">send</button>
+        <p class="forgot_password--disclaimer">※If you didn't set your email address,<br>please create your account again!</p>
+      </form>
+      <p class="success_message hidden">Email was sent to the address!<br>Please set your new password from the link on the email you received. If you didn't receive it, please check inside your spam box too.</p>
+    </div>
   
     <div class="overlay--app_explanation overlay_app_explanation--about_this_web hidden">
       <div class="overlay_in--app_explanation overlay_in_app_explanation--about_this_web">

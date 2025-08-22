@@ -67,12 +67,24 @@ export default class View {
     inputField.style.borderColor = "red";
   }
 
+  ///If no argument provided, it change all the boder colors for the input fields in _parentElement back to normal colors
+  removeErrorInputField(inputField) {
+    if (inputField) inputField.style.borderColor = "#bbbbbb";
+
+    if (!inputField) {
+      const inputFields = this._parentElement.querySelectorAll("input");
+      inputFields.forEach(
+        (inputField) => (inputField.style.borderColor = "#bbbbbb")
+      );
+    }
+  }
+
   addEventRemoveErrorInputField() {
     this._parentElement.addEventListener("click", (e) => {
       const inputField = e.target.closest("input");
       if (!inputField) return;
 
-      inputField.style.borderColor = "#bbbbbb";
+      this.removeErrorInputField(inputField);
     });
   }
 

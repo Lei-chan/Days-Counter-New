@@ -203,8 +203,16 @@ const controlForgotPasswordClose = function () {
 const controlForgotPasswordSubmit = async function (emailInput) {
   try {
     await UserModel.resetPasswordFromEmail(emailInput);
+
+    loginForgotPasswordView.close(loginForgotPasswordView._form);
+    loginForgotPasswordView.open(loginForgotPasswordView._successMessage);
   } catch (err) {
     console.error(err);
+    overlayMessageSpinnerView._asyncInit(
+      "message",
+      "error",
+      overlayMessageSpinnerView._errorMessage
+    );
   }
 };
 
