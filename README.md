@@ -25,6 +25,6 @@ either individually or collaboratively, while managing them with To-Do lists and
 
 • Users can modify/delete the goals and rooms information.
 
-•Users can modify/delete their account information.
+• Users can modify/delete their account information.
 
 <img src="./src/imgs/appExplanationImgs/appExplanationSettings.jpg" width="70%">
