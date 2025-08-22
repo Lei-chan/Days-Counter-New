@@ -30,7 +30,7 @@ class LoginBottomHalfView extends View {
       const emailInput = emailField.value?.trim();
 
       if (!usernameInput) this.renderErrorInputField(usernameField);
-      if (!passwordInput || !this._validatePassword(passwordInput))
+      if (!passwordInput || !this.validatePassword(passwordInput))
         this.renderErrorInputField(passwordField);
 
       this.addEventRemoveErrorInputField();
