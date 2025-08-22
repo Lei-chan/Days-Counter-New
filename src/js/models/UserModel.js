@@ -383,7 +383,12 @@ class UserManageApi {
 
       this._changeOrders(type);
 
-      await this.updateUser(this._curUser);
+      await this.updateUser({
+        goals: this._curUser.goals,
+        remainingDaysPrev: this._curUser.remainingDaysPrev,
+        remainingDaysNow: this._curUser.remainingDaysNow,
+        howManyTimesClick: this._curUser.howManyTimesClick,
+      });
     } catch (err) {
       throw err;
     }
