@@ -11,9 +11,10 @@ either individually or collaboratively, while managing them with To-Do lists and
 <h5>link to this application => https://days-counter-leichan.netlify.app </h5>
 
 <h3>Things user can do</h3>
+
 • Users can set titles and dates for specific goals (e.g., due dates, travel dates) indivisually and count down to the goals every day or when they have time.
 
-<img src="./src/imgs/appExplanationImgs/appExplanationSetGoals.jpg" width="40%" margin-top="10%">
+<img src="./src/imgs/appExplanationImgs/appExplanationSetGoals.jpg" width="40%">
 
 • Users can manage the goals with To-Do lists and comments.
 
