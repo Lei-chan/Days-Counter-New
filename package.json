@@ -1,6 +1,6 @@
 {
   "name": "days-counter-complete",
-  "version": "2.3.1",
+  "version": "2.3.2",
   "description": "countdown feature for goals",
   "type": "module",
   "scripts": {

@@ -35,6 +35,14 @@ const manageData = {
         'I added the feature to reset a password from your email address you register on this website! You can use the new feature when you forgot your password! You can reset it from "Forgot your password?" on this login page 😊 Please register your email address from "settings" if you think you are not good at remembering things like the website host 😶',
       type: "update",
     },
+    {
+      date: "08/23/2025",
+      title:
+        "The bugs that goals are not created properly, and To-Do lists/comments for rooms are not saved properly were fixed!",
+      content:
+        "I fixed the bugs that goals are not created properly, and To-Do lists/comments for rooms are not saved properly. I'm sorry for the inconvenience 🙇‍♂️",
+      type: "Bug fixed",
+    },
   ],
 };
 
