@@ -81,14 +81,30 @@ class UserManageApi {
     try {
       await this.updateUser(updatedUserInfo);
     } catch (err) {
+      console.error(err);
       overlayMessageSpinnerView._asyncInit(
         "message",
         "error",
         overlayMessageSpinnerView._errorMessageSaveDataAsync
       );
-      console.error(
-        "User changed data might not have been saved in the database! 🙇‍♂️",
-        err
+    }
+  }
+
+  /**
+   * Updates room info asynchronously. You can use this method without waiting for the result
+   * @param {String} roomId roomId for a room to be update
+   * @param {Object} updatedInfo updated room info
+   * @returns {undefined}
+   */
+  async _saveRoomDataAsync(roomId, updatedInfo) {
+    try {
+      await this.updateRoom(roomId, updatedInfo);
+    } catch (err) {
+      console.error(err);
+      overlayMessageSpinnerView._asyncInit(
+        "message",
+        "error",
+        overlayMessageSpinnerView._errorMessageSaveDataAsync
       );
     }
   }
@@ -184,32 +200,6 @@ class UserManageApi {
       throw err;
     }
   }
-
-  // async getCurrentUser() {
-  //   try {
-  //     if (!this._accessToken) await this._refreshAccessToken();
-  //     const res = await this._apiCall("/user/get", {
-  //       headers: {
-  //         Authorization: `Bearer ${this._accessToken}`,
-  //       },
-  //       credentials: "include",
-  //     });
-
-  //     const data = await res.json();
-
-  //     if (!res.ok)
-  //       return {
-  //         success: false,
-  //         message: data.message,
-  //         statusCode: res.status,
-  //       };
-
-  //     return data.user;
-  //   } catch (err) {
-  //     console.error(err);
-  //     return null;
-  //   }
-  // }
 
   /**
    * Updates user info except for password. Sets _curUser with the updated user data.
@@ -356,7 +346,9 @@ class UserManageApi {
       if (newComments || newComments === "")
         this._curUser.rooms[modifiedCard].comments = newComments;
 
-      return this._saveUserDataAsync({ rooms: this._curUser.rooms });
+      const modifiedRoom = this._curUser.rooms[modifiedCard];
+
+      this._saveRoomDataAsync(modifiedRoom.roomId, modifiedRoom);
     }
   }
 

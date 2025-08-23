@@ -27,7 +27,7 @@ class OverlayMessageSpinnerView extends View {
   _errorMessageLogout =
     "Server error 🙇‍♂️<br>Please try this again later<br>(You will still be automatically logged out in 30 minutes)";
   _errorMessageSaveDataAsync =
-    "Server error 🙇‍♂️ <br>User data might not have been saved properly!";
+    "Server error 🙇‍♂️ <br>Data might not have been saved properly!";
   _errorMessage = "Server error 🙇‍♂️ <br>Please try this again later";
 
   constructor() {
