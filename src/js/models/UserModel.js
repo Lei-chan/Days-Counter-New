@@ -346,9 +346,10 @@ class UserManageApi {
       if (newComments || newComments === "")
         this._curUser.rooms[modifiedCard].comments = newComments;
 
-      const modifiedRoom = this._curUser.rooms[modifiedCard];
+      //exludes MongoDB _id
+      const { _id, roomId, ...others } = this._curUser.rooms[modifiedCard];
 
-      this._saveRoomDataAsync(modifiedRoom.roomId, modifiedRoom);
+      this._saveRoomDataAsync(roomId, { roomId, ...others });
     }
   }
 
