@@ -66,6 +66,10 @@ class Helpers {
       if (document.visibilityState === "hidden") handler();
     });
   }
+
+  // changeHref(href) {
+  //   history.pushState({ page: href.slice(1) }, "", href);
+  // }
 }
 
 export default new Helpers();

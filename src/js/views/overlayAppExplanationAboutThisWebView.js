@@ -17,6 +17,7 @@ class OverlayAppExplanationAboutThisWebView extends View {
     this._parentElement.addEventListener("click", (e) => {
       const btn = e.target.closest(".btn--x");
       if (!btn) return;
+
       this.close();
     });
   }
@@ -24,6 +25,7 @@ class OverlayAppExplanationAboutThisWebView extends View {
   _addEventClickOutside() {
     this._parentElement.addEventListener("click", (e) => {
       if (!e.target.classList.contains("overlay--app_explanation")) return;
+
       this.close();
     });
   }
