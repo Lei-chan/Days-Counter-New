@@ -1,11 +1,15 @@
 .page--login {
   text-align: center;
+  width: 100%;
+  height: 100%;
 }
 
 .login {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: fit-content;
 
   .version_attribution_container {
     position: relative;
@@ -100,9 +104,6 @@
               padding: 0.8%;
               border-radius: 10%;
             }
-            // .date--lists {
-            //   font-size: 0.9vw;
-            // }
           }
 
           .title--lists {
@@ -134,7 +135,6 @@
 
     .attribution_line--login {
       margin-left: auto;
-      margin-right: 0.5%;
     }
   }
 
