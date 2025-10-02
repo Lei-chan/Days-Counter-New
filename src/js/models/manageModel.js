@@ -43,6 +43,13 @@ const manageData = {
         "I fixed the bugs that goals are not created properly, and To-Do lists/comments for rooms are not saved properly. I'm sorry for the inconvenience 🙇‍♂️",
       type: "Bug fixed",
     },
+    {
+      date: "10/02/2025",
+      title: "The autumn theme is introduced!",
+      content:
+        "It's getting cooler every day and I assume the leaves around the place you live (depending on where you live) started changing their colors 🍂 So I changed the website theme to the autumn season too 🎉 It's easier to get cold around this time of a year by temperature differences, so please take care of yourself 😊",
+      type: "New Theme",
+    },
   ],
 };
 
