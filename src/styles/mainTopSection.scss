@@ -95,13 +95,12 @@
   .btn--set_goal,
   .btn--create_room {
     @include img-btn-style();
-
     position: absolute;
     height: 10%;
     padding-top: 8%;
     font-size: 1.5vw;
     top: 20%;
-    color: rgb(1, 214, 90) !important;
+    color: $primary-font-color-white !important;
 
     &:hover {
       transform: $btn-transform-hover;
