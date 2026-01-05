@@ -50,6 +50,13 @@ const manageData = {
         "It's getting cooler every day and I assume the leaves around the place you live (depending on where you live) started changing their colors 🍂 So I changed the website theme to the autumn season too 🎉 It's easier to get cold around this time of a year by temperature differences, so please take care of yourself 😊",
       type: "New Theme",
     },
+    {
+      date: "01/05/2026",
+      title: "Days Counter will be not accessible for while 🙇‍♂️",
+      content:
+        "We apologize for the inconvenience. The Days Counter database will be temporarily unavailable starting January 28. At this time, we do not have a comfirmed date for when service will resume. During this period, the website will not be accessible. Thank you for your understanding.",
+      type: "",
+    },
   ],
 };
 

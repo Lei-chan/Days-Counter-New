@@ -143,8 +143,7 @@
     font-size: 2.4vw;
     letter-spacing: 0.15vw;
     word-spacing: 0.3vw;
-    // color: #000000ad;
-    color: rgb(36, 131, 79);
+    color: #000000ad;
   }
 
   h1 {
@@ -244,13 +243,11 @@
     font-size: 1.6vw;
     margin-top: calc(1.6vw * 6);
     letter-spacing: 0.2vw;
-    // color: $primary-font-color-white;
-    color: #36b61d;
+    color: $primary-font-color-white;
   }
 
   .btn_scroll {
-    // @include btn-style(#fcfce171);
-    @include btn-style(#66c43a71);
+    @include btn-style(#fcfce171);
     transform: rotate(270deg);
     border-radius: 100%;
     border: none;
